@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
 
 const photos = [
   {
@@ -37,6 +38,11 @@ const photos = [
 
 export const PortfolioSection = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
+  const navigate = useNavigate();
+
+  const handlePhotoClick = (photo: typeof photos[0]) => {
+    navigate(`/portfolio?category=${photo.title.toLowerCase()}`);
+  };
 
   return (
     <section className="py-20 bg-white" id="portfolio">
@@ -50,7 +56,7 @@ export const PortfolioSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               className="cursor-pointer group"
-              onClick={() => setSelectedPhoto(photo)}
+              onClick={() => handlePhotoClick(photo)}
             >
               <div className="relative overflow-hidden rounded-lg aspect-square">
                 <img
