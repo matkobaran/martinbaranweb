@@ -19,6 +19,7 @@ export default {
     },
     extend: {
       colors: {
+        skyblue: "#33C3F0",
         navy: "#1a237e",
         lightgray: "#f5f5f5",
         border: "hsl(var(--border))",

@@ -1,9 +1,57 @@
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Menu, Home } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 export const HeroSection = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-r from-navy to-blue-600 text-white p-4">
+    <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-r from-skyblue to-blue-400 text-white p-4">
+      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
+        <Link to="/" className="flex items-center gap-2 text-2xl font-bold">
+          <Home className="w-6 h-6" />
+          <span>PhotoFolio</span>
+        </Link>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <button className="p-2 hover:bg-white/20 rounded-lg transition-colors">
+              <Menu className="w-6 h-6" />
+            </button>
+          </SheetTrigger>
+          <SheetContent>
+            <nav className="flex flex-col gap-4 mt-8">
+              <Link 
+                to="/" 
+                className="text-lg hover:text-skyblue transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/portfolio" 
+                className="text-lg hover:text-skyblue transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Portfolio
+              </Link>
+              <Link 
+                to="#contact" 
+                className="text-lg hover:text-skyblue transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Contact
+              </Link>
+            </nav>
+          </SheetContent>
+        </Sheet>
+      </nav>
+
       <div className="text-center">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
@@ -19,7 +67,7 @@ export const HeroSection = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-xl md:text-2xl mb-8"
         >
-          Developer & Photographer
+          Photographer
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
