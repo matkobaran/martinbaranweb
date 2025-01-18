@@ -1,6 +1,7 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Home } from "lucide-react";
+import { Home, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const categoryPhotos = {
   nature: [
@@ -37,6 +38,7 @@ const categoryPhotos = {
 
 const Portfolio = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const category = searchParams.get("category") || "nature";
   const photos = categoryPhotos[category as keyof typeof categoryPhotos] || [];
 
@@ -50,7 +52,17 @@ const Portfolio = () => {
       </nav>
 
       <div className="container mx-auto pt-24">
-        <h1 className="text-4xl font-bold text-white mb-8 capitalize">{category} Photos</h1>
+        <div className="flex items-center gap-4 mb-8">
+          <Button
+            variant="outline"
+            onClick={() => navigate(-1)}
+            className="bg-white/90 hover:bg-white"
+          >
+            <ArrowLeft className="mr-2" />
+            Back
+          </Button>
+          <h1 className="text-4xl font-bold text-white capitalize">{category} Photos</h1>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {photos.map((photo, index) => (
             <motion.div
