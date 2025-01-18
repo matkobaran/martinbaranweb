@@ -11,6 +11,14 @@ import {
 export const HeroSection = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-r from-skyblue to-blue-400 text-white p-4">
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
@@ -26,33 +34,30 @@ export const HeroSection = () => {
           </SheetTrigger>
           <SheetContent>
             <nav className="flex flex-col gap-4 mt-8">
-              <Link 
-                to="/" 
-                className="text-lg hover:text-skyblue transition-colors"
-                onClick={() => setIsOpen(false)}
+              <button 
+                onClick={() => scrollToSection('home')}
+                className="text-lg hover:text-skyblue transition-colors text-left"
               >
                 Home
-              </Link>
-              <Link 
-                to="/portfolio" 
-                className="text-lg hover:text-skyblue transition-colors"
-                onClick={() => setIsOpen(false)}
+              </button>
+              <button 
+                onClick={() => scrollToSection('portfolio')}
+                className="text-lg hover:text-skyblue transition-colors text-left"
               >
                 Portfolio
-              </Link>
-              <Link 
-                to="#contact" 
-                className="text-lg hover:text-skyblue transition-colors"
-                onClick={() => setIsOpen(false)}
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="text-lg hover:text-skyblue transition-colors text-left"
               >
                 Contact
-              </Link>
+              </button>
             </nav>
           </SheetContent>
         </Sheet>
       </nav>
 
-      <div className="text-center">
+      <div className="text-center" id="home">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
