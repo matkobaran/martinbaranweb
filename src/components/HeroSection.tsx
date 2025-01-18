@@ -64,7 +64,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="text-5xl md:text-7xl font-bold mb-6"
         >
-          John Doe
+          Martin Baran
         </motion.h1>
         <motion.p 
           initial={{ opacity: 0 }}
@@ -72,7 +72,7 @@ export const HeroSection = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-xl md:text-2xl mb-8"
         >
-          Photographer
+          Software developer
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
