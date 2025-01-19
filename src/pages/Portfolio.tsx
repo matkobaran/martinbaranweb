@@ -39,8 +39,8 @@ const categoryPhotos = {
 const Portfolio = () => {
   const [searchParams] = useSearchParams();
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
-  const category = searchParams.get("category") || "nature";
-  const photos = categoryPhotos[category as keyof typeof categoryPhotos] || [];
+  const category = searchParams.get("category");
+  const photos = category ? categoryPhotos[category as keyof typeof categoryPhotos] || [] : [];
 
   const handlePrevPhoto = () => {
     if (selectedPhotoIndex === null) return;
@@ -70,26 +70,54 @@ const Portfolio = () => {
             <ChevronLeft className="w-5 h-5" />
             Back
           </Link>
-          <h1 className="text-4xl font-bold text-white capitalize">{category} Photos</h1>
+          {category ? (
+            <h1 className="text-4xl font-bold text-white capitalize">{category} Photos</h1>
+          ) : (
+            <h1 className="text-4xl font-bold text-white">All Categories</h1>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {photos.map((photo, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="relative aspect-square rounded-lg overflow-hidden cursor-pointer"
-              onClick={() => setSelectedPhotoIndex(index)}
-            >
-              <img
-                src={photo}
-                alt={`${category} photo ${index + 1}`}
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-              />
-            </motion.div>
-          ))}
+          {category ? (
+            photos.map((photo, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="relative aspect-square rounded-lg overflow-hidden cursor-pointer"
+                onClick={() => setSelectedPhotoIndex(index)}
+              >
+                <img
+                  src={photo}
+                  alt={`${category} photo ${index + 1}`}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                />
+              </motion.div>
+            ))
+          ) : (
+            Object.entries(categoryPhotos).map(([categoryName, photos], index) => (
+              <motion.div
+                key={categoryName}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group"
+                onClick={() => window.location.href = `/portfolio?category=${categoryName}`}
+              >
+                <img
+                  src={photos[0]}
+                  alt={`${categoryName} category`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center">
+                  <p className="text-white text-xl font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 capitalize">
+                    {categoryName}
+                  </p>
+                </div>
+              </motion.div>
+            ))
+          )}
         </div>
       </div>
 
