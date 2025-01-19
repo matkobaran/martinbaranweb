@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const menuItems = [
-  { id: 'home', label: 'Home' },
   { id: 'portfolio', label: 'Portfolio' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
@@ -12,11 +12,14 @@ const menuItems = [
 ];
 
 export const HeroSection = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setIsMenuOpen(false);
   };
 
   return (
@@ -25,18 +28,43 @@ export const HeroSection = () => {
         <Link to="/" className="text-2xl font-bold">
           Martin Baran
         </Link>
-        <div className="flex gap-4 md:gap-8">
+        
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Desktop menu */}
+        <div className="hidden md:flex gap-8">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="text-sm md:text-lg hover:text-white/80 transition-colors relative group"
+              className="text-lg hover:text-white/80 transition-colors relative group"
             >
               {item.label}
               <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform" />
             </button>
           ))}
         </div>
+
+        {/* Mobile menu dropdown */}
+        {isMenuOpen && (
+          <div className="absolute top-full right-0 w-48 bg-skyblue/95 backdrop-blur-sm py-2 md:hidden">
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="w-full text-left px-4 py-2 hover:bg-white/10 transition-colors"
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        )}
       </nav>
 
       <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center" id="home">
@@ -53,13 +81,14 @@ export const HeroSection = () => {
               A passionate software developer based in Prague, specializing in creating beautiful and functional web experiences. When I'm not coding, you'll find me exploring nature photography and practicing yoga.
             </p>
             <div className="flex gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white text-skyblue px-6 py-3 rounded-full font-semibold cursor-pointer"
-                onClick={() => scrollToSection('portfolio')}
-              >
-                View My Work
-              </motion.div>
+              <Link to="/portfolio">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white text-skyblue px-6 py-3 rounded-full font-semibold cursor-pointer"
+                >
+                  View My Work
+                </motion.div>
+              </Link>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="border-2 border-white px-6 py-3 rounded-full font-semibold cursor-pointer"
@@ -74,19 +103,19 @@ export const HeroSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            className="relative max-w-md mx-auto"
           >
             <div className="relative">
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
                 alt="Martin Baran"
-                className="rounded-2xl w-full max-w-md mx-auto shadow-xl"
+                className="rounded-2xl w-full max-w-sm mx-auto shadow-xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl" />
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mt-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mt-6">
               <h3 className="text-2xl font-semibold mb-4">Quick Facts</h3>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 <motion.li 
                   whileHover={{ x: 10 }}
                   className="flex items-center gap-2"
