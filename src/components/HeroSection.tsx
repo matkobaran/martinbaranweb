@@ -64,11 +64,11 @@ export const HeroSection = () => {
         )}
       </nav>
 
-      <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center" id="home">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
@@ -77,7 +77,7 @@ export const HeroSection = () => {
             <p className="text-xl md:text-2xl mb-8 leading-relaxed">
               A passionate software developer based in Prague, specializing in creating beautiful and functional web experiences. When I'm not coding, you'll find me exploring nature photography and practicing yoga.
             </p>
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-4">
               <Link to="/portfolio">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -94,6 +94,23 @@ export const HeroSection = () => {
                 Get in Touch
               </motion.div>
             </div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col gap-4 max-w-sm mx-auto"
+          >
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                alt="Martin Baran"
+                className="rounded-2xl w-full shadow-xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl" />
+            </div>
+            
           </motion.div>
         </div>
       </div>
