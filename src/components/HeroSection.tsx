@@ -24,7 +24,7 @@ export const HeroSection = () => {
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold">
           <Home className="w-6 h-6" />
-          <span>PhotoFolio</span>
+          <span>Martin Baran</span>
         </Link>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
@@ -44,7 +44,7 @@ export const HeroSection = () => {
                 onClick={() => scrollToSection('portfolio')}
                 className="text-lg hover:text-skyblue transition-colors text-left"
               >
-                Portfolio
+                Photo portfolio
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
