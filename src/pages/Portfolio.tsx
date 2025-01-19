@@ -1,7 +1,7 @@
-import { useSearchParams, Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Home, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useSearchParams, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Home, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 const categoryPhotos = {
   nature: [
@@ -38,9 +38,19 @@ const categoryPhotos = {
 
 const Portfolio = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const category = searchParams.get("category") || "nature";
   const photos = categoryPhotos[category as keyof typeof categoryPhotos] || [];
+
+  const handlePrevPhoto = () => {
+    if (selectedPhotoIndex === null) return;
+    setSelectedPhotoIndex(selectedPhotoIndex === 0 ? photos.length - 1 : selectedPhotoIndex - 1);
+  };
+
+  const handleNextPhoto = () => {
+    if (selectedPhotoIndex === null) return;
+    setSelectedPhotoIndex(selectedPhotoIndex === photos.length - 1 ? 0 : selectedPhotoIndex + 1);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-skyblue to-blue-400 p-4">
@@ -53,16 +63,16 @@ const Portfolio = () => {
 
       <div className="container mx-auto pt-24">
         <div className="flex items-center gap-4 mb-8">
-          <Button
-            variant="outline"
-            onClick={() => navigate(-1)}
-            className="bg-white/90 hover:bg-white"
+          <Link 
+            to="/"
+            className="text-white hover:text-white/80 transition-colors flex items-center gap-2"
           >
-            <ArrowLeft className="mr-2" />
+            <ChevronLeft className="w-5 h-5" />
             Back
-          </Button>
+          </Link>
           <h1 className="text-4xl font-bold text-white capitalize">{category} Photos</h1>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {photos.map((photo, index) => (
             <motion.div
@@ -70,7 +80,8 @@ const Portfolio = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="relative aspect-square rounded-lg overflow-hidden"
+              className="relative aspect-square rounded-lg overflow-hidden cursor-pointer"
+              onClick={() => setSelectedPhotoIndex(index)}
             >
               <img
                 src={photo}
@@ -81,6 +92,52 @@ const Portfolio = () => {
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedPhotoIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+            onClick={() => setSelectedPhotoIndex(null)}
+          >
+            <button
+              className="absolute top-4 right-4 text-white hover:text-white/80 transition-colors"
+              onClick={() => setSelectedPhotoIndex(null)}
+            >
+              <X size={32} />
+            </button>
+            
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrevPhoto();
+              }}
+            >
+              <ChevronLeft size={32} />
+            </button>
+
+            <img
+              src={photos[selectedPhotoIndex]}
+              alt={`${category} photo ${selectedPhotoIndex + 1}`}
+              className="max-h-[90vh] max-w-[90vw] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNextPhoto();
+              }}
+            >
+              <ChevronRight size={32} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

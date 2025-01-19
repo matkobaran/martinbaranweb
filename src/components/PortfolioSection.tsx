@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
 
 const photos = [
@@ -37,7 +36,6 @@ const photos = [
 ];
 
 export const PortfolioSection = () => {
-  const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
   const navigate = useNavigate();
 
   const handlePhotoClick = (photo: typeof photos[0]) => {
@@ -74,18 +72,6 @@ export const PortfolioSection = () => {
           ))}
         </div>
       </div>
-
-      <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
-        <DialogContent className="max-w-4xl">
-          {selectedPhoto && (
-            <img
-              src={selectedPhoto.src}
-              alt={selectedPhoto.title}
-              className="w-full h-auto"
-            />
-          )}
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
