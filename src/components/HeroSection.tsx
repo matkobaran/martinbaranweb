@@ -53,7 +53,7 @@ export const HeroSection = () => {
 
         {/* Mobile menu dropdown */}
         {isMenuOpen && (
-          <div className="absolute top-full right-0 w-48 bg-skyblue/95 backdrop-blur-sm py-2 md:hidden">
+          <div className="absolute top-full left-0 w-full bg-skyblue/95 backdrop-blur-sm py-2 md:hidden">
             {menuItems.map((item) => (
               <button
                 key={item.id}
@@ -68,7 +68,7 @@ export const HeroSection = () => {
       </nav>
 
       <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center" id="home">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -103,19 +103,19 @@ export const HeroSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative max-w-md mx-auto"
+            className="flex flex-col gap-4 max-w-sm mx-auto"
           >
             <div className="relative">
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
                 alt="Martin Baran"
-                className="rounded-2xl w-full max-w-sm mx-auto shadow-xl"
+                className="rounded-2xl w-full shadow-xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl" />
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mt-6">
-              <h3 className="text-2xl font-semibold mb-4">Quick Facts</h3>
-              <ul className="space-y-3">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4">
+              <h3 className="text-xl font-semibold mb-3">Quick Facts</h3>
+              <ul className="space-y-2">
                 <motion.li 
                   whileHover={{ x: 10 }}
                   className="flex items-center gap-2"
