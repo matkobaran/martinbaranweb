@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const menuItems = [
-  { id: 'portfolio', label: 'Portfolio' },
-  { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'portfolio', label: 'Portfolio' },
   { id: 'videography', label: 'Videography' },
   { id: 'contact', label: 'Contact' }
 ];
@@ -25,8 +25,8 @@ export const HeroSection = () => {
   return (
     <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-blue-400 text-white">
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
-        <Link to="/" className="text-2xl font-bold">
-          Martin Baran
+        <Link to="/" className="pl-10 text-2xl font-bold">
+          MB
         </Link>
         
         <button 
@@ -75,7 +75,7 @@ export const HeroSection = () => {
               Hi, I'm Martin
             </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-              A passionate software developer based in Prague, specializing in creating beautiful and functional web experiences. When I'm not coding, you'll find me exploring nature photography and practicing yoga.
+              A passionate software developer currently based in Brno, Czechia, specializing in software development for Windows, mobile and web application. When I'm not coding, you'll find me taking photos or jogging.
             </p>
             <div className="flex gap-4">
               <Link to="/portfolio">
@@ -83,7 +83,7 @@ export const HeroSection = () => {
                   whileHover={{ scale: 1.05 }}
                   className="bg-white text-skyblue px-6 py-3 rounded-full font-semibold cursor-pointer"
                 >
-                  View My Work
+                  View photos
                 </motion.div>
               </Link>
               <motion.div
@@ -100,11 +100,11 @@ export const HeroSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col gap-4 max-w-sm mx-auto"
+            className="flex flex-col pb-4 gap-4 max-w-sm mx-auto"
           >
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                src="https://lh3.googleusercontent.com/pw/AP1GczP_m0HEKdoz8kbXcF6MYbnkATWq1sJwooRGSqU3K8yelcQm3GX6MxiCSetj8k8y2rSJF5laIR18ocZkXVl312UNr5JxSUxFI8Dc_TjSVd3rpko34a4JgcXjKRY4g4YGbHLRdeAj4IL79Oj7Sfb2Z8GzVA=w472-h815-s-no-gm"
                 alt="Martin Baran"
                 className="rounded-2xl w-full shadow-xl"
               />

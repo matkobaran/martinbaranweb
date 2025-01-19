@@ -4,25 +4,33 @@ import { useNavigate } from "react-router-dom";
 const videos = [
   {
     id: 1,
-    title: "Urban Life",
-    thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4",
-    description: "A short film exploring city life in Prague",
-    duration: "5:20"
+    title: "Stovka",
+    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    description: "Documentary about Czech forests",
+    duration: "7:06"
   },
   {
     id: 2,
-    title: "Nature's Rhythm",
-    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-    description: "Documentary about Czech forests",
-    duration: "8:45"
+    title: "Koleje",
+    thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4",
+    description: "A short film exploring city life in Prague",
+    duration: "3:05"
   },
   {
     id: 3,
-    title: "Tech Stories",
-    thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475",
-    description: "Series about local tech startups",
-    duration: "12:30"
+    title: "RHSO 2023",
+    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    description: "Documentary about Czech forests",
+    duration: "5:05"
+  },
+  {
+    id: 4,
+    title: "Svadba",
+    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    description: "Documentary about Czech forests",
+    duration: "4:33"
   }
+
 ];
 
 export const VideographySection = () => {
@@ -37,7 +45,7 @@ export const VideographySection = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue">Videography</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {videos.map((video, index) => (
             <motion.div
               key={video.id}

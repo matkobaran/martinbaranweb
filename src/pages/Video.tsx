@@ -2,28 +2,14 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const videos = [
+  
   {
     id: 1,
-    title: "Urban Life",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    description: "A short film exploring city life in Prague",
-    details: "This documentary captures the essence of urban life in Prague, showcasing the blend of historical architecture with modern city living. Shot over 6 months, it features interviews with local residents and beautiful timelapses of city landmarks.",
-    year: "2023",
-    duration: "5:20",
-    credits: [
-      "Director: Martin Baran",
-      "Cinematography: Martin Baran",
-      "Editing: Martin Baran",
-      "Music: Local Artists"
-    ]
-  },
-  {
-    id: 2,
-    title: "Nature's Rhythm",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    title: "Stovka",
+    videoUrl: "https://www.youtube.com/embed/oVmHn2yd9ks?si=QP79mRBum6mD9Qrz",
     description: "Documentary about Czech forests",
     details: "An intimate look at the seasonal changes in Czech forests, featuring rare wildlife footage and stunning macro photography. This project was created to raise awareness about local conservation efforts.",
-    year: "2022",
+    year: "2024",
     duration: "8:45",
     credits: [
       "Director: Martin Baran",
@@ -33,13 +19,43 @@ const videos = [
     ]
   },
   {
+    id: 2,
+    title: "Koleje",
+    videoUrl: "https://www.youtube.com/embed/sMOxQ3qbSt8?si=DkCsDgMeBrJtoD9H",
+    description: "A short film exploring city life in Prague",
+    details: "This documentary captures the essence of urban life in Prague, showcasing the blend of historical architecture with modern city living. Shot over 6 months, it features interviews with local residents and beautiful timelapses of city landmarks.",
+    year: "2023",
+    duration: "3:05",
+    credits: [
+      "Director: Martin Baran",
+      "Cinematography: Martin Baran",
+      "Editing: Martin Baran",
+      "Music: Local Artists"
+    ]
+  },
+  {
     id: 3,
-    title: "Tech Stories",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    title: "RSHO 2023",
+    videoUrl: "https://www.youtube.com/embed/g26BMLE5T2Q?si=CfY2OAtFwKYZ1eOw",
+    description: "Regionální hry Speciální olympiády 2023 Brno",
+    details: "Športová akcia organizovaná študentami Fakulty športových študií Masarykovej univerzity. Video z regionálnych hier SO konaných 12.5. 2023 v areáli: Pod Palackého vrchem Brno",
+    year: "2023",
+    duration: "5:05",
+    credits: [
+      "Director: Martin Baran",
+      "Cinematography: Martin Baran",
+      "Editing: Martin Baran",
+      "Interviews: Local Tech Leaders"
+    ]
+  },
+  {
+    id: 4,
+    title: "Svadba Juraj a Naďka",
+    videoUrl: "https://www.youtube.com/embed/ctfxxjWLWSo?si=DZjE7ERXWsYem5lk",
     description: "Series about local tech startups",
     details: "A documentary series highlighting the innovative tech startups in Prague's growing tech scene. Features interviews with founders, developers, and investors who are shaping the future of technology in the Czech Republic.",
-    year: "2023",
-    duration: "12:30",
+    year: "2022",
+    duration: "4:32",
     credits: [
       "Director: Martin Baran",
       "Cinematography: Martin Baran",

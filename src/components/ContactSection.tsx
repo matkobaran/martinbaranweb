@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const ContactSection = () => {
@@ -12,14 +12,14 @@ export const ContactSection = () => {
           className="flex justify-center space-x-8"
         >
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:martin.baran12@gmail.com"
             className="flex items-center space-x-2 hover:text-blue-300 transition-colors"
           >
             <Mail size={24} />
             <span>Email</span>
           </a>
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/matkobaran"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-2 hover:text-blue-300 transition-colors"
@@ -28,13 +28,22 @@ export const ContactSection = () => {
             <span>GitHub</span>
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/martin-baran/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-2 hover:text-blue-300 transition-colors"
           >
             <Linkedin size={24} />
             <span>LinkedIn</span>
+          </a>
+          <a
+            href="https://www.instagram.com/matko_baran/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 hover:text-blue-300 transition-colors"
+          >
+            <Instagram size={24} />
+            <span>Instagram</span>
           </a>
         </motion.div>
       </div>

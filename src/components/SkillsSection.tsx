@@ -5,22 +5,17 @@ const skills = [
   {
     icon: <Code2 size={32} />,
     title: "Frontend Development",
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
+    technologies: ["React", "TypeScript"],
   },
   {
     icon: <Database size={32} />,
     title: "Backend Development",
-    technologies: ["Node.js", "Python", "PostgreSQL"],
+    technologies: [".NET", ".VB", "C#", "SQL"],
   },
   {
     icon: <Smartphone size={32} />,
     title: "Mobile Development",
-    technologies: ["React Native", "Flutter"],
-  },
-  {
-    icon: <Layout size={32} />,
-    title: "UI/UX Design",
-    technologies: ["Figma", "Adobe XD"],
+    technologies: ["React Native", "MAUI", "Xamarin"],
   },
 ];
 
@@ -29,7 +24,7 @@ export const SkillsSection = () => {
     <section className="py-20 bg-lightgray" id="skills">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16">Skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.title}
