@@ -6,6 +6,8 @@ const menuItems = [
   { id: 'home', label: 'Home' },
   { id: 'portfolio', label: 'Portfolio' },
   { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'videography', label: 'Videography' },
   { id: 'contact', label: 'Contact' }
 ];
 
@@ -23,12 +25,12 @@ export const HeroSection = () => {
         <Link to="/" className="text-2xl font-bold">
           Martin Baran
         </Link>
-        <div className="flex gap-8">
+        <div className="flex gap-4 md:gap-8">
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="text-lg hover:text-white/80 transition-colors relative group"
+              className="text-sm md:text-lg hover:text-white/80 transition-colors relative group"
             >
               {item.label}
               <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform" />
@@ -74,7 +76,15 @@ export const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+                alt="Martin Baran"
+                className="rounded-2xl w-full max-w-md mx-auto shadow-xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl" />
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mt-8">
               <h3 className="text-2xl font-semibold mb-4">Quick Facts</h3>
               <ul className="space-y-4">
                 <motion.li 
@@ -111,7 +121,8 @@ export const HeroSection = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer"
+        onClick={() => scrollToSection('experience')}
       >
         <ArrowDown size={32} />
       </motion.div>
