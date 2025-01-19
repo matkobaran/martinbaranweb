@@ -61,9 +61,7 @@ const experiences = [
     description: "Repair of scanners and printers for warehouses.",
     details: [
       "Built with React, Node.js, and MongoDB",
-      "Over 10,000 active users",
-      "Featured in TechCrunch",
-      "Open source with 500+ GitHub stars"
+      "Customer support"
     ]
   }
 ];

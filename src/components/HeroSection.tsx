@@ -25,7 +25,7 @@ export const HeroSection = () => {
   return (
     <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-blue-400 text-white">
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
-        <Link to="/" className="pl-10 text-2xl font-bold">
+        <Link to="/" className="text-2xl font-bold">
           MB
         </Link>
         
@@ -78,14 +78,13 @@ export const HeroSection = () => {
               A passionate software developer currently based in Brno, Czechia, specializing in software development for Windows, mobile and web application. When I'm not coding, you'll find me taking photos or jogging.
             </p>
             <div className="flex gap-4">
-              <Link to="/portfolio">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   className="bg-white text-skyblue px-6 py-3 rounded-full font-semibold cursor-pointer"
+                  onClick={() => scrollToSection('portfolio')}
                 >
                   View photos
                 </motion.div>
-              </Link>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="border-2 border-white px-6 py-3 rounded-full font-semibold cursor-pointer"

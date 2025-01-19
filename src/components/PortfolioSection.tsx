@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const photos = [
   {
@@ -17,22 +18,7 @@ const photos = [
     id: 3,
     src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1",
     title: "Landscape",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1554080353-a576cf803bda",
-    title: "Wildlife",
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
-    title: "Mountains",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d",
-    title: "Forest",
-  },
+  }
 ];
 
 export const PortfolioSection = () => {
@@ -68,8 +54,17 @@ export const PortfolioSection = () => {
                   </p>
                 </div>
               </div>
+
             </motion.div>
           ))}
+          <Link to="/portfolio">
+                <motion.div
+                  whileHover={{ scale: 1.05, backgroundColor: 'skyblue', color: 'white'  }}
+                  className="border-2 border-skyblue px-3 text-skyblue py-3 rounded-full font-semibold cursor-pointer"
+                >
+                  View more
+                </motion.div>
+              </Link>
         </div>
       </div>
     </section>

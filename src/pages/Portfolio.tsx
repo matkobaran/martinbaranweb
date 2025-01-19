@@ -56,14 +56,14 @@ const Portfolio = () => {
     <div className="min-h-screen bg-gradient-to-r from-skyblue to-blue-400 p-4">
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
-          <Home className="w-6 h-6" />
-          <span>PhotoFolio</span>
+          <span>MB</span>
         </Link>
       </nav>
 
       <div className="container mx-auto pt-24">
-        <Link 
-            to="/"
+        <Link
+         
+            to={category? ("/portfolio") : ("/")}
             className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-4"
           >
           <ChevronLeft className="w-5 h-5" />
@@ -73,7 +73,7 @@ const Portfolio = () => {
           {category ? (
             <h1 className="text-4xl font-bold text-white capitalize">{category} Photos</h1>
           ) : (
-            <h1 className="text-4xl font-bold text-white">All Categories</h1>
+            <h1 className="text-4xl font-bold text-white">Photo portfolio</h1>
           )}
         </div>
 

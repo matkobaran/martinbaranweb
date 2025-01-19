@@ -1,11 +1,11 @@
-import { Code2, Database, Layout, Smartphone } from "lucide-react";
+import { Code2, Database, FileCode, Smartphone } from "lucide-react";
 import { motion } from "framer-motion";
 
 const skills = [
   {
     icon: <Code2 size={32} />,
     title: "Frontend Development",
-    technologies: ["React", "TypeScript"],
+    technologies: ["React", "TypeScript", "HTML", "CSS", "JS"],
   },
   {
     icon: <Database size={32} />,
@@ -17,6 +17,12 @@ const skills = [
     title: "Mobile Development",
     technologies: ["React Native", "MAUI", "Xamarin"],
   },
+
+  {
+    icon: <FileCode size={32} />,
+    title: "Technologies",
+    technologies: ["Git", "Azure", "Docker"],
+  },
 ];
 
 export const SkillsSection = () => {
@@ -24,7 +30,7 @@ export const SkillsSection = () => {
     <section className="py-20 bg-lightgray" id="skills">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16">Skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.title}
