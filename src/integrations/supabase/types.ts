@@ -9,6 +9,41 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      albums: {
+        Row: {
+          cover_photo_id: number | null
+          created_at: string
+          created_by: string
+          description: string | null
+          id: number
+          title: string
+        }
+        Insert: {
+          cover_photo_id?: number | null
+          created_at?: string
+          created_by: string
+          description?: string | null
+          id?: number
+          title: string
+        }
+        Update: {
+          cover_photo_id?: number | null
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          id?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_cover_photo"
+            columns: ["cover_photo_id"]
+            isOneToOne: false
+            referencedRelation: "photos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       photo_categories: {
         Row: {
           category: string
@@ -59,6 +94,7 @@ export type Database = {
       }
       photos: {
         Row: {
+          album_id: number | null
           category_id: number
           created_at: string
           description: string | null
@@ -68,6 +104,7 @@ export type Database = {
           uploaded_by: string | null
         }
         Insert: {
+          album_id?: number | null
           category_id: number
           created_at?: string
           description?: string | null
@@ -77,6 +114,7 @@ export type Database = {
           uploaded_by?: string | null
         }
         Update: {
+          album_id?: number | null
           category_id?: number
           created_at?: string
           description?: string | null
@@ -86,6 +124,13 @@ export type Database = {
           uploaded_by?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "photos_album_id_fkey"
+            columns: ["album_id"]
+            isOneToOne: false
+            referencedRelation: "albums"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "photos_category_id_fkey"
             columns: ["category_id"]
