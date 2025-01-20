@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Menu, X } from "lucide-react";
+import { ArrowDown, Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const menuItems = [
   { id: 'experience', label: 'Experience' },
@@ -13,6 +13,26 @@ const menuItems = [
 
 export const HeroSection = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return document.documentElement.classList.contains('dark');
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDark(darkModePreference.matches);
+    
+    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+    darkModePreference.addEventListener('change', handler);
+    return () => darkModePreference.removeEventListener('change', handler);
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle('dark');
+  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -22,19 +42,33 @@ export const HeroSection = () => {
     setIsMenuOpen(false);
   };
 
+  const handleLogoClick = () => {
+    window.location.reload();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-blue-400 text-white">
-      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
-        <Link to="/" className="text-2xl font-bold">
+    <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-blue-400 dark:from-navy dark:to-blue-900 text-white">
+      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 dark:bg-navy/80 backdrop-blur-sm">
+        <button onClick={handleLogoClick} className="text-2xl font-bold">
           MB
-        </Link>
-        
-        <button 
-          className="md:hidden p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+        
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full hover:bg-white/10 transition-colors"
+          >
+            {isDark ? <Sun size={24} /> : <Moon size={24} />}
+          </button>
+
+          <button 
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
         <div className="hidden md:flex gap-8">
           {menuItems.map((item) => (
@@ -50,7 +84,7 @@ export const HeroSection = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-skyblue/95 backdrop-blur-sm py-2 md:hidden">
+          <div className="absolute top-full left-0 w-full bg-skyblue/95 dark:bg-navy/95 backdrop-blur-sm py-2 md:hidden">
             {menuItems.map((item) => (
               <button
                 key={item.id}

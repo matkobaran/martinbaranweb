@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 
 const photos = [
   {
@@ -29,9 +30,9 @@ export const PortfolioSection = () => {
   };
 
   return (
-    <section className="py-20 bg-white" id="portfolio">
+    <section className="py-20 bg-white dark:bg-gray-900" id="portfolio">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16 text-skyblue">Photo portfolio</h2>
+        <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-blue-400">Photo portfolio</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {photos.map((photo, index) => (
             <motion.div
@@ -54,17 +55,20 @@ export const PortfolioSection = () => {
                   </p>
                 </div>
               </div>
-
             </motion.div>
           ))}
-          <Link to="/portfolio">
-                <motion.div
-                  whileHover={{ scale: 1.05, backgroundColor: 'skyblue', color: 'white'  }}
-                  className="border-2 border-skyblue px-3 text-skyblue py-3 rounded-full font-semibold cursor-pointer"
-                >
-                  View more
-                </motion.div>
-              </Link>
+        </div>
+        
+        <div className="mt-12 flex flex-col items-center">
+          <Link to="/portfolio" className="group">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="border-2 border-skyblue dark:border-blue-400 px-6 py-3 rounded-full font-semibold cursor-pointer flex items-center gap-2 text-skyblue dark:text-blue-400 hover:bg-skyblue hover:text-white dark:hover:bg-blue-400 transition-all"
+            >
+              View more categories
+              <ChevronDown className="group-hover:translate-y-1 transition-transform" />
+            </motion.div>
+          </Link>
         </div>
       </div>
     </section>

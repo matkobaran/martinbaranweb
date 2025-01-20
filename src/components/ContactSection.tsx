@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 
 export const ContactSection = () => {
   return (
-    <section className="py-20 bg-navy text-white" id="contact">
+    <section className="py-20 bg-navy text-white dark:bg-gray-900" id="contact">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16">Get in Touch</h2>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="flex justify-center space-x-8"
+          className="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8"
         >
           <a
             href="mailto:martin.baran12@gmail.com"
