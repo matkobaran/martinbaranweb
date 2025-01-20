@@ -9,6 +9,30 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      photo_categories: {
+        Row: {
+          category: string
+          categorydescription: string
+          created_at: string
+          id: number
+          yearofevent: string | null
+        }
+        Insert: {
+          category?: string
+          categorydescription: string
+          created_at?: string
+          id?: number
+          yearofevent?: string | null
+        }
+        Update: {
+          category?: string
+          categorydescription?: string
+          created_at?: string
+          id?: number
+          yearofevent?: string | null
+        }
+        Relationships: []
+      }
       PhotoCategories: {
         Row: {
           category: string
@@ -32,6 +56,44 @@ export type Database = {
           YearOfEvent?: string | null
         }
         Relationships: []
+      }
+      photos: {
+        Row: {
+          category_id: number
+          created_at: string
+          description: string | null
+          id: number
+          photo_url: string
+          title: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          category_id: number
+          created_at?: string
+          description?: string | null
+          id?: number
+          photo_url: string
+          title?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          category_id?: number
+          created_at?: string
+          description?: string | null
+          id?: number
+          photo_url?: string
+          title?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "photos_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "photo_categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
