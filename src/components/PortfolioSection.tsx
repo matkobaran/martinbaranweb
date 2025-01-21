@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const photos = [
   {
@@ -24,17 +24,20 @@ const photos = [
 
 export const PortfolioSection = () => {
   const navigate = useNavigate();
+  const [showAll, setShowAll] = useState(false);
 
   const handlePhotoClick = (photo: typeof photos[0]) => {
     navigate(`/portfolio?category=${photo.title.toLowerCase()}`);
   };
+
+  const visiblePhotos = showAll ? photos : photos.slice(0, 2);
 
   return (
     <section className="py-20 bg-white dark:bg-gray-900" id="portfolio">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-blue-400">Photo portfolio</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {photos.map((photo, index) => (
+          {visiblePhotos.map((photo, index) => (
             <motion.div
               key={photo.id}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -59,7 +62,27 @@ export const PortfolioSection = () => {
           ))}
         </div>
         
-        <div className="mt-12 flex flex-col items-center">
+        <div className="mt-12 flex flex-col items-center gap-4">
+          {photos.length > 2 && (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              onClick={() => setShowAll(!showAll)}
+              className="border-2 border-skyblue dark:border-blue-400 px-6 py-3 rounded-full font-semibold cursor-pointer flex items-center gap-2 text-skyblue dark:text-blue-400 hover:bg-skyblue hover:text-white dark:hover:bg-blue-400 transition-all"
+            >
+              {showAll ? (
+                <>
+                  Show less
+                  <ChevronUp className="transition-transform" />
+                </>
+              ) : (
+                <>
+                  Show more
+                  <ChevronDown className="transition-transform" />
+                </>
+              )}
+            </motion.button>
+          )}
+          
           <Link to="/portfolio" className="group">
             <motion.div
               whileHover={{ scale: 1.05 }}
