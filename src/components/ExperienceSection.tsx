@@ -16,12 +16,14 @@ const experiences = [
     title: "Junior Software Developer",
     company: "ApS Brno",
     period: "06/2023 - Present",
-    description: "Leading the frontend development team, implementing modern web solutions using React and TypeScript.",
+    description: "Fullstack software developer",
     details: [
-      "Developed and maintained multiple enterprise-level applications",
-      "Mentored junior developers",
-      "Implemented CI/CD pipelines",
-      "Reduced application bundle size by 40%"
+      "Developed and maintained Windows application for our customers (.NET, .VB)",
+      "Migration of mobile application from Xamarin to MAUI",
+      "Creating REST API for mobile app",
+      "Facelift of Windows application in XAML",
+      "Maintainence of web in .vbhtml, .js",
+      "Customers support"
     ]
   },
   {
@@ -32,10 +34,8 @@ const experiences = [
     period: "12/2022 - 05/2023",
     description: "Frontend programming, mostly in React and javascript",
     details: [
-      "Thesis: AI-driven Web Applications",
-      "GPA: 3.9/4.0",
-      "Research Assistant in Web Technologies Lab",
-      "Published 2 academic papers"
+      "Creating React components from Figma",
+      "Working with Redux",
     ]
   },
   {
@@ -46,10 +46,9 @@ const experiences = [
     period: "09/2018 - 09/2020, 09/2021 - 01/2023",
     description: "Unfinished",
     details: [
-      "Built with React, Node.js, and MongoDB",
-      "Over 10,000 active users",
-      "Featured in TechCrunch",
-      "Open source with 500+ GitHub stars"
+     "Completing most of the undergraduate courses", 
+     "Learning strong software engineering fundamentals", 
+     "Organizing a faculty film festival"
     ]
   },
   {
@@ -60,7 +59,8 @@ const experiences = [
     period: "10/2020 - 09/2021",
     description: "Repair of scanners and printers for warehouses.",
     details: [
-      "Built with React, Node.js, and MongoDB",
+      "Physical repair of broken devices", 
+      "Zebra device configuration", 
       "Customer support"
     ]
   }
@@ -74,7 +74,7 @@ export const ExperienceSection = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue">Experience & Education</h2>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.id}

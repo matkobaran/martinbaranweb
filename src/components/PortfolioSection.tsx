@@ -65,7 +65,7 @@ export const PortfolioSection = () => {
               whileHover={{ scale: 1.05 }}
               className="border-2 border-skyblue dark:border-blue-400 px-6 py-3 rounded-full font-semibold cursor-pointer flex items-center gap-2 text-skyblue dark:text-blue-400 hover:bg-skyblue hover:text-white dark:hover:bg-blue-400 transition-all"
             >
-              View more categories
+              View more photo categories
               <ChevronDown className="group-hover:translate-y-1 transition-transform" />
             </motion.div>
           </Link>
