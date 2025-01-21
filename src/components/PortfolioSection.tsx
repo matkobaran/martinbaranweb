@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const photos = [
   {
@@ -24,13 +24,14 @@ const photos = [
 
 export const PortfolioSection = () => {
   const navigate = useNavigate();
-  const [showAll, setShowAll] = useState(false);
+  const isMobile = useIsMobile();
 
   const handlePhotoClick = (photo: typeof photos[0]) => {
     navigate(`/portfolio?category=${photo.title.toLowerCase()}`);
   };
 
-  const visiblePhotos = showAll ? photos : photos.slice(0, 2);
+  // Show all photos on mobile (sm), 2 photos on md, and 3 photos on lg
+  const visiblePhotos = photos.slice(0, isMobile ? 3 : window.innerWidth < 1024 ? 2 : 3);
 
   return (
     <section className="py-20 bg-white dark:bg-gray-900" id="portfolio">
@@ -62,27 +63,7 @@ export const PortfolioSection = () => {
           ))}
         </div>
         
-        <div className="mt-12 flex flex-col items-center gap-4">
-          {photos.length > 2 && (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              onClick={() => setShowAll(!showAll)}
-              className="border-2 border-skyblue dark:border-blue-400 px-6 py-3 rounded-full font-semibold cursor-pointer flex items-center gap-2 text-skyblue dark:text-blue-400 hover:bg-skyblue hover:text-white dark:hover:bg-blue-400 transition-all"
-            >
-              {showAll ? (
-                <>
-                  Show less
-                  <ChevronUp className="transition-transform" />
-                </>
-              ) : (
-                <>
-                  Show more
-                  <ChevronDown className="transition-transform" />
-                </>
-              )}
-            </motion.button>
-          )}
-          
+        <div className="mt-12 flex flex-col items-center">
           <Link to="/portfolio" className="group">
             <motion.div
               whileHover={{ scale: 1.05 }}
