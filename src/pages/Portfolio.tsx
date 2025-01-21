@@ -1,7 +1,7 @@
 import { useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const categoryPhotos = {
   nature: [
@@ -42,6 +42,10 @@ const Portfolio = () => {
   const category = searchParams.get("category");
   const photos = category ? categoryPhotos[category as keyof typeof categoryPhotos] || [] : [];
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handlePrevPhoto = () => {
     if (selectedPhotoIndex === null) return;
     setSelectedPhotoIndex(selectedPhotoIndex === 0 ? photos.length - 1 : selectedPhotoIndex - 1);
@@ -62,10 +66,9 @@ const Portfolio = () => {
 
       <div className="container mx-auto pt-24">
         <Link
-         
-            to={category? ("/portfolio") : ("/")}
-            className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-4"
-          >
+          to={category ? ("/portfolio") : ("/")}
+          className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-4"
+        >
           <ChevronLeft className="w-5 h-5" />
           Back
         </Link>

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import Video from "./pages/Video";
+import Videos from "./pages/Videos";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/video/:id" element={<Video />} />
+          <Route path="/videos" element={<Videos />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
