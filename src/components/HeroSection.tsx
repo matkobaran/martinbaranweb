@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Menu, X, Sun, Moon, LogOut } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { ArrowDown, Menu, X, Sun, Moon } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 
 const menuItems = [
   { id: 'experience', label: 'Experience' },
@@ -14,7 +12,6 @@ const menuItems = [
 ];
 
 export const HeroSection = () => {
-  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -35,18 +32,6 @@ export const HeroSection = () => {
   const toggleDarkMode = () => {
     setIsDark(!isDark);
     document.documentElement.classList.toggle('dark');
-  };
-
-  const handleLogout = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      toast.success("Logged out successfully");
-      navigate("/auth");
-    } catch (error) {
-      console.error("Error logging out:", error);
-      toast.error("Error logging out");
-    }
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -75,13 +60,6 @@ export const HeroSection = () => {
             className="p-2 rounded-full hover:bg-white/10 transition-colors"
           >
             {isDark ? <Sun size={24} /> : <Moon size={24} />}
-          </button>
-
-          <button
-            onClick={handleLogout}
-            className="p-2 rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
-          >
-            <LogOut size={24} />
           </button>
 
           <button 
