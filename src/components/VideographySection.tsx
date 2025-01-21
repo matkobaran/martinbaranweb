@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const videos = [
   {
@@ -29,10 +30,12 @@ const videos = [
 
 export const VideographySection = () => {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const handleVideoClick = (videoId: number) => {
     navigate(`/video/${videoId}`);
   };
+  const visiblePhotos = videos.slice(0, isMobile ? 3 : window.innerWidth < 1024 ? 2 : 3);
 
   return (
     <section className="py-20 bg-lightgray dark:bg-gray-900" id="videography">
@@ -40,7 +43,7 @@ export const VideographySection = () => {
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-blue-400">Videography</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {videos.map((video, index) => (
+          {visiblePhotos.map((video, index) => (
             <motion.div
               key={video.id}
               initial={{ opacity: 0, y: 20 }}
@@ -69,7 +72,7 @@ export const VideographySection = () => {
           ))}
         </div>
         <div className="mt-12 flex flex-col items-center">
-          <Link to="/portfolio?category=video" className="group">
+          <Link to="/video" className="group">
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="border-2 border-skyblue dark:border-blue-400 px-6 py-3 rounded-full font-semibold cursor-pointer flex items-center gap-2 text-skyblue dark:text-blue-400 hover:bg-skyblue hover:text-white dark:hover:bg-blue-400 transition-all"
