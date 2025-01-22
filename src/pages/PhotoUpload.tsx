@@ -124,7 +124,7 @@ const PhotoUpload = () => {
         .from("photos")
         .insert({
           photo_url: publicUrl,
-          category_id: categoryId,
+          category_id: parseInt(categoryId), // Convert string to number
           title: title || null,
           description: description || null,
           uploaded_by: user.id,
