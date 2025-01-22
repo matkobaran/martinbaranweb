@@ -8,6 +8,8 @@ import Portfolio from "./pages/Portfolio";
 import Video from "./pages/Video";
 import Videos from "./pages/Videos";
 import Admin from "./pages/Admin";
+import PhotoUpload from "./pages/PhotoUpload";
+import CategoryManagement from "./pages/CategoryManagement";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/video/:id" element={<Video />} />
           <Route path="/videos" element={<Videos />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/upload" element={<PhotoUpload />} />
+          <Route path="/admin/categories" element={<CategoryManagement />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
