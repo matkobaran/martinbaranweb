@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useEffect, useState } from "react";
 
 const photos = [
   {
@@ -25,10 +26,31 @@ const photos = [
 export const PortfolioSection = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+    const [visibleCount, setVisibleCount] = useState(3);
+  
 
   const handlePhotoClick = (photo: typeof photos[0]) => {
     navigate(`/portfolio?category=${photo.title.toLowerCase()}`);
   };
+
+   useEffect(() => {
+      const handleResize = () => {
+        if (window.innerWidth >= 1024) {
+          setVisibleCount(3);
+        } else if (window.innerWidth >= 768) {
+          setVisibleCount(2);
+        } else {
+          setVisibleCount(3);
+        }
+      };
+  
+      handleResize(); // Initial check
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
 
   // Show all photos on mobile (sm), 2 photos on md, and 3 photos on lg
   const visiblePhotos = photos.slice(0, isMobile ? 3 : window.innerWidth < 1024 ? 2 : 3);
