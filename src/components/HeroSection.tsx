@@ -23,7 +23,7 @@ export const HeroSection = () => {
   useEffect(() => {
     const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)');
     setIsDark(darkModePreference.matches);
-    
+
     const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
     darkModePreference.addEventListener('change', handler);
     return () => darkModePreference.removeEventListener('change', handler);
@@ -53,49 +53,50 @@ export const HeroSection = () => {
         <button onClick={handleLogoClick} className="text-2xl font-bold">
           MB
         </button>
-        
         <div className="flex items-center gap-4">
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 rounded-full hover:bg-white/10 transition-colors"
-          >
-            {isDark ? <Sun size={24} /> : <Moon size={24} />}
-          </button>
-
-          <button 
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        <div className="hidden md:flex gap-8">
-          {menuItems.map((item) => (
+          <div className="mr-5">
             <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className="text-lg hover:text-white/80 transition-colors relative group"
+              onClick={toggleDarkMode}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors"
             >
-              {item.label}
-              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform" />
+              {isDark ? <Sun size={24} /> : <Moon size={24} />}
             </button>
-          ))}
-        </div>
 
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-skyblue/95 dark:bg-navy/95 backdrop-blur-sm py-2 md:hidden">
+            <button
+              className="md:hidden p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+
+          <div className="hidden md:flex gap-8">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="w-full text-left px-4 py-2 hover:bg-white/10 transition-colors"
+                className="text-lg hover:text-white/80 transition-colors relative group"
               >
                 {item.label}
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform" />
               </button>
             ))}
           </div>
-        )}
+
+          {isMenuOpen && (
+            <div className="absolute top-full left-0 w-full bg-skyblue/95 dark:bg-navy/95 backdrop-blur-sm py-2 md:hidden">
+              {menuItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="w-full text-left px-4 py-2 hover:bg-white/10 transition-colors"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </nav>
 
       <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center" id="home">
@@ -112,13 +113,13 @@ export const HeroSection = () => {
               A passionate software developer currently based in Brno, Czechia, specializing in software development for Windows, mobile and web application. When I'm not coding, you'll find me taking photos or jogging.
             </p>
             <div className="flex gap-4">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white text-skyblue px-6 py-3 rounded-full font-semibold cursor-pointer"
-                  onClick={() => scrollToSection('portfolio')}
-                >
-                  View photos
-                </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-white text-skyblue px-6 py-3 rounded-full font-semibold cursor-pointer"
+                onClick={() => scrollToSection('portfolio')}
+              >
+                View photos
+              </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="border-2 border-white px-6 py-3 rounded-full font-semibold cursor-pointer"
@@ -128,7 +129,7 @@ export const HeroSection = () => {
               </motion.div>
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -143,11 +144,11 @@ export const HeroSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl" />
             </div>
-            
+
           </motion.div>
         </div>
       </div>
-      
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

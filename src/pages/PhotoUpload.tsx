@@ -25,7 +25,7 @@ const PhotoUpload = () => {
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
-    checkAdminAccess();
+    //checkAdminAccess();
     fetchCategories();
   }, []);
 

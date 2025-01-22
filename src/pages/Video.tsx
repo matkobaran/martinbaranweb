@@ -7,60 +7,54 @@ const videos = [
     id: 1,
     title: "Stovka",
     videoUrl: "https://www.youtube.com/embed/oVmHn2yd9ks?si=QP79mRBum6mD9Qrz",
-    description: "Documentary about Czech forests",
-    details: "An intimate look at the seasonal changes in Czech forests, featuring rare wildlife footage and stunning macro photography. This project was created to raise awareness about local conservation efforts.",
+    description: "Documentary about rivarly",
+    details: "What is victory and what you are willing to sacrifice? This is a documentary about the last race of the season, when there can only be one winner.",
     year: "2024",
     duration: "8:45",
     credits: [
       "Director: Martin Baran",
-      "Cinematography: Martin Baran",
+      "Cinematography: Dominik Hanak",
       "Editing: Martin Baran",
-      "Sound Design: Nature Sounds"
     ]
   },
   {
     id: 2,
     title: "Koleje",
     videoUrl: "https://www.youtube.com/embed/sMOxQ3qbSt8?si=DkCsDgMeBrJtoD9H",
-    description: "A short film exploring city life in Prague",
-    details: "This documentary captures the essence of urban life in Prague, showcasing the blend of historical architecture with modern city living. Shot over 6 months, it features interviews with local residents and beautiful timelapses of city landmarks.",
+    description: "A short film about the benefits of living in a dormitory",
+    details: "Short commercial created for the Film Festival, where viewer can see how life in dormitories can sometimes be interesting",
     year: "2023",
     duration: "3:05",
     credits: [
       "Director: Martin Baran",
-      "Cinematography: Martin Baran",
+      "Cinematography: Lazar Kis Bence",
       "Editing: Martin Baran",
-      "Music: Local Artists"
     ]
   },
   {
     id: 3,
     title: "RSHO 2023",
     videoUrl: "https://www.youtube.com/embed/g26BMLE5T2Q?si=CfY2OAtFwKYZ1eOw",
-    description: "Regionální hry Speciální olympiády 2023 Brno",
-    details: "Športová akcia organizovaná študentami Fakulty športových študií Masarykovej univerzity. Video z regionálnych hier SO konaných 12.5. 2023 v areáli: Pod Palackého vrchem Brno",
+    description: "Regional Games of the Special Olympics 2023 Brno",
+    details: "A sports event organized by MUNI Sport student.",
     year: "2023",
     duration: "5:05",
     credits: [
-      "Director: Martin Baran",
       "Cinematography: Martin Baran",
       "Editing: Martin Baran",
-      "Interviews: Local Tech Leaders"
     ]
   },
   {
     id: 4,
     title: "Svadba Juraj a Naďka",
     videoUrl: "https://www.youtube.com/embed/ctfxxjWLWSo?si=DZjE7ERXWsYem5lk",
-    description: "Series about local tech startups",
-    details: "A documentary series highlighting the innovative tech startups in Prague's growing tech scene. Features interviews with founders, developers, and investors who are shaping the future of technology in the Czech Republic.",
+    description: "Wedding video",
+    details: "Video from my dear friend's wedding",
     year: "2022",
     duration: "4:32",
     credits: [
-      "Director: Martin Baran",
       "Cinematography: Martin Baran",
       "Editing: Martin Baran",
-      "Interviews: Local Tech Leaders"
     ]
   }
 ];

@@ -25,7 +25,7 @@ const CategoryManagement = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    checkAdminAccess();
+    //checkAdminAccess();
     fetchCategories();
   }, []);
 

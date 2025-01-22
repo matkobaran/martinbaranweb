@@ -9,21 +9,21 @@ const videos = [
     id: 1,
     title: "Stovka",
     thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-    description: "Documentary about Czech forests",
+    description: "Documentary about rivarly",
     duration: "7:06"
   },
   {
     id: 2,
     title: "Koleje",
     thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4",
-    description: "A short film exploring city life in Prague",
+    description: "A short film about the benefits of living in a dormitory",
     duration: "3:05"
   },
   {
     id: 3,
     title: "RHSO 2023",
     thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-    description: "Documentary about Czech forests",
+    description: "Regional Games of the Special Olympics 2023 Brno",
     duration: "5:05"
   }
 ];
@@ -82,7 +82,7 @@ export const VideographySection = () => {
                   <div className="absolute bottom-4 left-4 right-4 text-white">
                     <h3 className="text-xl font-semibold mb-2">{video.title}</h3>
                     <p className="text-sm opacity-90">{video.description}</p>
-                    <span className="absolute top-4 right-4 bg-black/50 px-2 py-1 rounded text-sm">
+                    <span className="absolute top-0 right-4 bg-black/50 px-2 py-1 rounded text-sm">
                       {video.duration}
                     </span>
                   </div>

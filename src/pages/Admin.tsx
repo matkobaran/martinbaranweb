@@ -9,9 +9,9 @@ const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  useEffect(() => {
-    checkAdminAccess();
-  }, []);
+  // useEffect(() => {
+  //   checkAdminAccess();
+  // }, []);
 
   const checkAdminAccess = async () => {
     try {
