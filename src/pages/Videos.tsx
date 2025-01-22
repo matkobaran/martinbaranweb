@@ -1,6 +1,7 @@
 import { useSearchParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
+import { useEffect } from "react";
 
 const videos = [
   {
@@ -36,6 +37,10 @@ const videos = [
 const Videos = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-skyblue to-blue-400 p-4">

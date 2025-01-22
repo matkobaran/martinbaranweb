@@ -10,7 +10,7 @@ const videos = [
     description: "Documentary about rivarly",
     details: "What is victory and what you are willing to sacrifice? This is a documentary about the last race of the season, when there can only be one winner.",
     year: "2024",
-    duration: "8:45",
+    duration: "7:06",
     credits: [
       "Director: Martin Baran",
       "Cinematography: Dominik Hanak",
