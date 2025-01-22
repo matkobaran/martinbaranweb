@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import Video from "./pages/Video";
 import Videos from "./pages/Videos";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/video/:id" element={<Video />} />
           <Route path="/videos" element={<Videos />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
