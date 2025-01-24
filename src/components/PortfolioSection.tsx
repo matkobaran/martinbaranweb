@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
+import AnimatedButton from "./my components/AnimatedButton";
 
 const photos = [
   {
@@ -87,13 +87,11 @@ export const PortfolioSection = () => {
         
         <div className="mt-12 flex flex-col items-center">
           <Link to="/portfolio" className="group">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="border-2 border-skyblue dark:border-blue-400 px-6 py-3 rounded-full font-semibold cursor-pointer flex items-center gap-2 text-skyblue dark:text-blue-400 hover:bg-skyblue hover:text-white dark:hover:bg-blue-400 transition-all"
-            >
-              View more photo categories
-              <ChevronDown className="group-hover:translate-y-1 transition-transform" />
-            </motion.div>
+            <AnimatedButton
+              text="View more photo categories"
+              variant="wide"
+              decoration={true}
+            />
           </Link>
         </div>
       </div>

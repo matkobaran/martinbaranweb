@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import AnimatedButton from "./my components/AnimatedButton";
 
 const menuItems = [
   { id: 'experience', label: 'Experience' },
@@ -113,20 +114,16 @@ export const HeroSection = () => {
               A passionate software developer currently based in Brno, Czechia, specializing in software development for Windows, mobile and web application. When I'm not coding, you'll find me taking photos or jogging.
             </p>
             <div className="flex gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-white text-skyblue px-6 py-3 rounded-full font-semibold cursor-pointer"
-                onClick={() => scrollToSection('portfolio')}
-              >
-                View photos
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="border-2 border-white px-6 py-3 rounded-full font-semibold cursor-pointer"
-                onClick={() => scrollToSection('contact')}
-              >
-                Get in Touch
-              </motion.div>
+            <AnimatedButton
+              text="View photos"
+              onClick={() => scrollToSection('portfolio')}
+              variant="primary"
+            />
+            <AnimatedButton
+              text="Get in Touch"
+              onClick={() => scrollToSection('contact')}
+              variant="secondary"
+            />
             </div>
           </motion.div>
 

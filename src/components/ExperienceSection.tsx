@@ -70,7 +70,7 @@ export const ExperienceSection = () => {
   const [selectedExperience, setSelectedExperience] = useState<typeof experiences[0] | null>(null);
 
   return (
-    <section className="py-20 bg-white" id="experience">
+    <section className="py-20 bg-white dark:bg-gray-900 " id="experience">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue">Experience & Education</h2>
         

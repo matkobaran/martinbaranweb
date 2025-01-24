@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
+import AnimatedButton from "./my components/AnimatedButton";
 
 const videos = [
   {
     id: 1,
     title: "Stovka",
     thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-    description: "Documentary about rivarly",
+    description: "Documentary about rivalry",
     duration: "7:06"
   },
   {
@@ -58,9 +58,9 @@ export const VideographySection = () => {
   const visibleVideos = videos.slice(0, visibleCount);
 
   return (
-    <section className="py-20 bg-lightgray dark:bg-gray-900" id="videography">
+    <section className="py-20 bg-lightgray dark:bg-navy" id="videography">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-blue-400">Videography</h2>
+        <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-white">Videography</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {visibleVideos.map((video, index) => (
@@ -93,13 +93,11 @@ export const VideographySection = () => {
         </div>
         <div className="mt-12 flex flex-col items-center">
           <Link to="/videos" className="group">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="border-2 border-skyblue dark:border-blue-400 px-6 py-3 rounded-full font-semibold cursor-pointer flex items-center gap-2 text-skyblue dark:text-blue-400 hover:bg-skyblue hover:text-white dark:hover:bg-blue-400 transition-all"
-            >
-              View more video categories
-              <ChevronDown className="group-hover:translate-y-1 transition-transform" />
-            </motion.div>
+            <AnimatedButton
+              text="View more video categories"
+              variant="wide"
+              decoration={true}
+            />
           </Link>
         </div>
       </div>
