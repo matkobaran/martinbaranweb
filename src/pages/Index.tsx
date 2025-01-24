@@ -8,10 +8,13 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
+import { UserCog } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     checkAdminStatus();
@@ -19,19 +22,27 @@ const Index = () => {
 
   const checkAdminStatus = async () => {
     try {
+      console.log("Checking admin status...");
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user) {
+        console.log("User found:", user.id);
         const { data: roles } = await supabase
           .from("user_roles")
           .select("role")
           .eq("user_id", user.id)
           .single();
 
+        console.log("User roles:", roles);
         setIsAdmin(roles?.role === "admin");
       }
     } catch (error) {
       console.error("Error checking admin status:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to check admin status",
+      });
     }
   };
 
@@ -42,8 +53,9 @@ const Index = () => {
           <Button 
             variant="outline"
             onClick={() => navigate("/admin")}
-            className="mr-2"
+            className="flex items-center gap-2 bg-white/80 backdrop-blur-sm hover:bg-white/90"
           >
+            <UserCog className="w-4 h-4" />
             Admin Dashboard
           </Button>
         )}
