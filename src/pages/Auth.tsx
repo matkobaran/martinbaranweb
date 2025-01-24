@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Mail, Lock, Loader2 } from "lucide-react";
 
@@ -10,25 +10,52 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true); // Default to sign up since you're new
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (password.length < 6) {
+      toast({
+        variant: "destructive",
+        title: "Invalid password",
+        description: "Password must be at least 6 characters long",
+      });
+      return;
+    }
+
     setIsLoading(true);
+    console.log("Attempting to", isSignUp ? "sign up" : "sign in", "with email:", email);
 
     try {
-      const { data, error } = isSignUp 
-        ? await supabase.auth.signUp({ email, password })
-        : await supabase.auth.signInWithPassword({ email, password });
+      if (isSignUp) {
+        const { data, error } = await supabase.auth.signUp({ 
+          email, 
+          password,
+          options: {
+            emailRedirectTo: window.location.origin
+          }
+        });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      if (data.user) {
         toast({
-          title: isSignUp ? "Account created successfully!" : "Welcome back!",
-          description: isSignUp ? "Please check your email to verify your account." : "You have been logged in successfully.",
+          title: "Account created!",
+          description: "Please check your email to verify your account.",
+        });
+      } else {
+        const { data, error } = await supabase.auth.signInWithPassword({ 
+          email, 
+          password 
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: "Welcome back!",
+          description: "You have been logged in successfully.",
         });
         navigate("/");
       }
@@ -37,7 +64,7 @@ export default function Auth() {
       toast({
         variant: "destructive",
         title: "Authentication error",
-        description: error.message,
+        description: error.message || "An error occurred during authentication",
       });
     } finally {
       setIsLoading(false);
@@ -88,7 +115,7 @@ export default function Auth() {
 
           <Button
             type="submit"
-            className="w-full"
+            className="w-full bg-blue-600 hover:bg-blue-700"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -103,6 +130,7 @@ export default function Auth() {
           <button
             onClick={() => setIsSignUp(!isSignUp)}
             className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            type="button"
           >
             {isSignUp 
               ? "Already have an account? Sign in" 
