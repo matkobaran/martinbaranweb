@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Upload, FolderPlus } from "lucide-react";
@@ -8,10 +8,11 @@ import { supabase } from "@/integrations/supabase/client";
 const Admin = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   checkAdminAccess();
-  // }, []);
+  useEffect(() => {
+    checkAdminAccess();
+  }, []);
 
   const checkAdminAccess = async () => {
     try {
@@ -40,12 +41,24 @@ const Admin = () => {
           description: "You don't have admin privileges.",
         });
         navigate("/");
+        return;
       }
+
+      setIsLoading(false);
     } catch (error) {
       console.error("Error checking admin access:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "An error occurred while checking access.",
+      });
       navigate("/");
     }
   };
+
+  if (isLoading) {
+    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
