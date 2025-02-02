@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Menu, X, Sun, Moon } from "lucide-react";
-import { Link } from "react-router-dom";
+import titlePhoto  from "../../resources/img/title.jpg";
 import { useState, useEffect } from "react";
 import AnimatedButton from "./my components/AnimatedButton";
 
@@ -135,7 +135,7 @@ export const HeroSection = () => {
           >
             <div className="relative">
               <img
-                src="https://lh3.googleusercontent.com/pw/AP1GczP_m0HEKdoz8kbXcF6MYbnkATWq1sJwooRGSqU3K8yelcQm3GX6MxiCSetj8k8y2rSJF5laIR18ocZkXVl312UNr5JxSUxFI8Dc_TjSVd3rpko34a4JgcXjKRY4g4YGbHLRdeAj4IL79Oj7Sfb2Z8GzVA=w472-h815-s-no-gm"
+                src={titlePhoto}
                 alt="Martin Baran"
                 className="rounded-2xl w-full shadow-xl"
               />
