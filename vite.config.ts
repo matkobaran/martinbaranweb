@@ -7,9 +7,9 @@ import { componentTagger } from "lovable-tagger";
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
   base: "/martinbaranweb",
-  /*resolve: {
+  resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-  },*/
+  },
 }));
