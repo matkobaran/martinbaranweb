@@ -2,7 +2,7 @@
   "name": "vite_react_shadcn_ts",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://matkobaran.github.io/martinbaranweb/",
+  "homepage": "http://martinbaran.com/",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --cname martinbaran.com"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

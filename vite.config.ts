@@ -5,8 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: "/",
   plugins: [react()],
-  base: "/martinbaranweb/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
