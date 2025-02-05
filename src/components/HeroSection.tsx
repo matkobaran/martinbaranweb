@@ -55,7 +55,7 @@ export const HeroSection = () => {
           MB
         </button>
         <div className="flex items-center gap-4">
-          <div className="mr-5">
+          {/* <div className="mr-5">
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-full hover:bg-white/10 transition-colors"
@@ -69,7 +69,7 @@ export const HeroSection = () => {
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          </div>
+          </div> */}
 
           <div className="hidden md:flex gap-8">
             {menuItems.map((item) => (

@@ -2,33 +2,37 @@ import { useSearchParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
+import titleStovka from "/resources/video/stovka.jpg";
+import titleKoleje from "/resources/video/koleje.webp";
+import titleRHSO from "/resources/video/rso.webp";
+import titleSvadba from "/resources/video/svadba.webp";
 
 const videos = [
   {
     id: 1,
     title: "Stovka",
-    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    thumbnail: titleStovka,
     description: "Documentary about rivarly",
     duration: "7:06"
   },
   {
     id: 2,
     title: "Koleje",
-    thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4",
+    thumbnail: titleKoleje,
     description: "A short film about the benefits of living in a dormitory",
     duration: "3:05"
   },
   {
     id: 3,
     title: "RHSO 2023",
-    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    thumbnail: titleRHSO,
     description: "Regional Games of the Special Olympics 2023 Brno",
     duration: "5:05"
   },
   {
     id: 4,
     title: "Svadba Juraj a Naďka",
-    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    thumbnail: titleSvadba,
     description: "Wedding video",
     duration: "4:32"
   }

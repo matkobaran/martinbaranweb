@@ -3,26 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AnimatedButton from "./my components/AnimatedButton";
+import titleStovka from "/resources/video/stovka.jpg";
+import titleKoleje from "/resources/video/koleje.webp";
+import titleRHSO from "/resources/video/rso.webp";
+
 
 const videos = [
   {
     id: 1,
     title: "Stovka",
-    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    thumbnail: titleStovka,
     description: "Documentary about rivalry",
     duration: "7:06"
   },
   {
     id: 2,
     title: "Koleje",
-    thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4",
+    thumbnail: titleKoleje,
     description: "A short film about the benefits of living in a dormitory",
     duration: "3:05"
   },
   {
     id: 3,
     title: "RHSO 2023",
-    thumbnail: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+    thumbnail: titleRHSO,
     description: "Regional Games of the Special Olympics 2023 Brno",
     duration: "5:05"
   }

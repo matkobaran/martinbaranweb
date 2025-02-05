@@ -4,27 +4,19 @@ import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
 import AnimatedButton from "./my components/AnimatedButton";
-import titleCyberWine from "/resources/img/Cyber Wine/title.jpg";
-import titleBDParis from "/resources/img/BD Paris/title.jpg";
-import titleBDLondon from "/resources/img/BD London/title.jpg";
 
-const photos = [
-  {
-    id: 1,
-    src: titleBDParis,
-    title: "Best Diplomats Paris 2025",
-  },
-  {
-    id: 2,
-    src: titleBDLondon,
-    title: "Best Diplomats London 2024",
-  },
-  {
-    id: 3,
-    src: titleCyberWine,
-    title: "Cyber Wine 2024",
-  }
+const eventData = [
+  { id: 1, folder: "BD Paris", title: "Best Diplomats Paris 2025" },
+  { id: 2, folder: "BD London", title: "Best Diplomats London 2024" },
+  { id: 3, folder: "Cyber Wine", title: "Cyber Wine 2024" },
 ];
+
+const photos = eventData.map(({ id, folder, title }) => ({
+  id,
+  src: `/resources/img/${folder}/1.jpg`,
+  title,
+}));
+
 
 export const PortfolioSection = () => {
   const navigate = useNavigate();
@@ -33,7 +25,7 @@ export const PortfolioSection = () => {
   
 
   const handlePhotoClick = (photo: typeof photos[0]) => {
-    navigate(`/portfolio?category=${photo.title.toLowerCase()}`);
+    navigate(`/portfolio?category=${photo.title}`);
   };
 
    useEffect(() => {

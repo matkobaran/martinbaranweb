@@ -2,21 +2,23 @@ import { useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import titleCyberWine from "/resources/img/Cyber Wine/title.jpg";
-import titleBDParis from "/resources/img/BD Paris/title.jpg";
-import titleBDLondon from "/resources/img/BD London/title.jpg";
 
-const categoryPhotos = {
-  Paris: [
-    titleBDParis,
-  ],
-  London: [
-    titleBDLondon,
-  ],
-  CyberWine: [
-    titleCyberWine,
-  ],
-};
+
+const categories = [
+  { title: "Best Diplomats Paris 2025", folder: "BD Paris" },
+  { title: "Best Diplomats London 2024", folder: "BD London" },
+  { title: "Cyber Wine 2024", folder: "Cyber Wine" },
+];
+
+const categoryPhotos = {};
+
+categories.forEach(({ title, folder }) => {
+  categoryPhotos[title] = Array.from({ length: 39 }, (_, i) => 
+    `/resources/img/${folder}/${i + 1}.jpg`
+  );
+});
+
+console.log(categoryPhotos);
 
 const Portfolio = () => {
   const [searchParams] = useSearchParams();
