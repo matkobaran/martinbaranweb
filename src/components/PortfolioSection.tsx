@@ -4,22 +4,25 @@ import { Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
 import AnimatedButton from "./my components/AnimatedButton";
+import titleCyberWine from "/resources/img/Cyber Wine/title.jpg";
+import titleBDParis from "/resources/img/BD Paris/title.jpg";
+import titleBDLondon from "/resources/img/BD London/title.jpg";
 
 const photos = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e",
-    title: "Nature",
+    src: titleBDParis,
+    title: "Best Diplomats Paris 2025",
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1493863641943-9b68992a8d07",
-    title: "Architecture",
+    src: titleBDLondon,
+    title: "Best Diplomats London 2024",
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1",
-    title: "Landscape",
+    src: titleCyberWine,
+    title: "Cyber Wine 2024",
   }
 ];
 
