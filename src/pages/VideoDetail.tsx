@@ -1,5 +1,6 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import { useEffect } from "react";
 
 const videos = [
   
@@ -63,7 +64,9 @@ const Video = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const video = videos.find(v => v.id === Number(id));
-
+useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (!video) {
     return <div>Video not found</div>;
   }
