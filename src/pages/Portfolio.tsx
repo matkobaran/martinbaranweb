@@ -14,7 +14,7 @@ const categoryPhotos = {};
 
 categories.forEach(({ title, folder, photoCount }) => {
   categoryPhotos[title] = Array.from({ length: photoCount }, (_, i) => 
-    `../../resources/img/${folder}/${i + 1}.jpg`
+    `/resources/img/${folder}/${i + 1}.jpg`
   );
 });
 

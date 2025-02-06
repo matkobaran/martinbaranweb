@@ -139,7 +139,7 @@ export const HeroSection = () => {
                 alt="Martin Baran"
                 className="rounded-2xl w-full shadow-xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl" />
             </div>
 
           </motion.div>
