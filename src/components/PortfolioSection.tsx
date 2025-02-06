@@ -13,7 +13,7 @@ const eventData = [
 
 const photos = eventData.map(({ id, folder, title }) => ({
   id,
-  src: `src/resources/img/${folder}/1.jpg`,
+  src: `/resources/img/${folder}/1.jpg`,
   title,
 }));
 
