@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AnimatedButton from "./my components/AnimatedButton";
-import titleStovka from "/resources/video/stovka.jpg";
-import titleKoleje from "/resources/video/koleje.webp";
-import titleRHSO from "/resources/video/rso.webp";
+import titleStovka from "../resources/video/stovka.jpg";
+import titleKoleje from "../resources/video/koleje.webp";
+import titleRHSO from "../resources/video/rso.webp";
 
 
 const videos = [

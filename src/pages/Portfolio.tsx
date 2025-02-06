@@ -5,16 +5,16 @@ import { useState, useEffect } from "react";
 
 
 const categories = [
-  { title: "Best Diplomats Paris 2025", folder: "BD Paris" },
-  { title: "Best Diplomats London 2024", folder: "BD London" },
-  { title: "Cyber Wine 2024", folder: "Cyber Wine" },
+  { title: "Best Diplomats Paris 2025", folder: "BD Paris", photoCount: 1 },
+  { title: "Best Diplomats London 2024", folder: "BD London", photoCount: 1 },
+  { title: "Cyber Wine 2024", folder: "Cyber Wine", photoCount: 39 },
 ];
 
 const categoryPhotos = {};
 
-categories.forEach(({ title, folder }) => {
-  categoryPhotos[title] = Array.from({ length: 39 }, (_, i) => 
-    `/resources/img/${folder}/${i + 1}.jpg`
+categories.forEach(({ title, folder, photoCount }) => {
+  categoryPhotos[title] = Array.from({ length: photoCount }, (_, i) => 
+    `src/resources/img/${folder}/${i + 1}.jpg`
   );
 });
 
