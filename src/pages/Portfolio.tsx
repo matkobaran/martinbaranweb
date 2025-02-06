@@ -2,6 +2,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const categories = [
@@ -17,8 +18,6 @@ categories.forEach(({ title, folder, photoCount }) => {
     `/resources/img/${folder}/${i + 1}.jpg`
   );
 });
-
-console.log(categoryPhotos);
 
 const Portfolio = () => {
   const [searchParams] = useSearchParams();
@@ -39,6 +38,8 @@ const Portfolio = () => {
     if (selectedPhotoIndex === null) return;
     setSelectedPhotoIndex(selectedPhotoIndex === photos.length - 1 ? 0 : selectedPhotoIndex + 1);
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-skyblue to-blue-400 p-4">
@@ -90,8 +91,8 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group"
-                onClick={() => window.location.href = `/portfolio?category=${categoryName}`}
-              >
+                onClick={() => navigate(`/portfolio?category=${categoryName}`)}
+                >
                 <img
                   src={photos[0]}
                   alt={`${categoryName} category`}
