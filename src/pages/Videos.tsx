@@ -6,6 +6,7 @@ import titleStovka from "/resources/video/stovka.jpg";
 import titleKoleje from "/resources/video/koleje.webp";
 import titleRHSO from "/resources/video/rso.webp";
 import titleSvadba from "/resources/video/svadba.webp";
+import { useNavigate } from "react-router-dom";
 
 const videos = [
   {
@@ -41,6 +42,7 @@ const videos = [
 const Videos = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -73,7 +75,7 @@ const Videos = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className="cursor-pointer group"
-              onClick={() => window.location.href = `/video/${video.id}`}
+              onClick={() => navigate(`/video/${video.id}`)}
             >
               <div className="relative overflow-hidden rounded-lg aspect-video">
                 <img

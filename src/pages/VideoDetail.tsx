@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const videos = [
   
@@ -71,13 +72,13 @@ const Video = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-8">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center text-gray-600 hover:text-gray-900 mb-8"
+      <Link
+          to="/videos"
+          className="text-black hover:text-black/80 transition-colors flex items-center gap-2 pb-4"
         >
-          <ArrowLeft className="mr-2" size={20} />
+          <ChevronLeft className="w-5 h-5" />
           Back
-        </button>
+        </Link>
 
         <h1 className="text-4xl font-bold mb-4">{video.title}</h1>
         <div className="aspect-video w-full mb-8">

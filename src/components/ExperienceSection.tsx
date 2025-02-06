@@ -99,15 +99,13 @@ export const ExperienceSection = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle>{selectedExperience?.title}</DialogTitle>
-              <DialogDescription>
                 <p className="text-gray-600">{selectedExperience?.company}</p>
                 <p className="text-sm text-gray-500 mb-4">{selectedExperience?.period}</p>
                 <ul className="list-disc pl-4 space-y-2">
                   {selectedExperience?.details.map((detail, index) => (
-                    <li key={index} className="text-gray-700">{detail}</li>
+                    <li key={index} className="text-gray-700 text-left">{detail}</li>
                   ))}
                 </ul>
-              </DialogDescription>
             </DialogHeader>
           </DialogContent>
         </Dialog>
