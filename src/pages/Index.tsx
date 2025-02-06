@@ -4,9 +4,7 @@ import { PortfolioSection } from "@/components/PortfolioSection";
 import { ContactSection } from "@/components/ContactSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { VideographySection } from "@/components/VideographySection";
-import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const Index = () => {
   const navigate = useNavigate();

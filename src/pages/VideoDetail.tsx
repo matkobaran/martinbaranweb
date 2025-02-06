@@ -1,6 +1,5 @@
-import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 const videos = [
   

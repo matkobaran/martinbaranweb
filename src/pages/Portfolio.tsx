@@ -1,9 +1,7 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 
 const categories = [
   { title: "Best Diplomats Paris 2025", folder: "BD Paris", photoCount: 1 },

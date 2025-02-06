@@ -1,4 +1,4 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
@@ -6,7 +6,6 @@ import titleStovka from "/resources/video/stovka.jpg";
 import titleKoleje from "/resources/video/koleje.webp";
 import titleRHSO from "/resources/video/rso.webp";
 import titleSvadba from "/resources/video/svadba.webp";
-import { useNavigate } from "react-router-dom";
 
 const videos = [
   {
