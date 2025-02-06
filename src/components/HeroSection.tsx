@@ -113,7 +113,7 @@ export const HeroSection = () => {
               Hi, I'm Martin
             </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-              A passionate software developer currently based in Brno, Czechia, specializing in software development for Windows, mobile and web application. When I'm not coding, you'll find me taking photos or jogging.
+              A passionate software developer currently based in Brno, Czechia, specializing in software development for Windows, mobile and web application. When I'm not coding, you'll find me taking photos or running.
             </p>
             <div className="flex gap-4">
             <AnimatedButton
