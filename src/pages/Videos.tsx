@@ -6,6 +6,7 @@ import titleStovka from "/resources/video/stovka.jpg";
 import titleKoleje from "/resources/video/koleje.webp";
 import titleRHSO from "/resources/video/rso.webp";
 import titleSvadba from "/resources/video/svadba.webp";
+import titleKreditovka from "/resources/video/kreditovka.webp";
 
 const videos = [
   {
@@ -35,6 +36,13 @@ const videos = [
     thumbnail: titleSvadba,
     description: "Wedding video",
     duration: "4:32"
+  },
+  {
+    id: 5,
+    title: "Kreditovka",
+    thumbnail: titleKreditovka,
+    description: "Short horror film",
+    duration: "8:01"
   }
 ];
 

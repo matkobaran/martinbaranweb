@@ -57,6 +57,20 @@ const videos = [
       "Cinematography: Martin Baran",
       "Editing: Martin Baran",
     ]
+  },
+  {
+    
+    id: 5,
+    title: "Kreditovka",
+    videoUrl: "https://www.youtube.com/embed/sfe-V-tRXI8?si=11qmQuj4fzbUzbuq",
+    description: "Short horror film",
+    details: "A group of students need to earn a few extra credits, so they sign up for a very easy course where they only need to complete three online tests. What could go wrong?",
+    year: "2024",
+    duration: "8:01",
+    credits: [
+      "Cinematography: Martin Baran",
+      "Director: Martin Macák",
+    ]
   }
 ];
 
