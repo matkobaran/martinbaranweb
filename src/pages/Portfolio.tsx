@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 const categories = [
   { title: "Best Diplomats Paris 2025", folder: "BD Paris", photoCount: 1 },
-  { title: "Best Diplomats London 2024", folder: "BD London", photoCount: 1 },
+  { title: "Best Diplomats London 2024", folder: "BD London", photoCount: 29},
   { title: "Cyber Wine 2024", folder: "Cyber Wine", photoCount: 39 },
 ];
 
