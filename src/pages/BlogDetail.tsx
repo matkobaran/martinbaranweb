@@ -1,34 +1,95 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const blogPosts = [
-  
   {
     id: 1,
     title: "I love the rain",
     subTitle: "Or what could happened if you decide to walk from Porto to Santiago de Compostela",
-    content: " “I love the rain!” I kept repeating to myself as I walked from Porto to Santiago de Compostela for 10 days. Since I planned to successfully complete my journey, I had no other choice. As a true sports fan, I started my journey at the Draka stadium in Porto, where I was drawn in by the atmosphere in the metro on the way from the airport. The next morning, I set off with determination. My first steps were from the most famous monuments in Porto towards the ocean, and after a few hours I left the city. There are two options for which route you can choose. Walk along the coast and walk on wooden footbridges or take an inland route through villages and countryside. I chose the latter due to the weather, as the wind from the ocean combined with the rain was unpleasant for walking. The morning after waking up consisted of finding a local bakery where I enjoyed a pastel de nata with coffee. I later missed that in Spain. When walking in the Portuguese part, you walk along historic cobblestone roads. The surroundings of these side roads are lined with old walls and vineyards. The architecture interested me, especially in terms of the variety of colors and stone building materials that we rarely encounter here. On the contrary, after four days I found myself in Spain, where I walked more on asphalt roads and the churches along the way seemed the same everywhere. To receive a certificate of completion, you must walk at least the last 100km and get at least 2 stamps in the \"Credential\" every day. The closer I was to the destination, the more people I met. Most often you will meet during the walk or in the evening in an albergue (a place of accommodation for pilgrims, typically large rooms with bunk beds, a kitchen and a shower). Sometimes you don't see each other for a few days and meeting later is all the more beautiful. In the kitchens, I learned a lot of interesting stories from people from different countries. I was inspired by older retired people who were in no hurry and walked at their own pace, often for weeks. The first morning after arriving in Santiago is special. You sit in a café or in front of the cathedral again, observing the surroundings, but today you don't have to walk anywhere. You think about everything you experienced and everyone you met. After getting to know the city, I then returned to Porto, from where I flew home. It was a strange feeling to walk a route that took me 10 days on foot, 10 euros and only 4 hours by bus. The journey itself will definitely teach you something, whether you decide to walk alone or with someone.",
+    content: "...",
     year: "2024",
-    author: "Martin Baran"
+    author: "Martin Baran",
+    comments: [
+      {
+        id: 1,
+        date: "10.2.2025",
+        author: "Michal",
+        replyTo: null,
+        message: "Nice text"
+      },
+      {
+        id: 2,
+        date: "11.2.2025",
+        author: "Adam",
+        replyTo: 1,
+        message: "Yes, I agree"
+      }
+    ]
   }
 ];
 
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const blog = blogPosts.find(v => v.id === Number(id));
-useEffect(() => {
+  const blog = blogPosts.find((v) => v.id === Number(id));
+  const [comments, setComments] = useState(blog ? blog.comments : []);
+  const [newComment, setNewComment] = useState("");
+  const [replyTo, setReplyTo] = useState(null);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   if (!blog) {
     return <div>Blog not found</div>;
   }
 
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/comments/${id}`)
+      .then(response => setComments(response.data))
+      .catch(error => console.error(error));
+  }, [id]);
+  
+  const handleAddComment = () => {
+    if (!newComment.trim()) return;
+  
+    axios.post("http://localhost:5000/api/comments", {
+      postId: Number(id),
+      author: "Guest",
+      message: newComment,
+      replyTo
+    })
+    .then(response => setComments([...comments, response.data]))
+    .catch(error => console.error(error));
+  
+    setNewComment("");
+    setReplyTo(null);
+  };
+  
+  const renderComments = (parentId = null) =>
+    comments
+      .filter((comment) => comment.replyTo === parentId)
+      .map((comment) => (
+        <div key={comment.id} className="ml-4 mt-2">
+          <p>
+            <strong>{comment.author}</strong> ({comment.date}): {comment.message}
+          </p>
+          <button
+            className="text-blue-500 text-sm"
+            onClick={() => setReplyTo(comment.id)}
+          >
+            Reply
+          </button>
+          {renderComments(comment.id)}
+        </div>
+      ));
+
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-8">
-      <Link
+        <Link
           to="/"
           className="text-black hover:text-black/80 transition-colors flex items-center gap-2 pb-4"
         >
@@ -44,10 +105,29 @@ useEffect(() => {
         </div>
 
         <div className="grid mt-10">
-            <p className="text-gray-700 mb-6">{blog.content}</p>
-          </div>        
+          <p className="text-gray-700 mb-6">{blog.content}</p>
+        </div>
+
+        <div className="mt-8">
+          <h3 className="text-xl font-bold">Comments</h3>
+          {renderComments()}
+          <div className="mt-4">
+            <textarea
+              className="w-full border border-gray-300 rounded-md p-2"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Write a comment..."
+            />
+            <button
+              className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+              onClick={handleAddComment}
+            >
+              Add Comment
+            </button>
+          </div>
         </div>
       </div>
+    </div>
   );
 };
 
