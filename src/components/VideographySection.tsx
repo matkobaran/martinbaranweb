@@ -61,7 +61,7 @@ export const VideographySection = () => {
   const visibleVideos = videos.slice(0, visibleCount);
 
   return (
-    <section className="py-20 bg-lightgray dark:bg-navy" id="videography">
+    <section className="py-20 bg-white dark:bg-navy" id="videography">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-white">Videography</h2>
         

@@ -50,7 +50,7 @@ export const PortfolioSection = () => {
   const visiblePhotos = photos.slice(0, isMobile ? 3 : window.innerWidth < 1024 ? 2 : 3);
 
   return (
-    <section className="py-20 bg-white dark:bg-gray-900" id="portfolio">
+    <section className="py-20 bg-lightgray dark:bg-gray-900" id="portfolio">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-blue-400">Photo portfolio</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
