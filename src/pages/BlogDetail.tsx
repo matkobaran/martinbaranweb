@@ -1,7 +1,7 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 
 const blogPosts = [
   {
@@ -46,27 +46,27 @@ const BlogDetail = () => {
     return <div>Blog not found</div>;
   }
 
-  useEffect(() => {
-    axios.get(`http://localhost:5000/api/comments/${id}`)
-      .then(response => setComments(response.data))
-      .catch(error => console.error(error));
-  }, [id]);
+  // useEffect(() => {
+  //   axios.get(`http://localhost:5000/api/comments/${id}`)
+  //     .then(response => setComments(response.data))
+  //     .catch(error => console.error(error));
+  // }, [id]);
   
-  const handleAddComment = () => {
-    if (!newComment.trim()) return;
+  // const handleAddComment = () => {
+  //   if (!newComment.trim()) return;
   
-    axios.post("http://localhost:5000/api/comments", {
-      postId: Number(id),
-      author: "Guest",
-      message: newComment,
-      replyTo
-    })
-    .then(response => setComments([...comments, response.data]))
-    .catch(error => console.error(error));
+  //   axios.post("http://localhost:5000/api/comments", {
+  //     postId: Number(id),
+  //     author: "Guest",
+  //     message: newComment,
+  //     replyTo
+  //   })
+  //   .then(response => setComments([...comments, response.data]))
+  //   .catch(error => console.error(error));
   
-    setNewComment("");
-    setReplyTo(null);
-  };
+  //   setNewComment("");
+  //   setReplyTo(null);
+  // };
   
   const renderComments = (parentId = null) =>
     comments
@@ -118,12 +118,12 @@ const BlogDetail = () => {
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Write a comment..."
             />
-            <button
+            {/* <button
               className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"
               onClick={handleAddComment}
             >
               Add Comment
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
