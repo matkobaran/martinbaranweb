@@ -22,7 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/video/:id" element={<Video />} />
-          <Route path="/blogdetail/:id" element={<BlogDetail />} />
+          {/* <Route path="/blogdetail/:id" element={<BlogDetail />} /> */}
           <Route path="/videos" element={<Videos />} />
         </Routes>
       </HashRouter>
