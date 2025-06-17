@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AnimatedButton from "./my components/AnimatedButton";
+import AnimatedButton from "../my components/AnimatedButton";
 import titleStovka from "/resources/video/stovka.jpg";
 import titleKoleje from "/resources/video/koleje.webp";
 import titleRHSO from "/resources/video/rso.webp";

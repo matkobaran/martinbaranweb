@@ -1,10 +1,10 @@
-import { HeroSection } from "@/components/HeroSection";
-import { SkillsSection } from "@/components/SkillsSection";
-import { PortfolioSection } from "@/components/PortfolioSection";
-import { ContactSection } from "@/components/ContactSection";
-import { ExperienceSection } from "@/components/ExperienceSection";
-import { VideographySection } from "@/components/VideographySection";
-import { BlogSection } from "@/components/BlogSection";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { SkillsSection } from "@/components/sections/SkillsSection";
+import { PortfolioSection } from "@/components/sections/PortfolioSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { ExperienceSection } from "@/components/sections/ExperienceSection";
+import { VideographySection } from "@/components/sections/VideographySection";
+/*import { BlogSection } from "@/components/sections/BlogSection";*/
 import { useNavigate } from "react-router-dom";
 
 const Index = () => {

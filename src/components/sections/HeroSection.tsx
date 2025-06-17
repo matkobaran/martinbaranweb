@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import titlePhoto  from "/resources/img/title.jpg";
 import { useState, useEffect } from "react";
-import AnimatedButton from "./my components/AnimatedButton";
+import AnimatedButton from "../my components/AnimatedButton";
 
 const menuItems = [
   { id: 'experience', label: 'Experience' },

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
-import AnimatedButton from "./my components/AnimatedButton";
+import AnimatedButton from "../my components/AnimatedButton";
 
 const eventData = [
   { id: 1, folder: "BD Paris", title: "Best Diplomats Paris 2025" },
