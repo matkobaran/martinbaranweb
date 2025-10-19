@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import AnimatedButton from "../my components/AnimatedButton";
 
 const menuItems = [
+  { id: 'portfolio', label: 'Photography' },
   { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
-  { id: 'portfolio', label: 'Portfolio' },
   { id: 'videography', label: 'Videography' },
   { id: 'contact', label: 'Contact' }
 ];
@@ -113,11 +113,13 @@ export const HeroSection = () => {
               Hi, I'm Martin
             </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-              A passionate software developer currently based in Brno, Czechia, specializing in software development for Windows, mobile and web application. When I'm not coding, you'll find me taking photos or running.
+              I'm a <span className="font-bold">photographer and software developer</span> based in Prague, Czechia.  
+              I capture authentic, dynamic moments through my lens — from football matches and conferences to creative events.  
+              When I’m not behind the camera, I design and build modern web and mobile apps focused on clean design and performance.
             </p>
             <div className="flex gap-4">
             <AnimatedButton
-              text="View photos"
+              text="📸 View Photography Portfolio"
               onClick={() => scrollToSection('portfolio')}
               variant="primary"
             />

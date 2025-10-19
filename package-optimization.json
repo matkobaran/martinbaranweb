@@ -1,0 +1,16 @@
+{
+  "name": "martinbaran-image-optimization",
+  "version": "1.0.0",
+  "description": "Image optimization dependencies for martinbaran portfolio",
+  "scripts": {
+    "optimize-images": "node scripts/optimize-images.js",
+    "install-sharp": "npm install sharp"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

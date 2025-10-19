@@ -1,40 +1,129 @@
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
-const categories = [
-  { title: "Best Diplomats Paris 2025", folder: "BD Paris", photoCount: 1 },
-  { title: "Best Diplomats London 2024", folder: "BD London", photoCount: 29},
-  { title: "Cyber Wine 2024", folder: "Cyber Wine", photoCount: 39 },
+// Enhanced metadata-driven structure
+const portfolioData = [
+  {
+    id: 'bd-paris-2025',
+    title: "Best Diplomats Paris 2025",
+    folder: "BD_Paris",
+    photoCount: 1,
+    thumbnail: "/resources/img/events/BD_Paris/thumbs/1.webp",
+    tags: ['events', 'conference'],
+    date: '2025-01-15',
+    description: 'Diplomatic conference photography'
+  },
+  {
+    id: 'bd-london-2024',
+    title: "Best Diplomats London 2024",
+    folder: "BD_London",
+    photoCount: 29,
+    thumbnail: "/resources/img/events/BD_London/thumbs/1.webp",
+    tags: ['events', 'conference'],
+    date: '2024-12-01',
+    description: 'International diplomatic summit'
+  },
+  {
+    id: 'cyber-wine-2024',
+    title: "Cyber Wine 2024",
+    folder: "Cyber_Wine",
+    photoCount: 39,
+    thumbnail: "/resources/img/events/Cyber_Wine/thumbs/1.webp",
+    tags: ['events', 'networking'],
+    date: '2024-11-15',
+    description: 'Technology and wine networking event'
+  }
 ];
+
+// Generate optimized image URLs
+const getOptimizedImage = (folder: string, index: number, size: 'thumb' | 'medium' | 'full' = 'full') => {
+  const sizePath = size === 'thumb' ? 'thumbs' : size === 'medium' ? 'medium' : 'fulls';
+  return `/resources/img/events/${folder}/${sizePath}/${index + 1}.webp`;
+};
 
 const categoryPhotos = {};
 
-categories.forEach(({ title, folder, photoCount }) => {
-  categoryPhotos[title] = Array.from({ length: photoCount }, (_, i) => 
-    `/resources/img/${folder}/${i + 1}.jpg`
-  );
+portfolioData.forEach(({ title, folder, photoCount }) => {
+  categoryPhotos[title] = {
+    thumbnails: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'thumb')),
+    medium: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'medium')),
+    full: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'full'))
+  };
 });
+
+// Temporary fallback for old structure until optimization script is run
+const oldCategories = [
+  { title: "Best Diplomats Paris 2025", folder: "BD_Paris", photoCount: 1 },
+  { title: "Best Diplomats London 2024", folder: "BD_London", photoCount: 29},
+  { title: "Cyber Wine 2024", folder: "Cyber_Wine", photoCount: 39 },
+];
+
+oldCategories.forEach(({ title, folder, photoCount }) => {
+  if (!categoryPhotos[title]) {
+    categoryPhotos[title] = Array.from({ length: photoCount }, (_, i) => 
+      `/resources/img/events/${folder}/${i + 1}.jpg`
+    );
+  }
+});
+
+// Note: Using native lazy loading with loading="lazy" attribute instead of IntersectionObserver
 
 const Portfolio = () => {
   const [searchParams] = useSearchParams();
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const [imageQuality, setImageQuality] = useState<'thumb' | 'medium' | 'full'>('thumb');
+  const [isLoading, setIsLoading] = useState(false);
+  
   const category = searchParams.get("category");
-  const photos = category ? categoryPhotos[category as keyof typeof categoryPhotos] || [] : [];
+  const photos = category ? categoryPhotos[category as keyof typeof categoryPhotos] : null;
+  
+  // Fallback to original structure if new structure doesn't exist
+  const getPhotosForDisplay = () => {
+    if (!photos) return [];
+    
+    // If new structure exists, use it
+    if (photos[imageQuality]) {
+      return photos[imageQuality];
+    }
+    
+    // Fallback to old structure (temporary until optimization script is run)
+    if (Array.isArray(photos)) {
+      return photos;
+    }
+    
+    return [];
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setLoadedImages(new Set());
+    setImageQuality('thumb');
+    
+    // Progressive loading: start with thumbnails, then upgrade to full quality
+    const timer = setTimeout(() => setImageQuality('medium'), 500);
+    const timer2 = setTimeout(() => setImageQuality('full'), 1000);
+    
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(timer2);
+    };
+  }, [category]);
+
+  const handleImageLoad = useCallback((index: number) => {
+    setLoadedImages(prev => new Set([...prev, index]));
   }, []);
 
   const handlePrevPhoto = () => {
-    if (selectedPhotoIndex === null) return;
-    setSelectedPhotoIndex(selectedPhotoIndex === 0 ? photos.length - 1 : selectedPhotoIndex - 1);
+    if (selectedPhotoIndex === null || !photos) return;
+    setSelectedPhotoIndex(selectedPhotoIndex === 0 ? photos.full.length - 1 : selectedPhotoIndex - 1);
   };
 
   const handleNextPhoto = () => {
-    if (selectedPhotoIndex === null) return;
-    setSelectedPhotoIndex(selectedPhotoIndex === photos.length - 1 ? 0 : selectedPhotoIndex + 1);
+    if (selectedPhotoIndex === null || !photos) return;
+    setSelectedPhotoIndex(selectedPhotoIndex === photos.full.length - 1 ? 0 : selectedPhotoIndex + 1);
   };
 
   const navigate = useNavigate();
@@ -64,42 +153,61 @@ const Portfolio = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {category ? (
-            photos.map((photo, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="relative aspect-square rounded-lg overflow-hidden cursor-pointer"
-                onClick={() => setSelectedPhotoIndex(index)}
-              >
-                <img
-                  src={photo}
-                  alt={`${category} photo ${index + 1}`}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </motion.div>
-            ))
+          {category && photos ? (
+            getPhotosForDisplay().map((photo, index) => {
+              const isLoaded = loadedImages.has(index);
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="relative aspect-square rounded-lg overflow-hidden cursor-pointer"
+                  onClick={() => setSelectedPhotoIndex(index)}
+                >
+                  {!isLoaded && (
+                    <div className="absolute inset-0 bg-gray-300 dark:bg-gray-700 animate-pulse flex items-center justify-center">
+                      <div className="w-8 h-8 border-4 border-skyblue border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                  )}
+                  <img
+                    src={photo}
+                    alt={`${category} photo ${index + 1}`}
+                    className={`w-full h-full object-cover hover:scale-110 transition-all duration-500 ${
+                      isLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onLoad={() => handleImageLoad(index)}
+                    loading="lazy"
+                  />
+                </motion.div>
+              );
+            })
           ) : (
-            Object.entries(categoryPhotos).map(([categoryName, photos], index) => (
+            portfolioData.map((item, index) => (
               <motion.div
-                key={categoryName}
+                key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group"
-                onClick={() => navigate(`/portfolio?category=${categoryName}`)}
-                >
+                onClick={() => navigate(`/portfolio?category=${item.title}`)}
+              >
                 <img
-                  src={photos[0]}
-                  alt={`${categoryName} category`}
+                  src={item.thumbnail}
+                  alt={`${item.title} category`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center">
-                  <p className="text-white text-xl font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 capitalize">
-                    {categoryName}
-                  </p>
+                  <div className="text-center">
+                    <p className="text-white text-xl font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 capitalize">
+                      {item.title}
+                    </p>
+                    <p className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1">
+                      {item.photoCount} photos
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))
@@ -133,12 +241,15 @@ const Portfolio = () => {
               <ChevronLeft size={32} />
             </button>
 
-            <img
-              src={photos[selectedPhotoIndex]}
-              alt={`${category} photo ${selectedPhotoIndex + 1}`}
-              className="max-h-[90vh] max-w-[90vw] object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
+            {photos && (
+              <img
+                src={photos.full[selectedPhotoIndex]}
+                alt={`${category} photo ${selectedPhotoIndex + 1}`}
+                className="max-h-[90vh] max-w-[90vw] object-contain"
+                onClick={(e) => e.stopPropagation()}
+                loading="eager"
+              />
+            )}
 
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors"
