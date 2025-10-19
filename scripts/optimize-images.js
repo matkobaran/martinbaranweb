@@ -30,10 +30,15 @@ const CONFIG = {
 
 // Folder mappings (old -> new)
 const FOLDER_MAPPINGS = {
-  'BD Paris': 'BD_Paris',
-  'BD London': 'BD_London', 
-  'Cyber Wine': 'Cyber_Wine'
+  'BD Paris': 'events/BD_Paris',
+  'BD London': 'events/BD_London', 
+  'Cyber Wine': 'events/Cyber_Wine'
 };
+
+// Additional folders to process
+const ADDITIONAL_FOLDERS = [
+  'sports/Kendice_Kosice'
+];
 
 async function ensureDirectoryExists(dirPath) {
   if (!fs.existsSync(dirPath)) {
@@ -53,6 +58,24 @@ async function optimizeImage(inputPath, outputPath, size) {
       .toFile(outputPath);
     
     console.log(`✅ Optimized: ${path.basename(outputPath)}`);
+    return true;
+  } catch (error) {
+    console.error(`❌ Error optimizing ${inputPath}:`, error.message);
+    return false;
+  }
+}
+
+async function optimizeImageWithAspectRatio(inputPath, outputPath, size) {
+  try {
+    await sharp(inputPath)
+      .resize(size.width, size.height, {
+        fit: 'contain', // Use 'contain' to preserve aspect ratio
+        background: { r: 0, g: 0, b: 0, alpha: 0 } // Transparent background
+      })
+      .webp({ quality: size.quality })
+      .toFile(outputPath);
+    
+    console.log(`✅ Optimized with aspect ratio: ${path.basename(outputPath)} (${size.width}x${size.height})`);
     return true;
   } catch (error) {
     console.error(`❌ Error optimizing ${inputPath}:`, error.message);
@@ -109,6 +132,112 @@ async function processFolder(folderName) {
   console.log(`✅ Completed processing ${folderName}: ${imageFiles.length} images`);
 }
 
+async function processAdditionalFolder(folderPath) {
+  const inputFolder = path.join(CONFIG.inputDir, folderPath);
+  
+  if (!fs.existsSync(inputFolder)) {
+    console.log(`⚠️  Folder not found: ${inputFolder}`);
+    return;
+  }
+
+  console.log(`\n🔄 Processing folder: ${folderPath}`);
+  
+  const files = fs.readdirSync(inputFolder);
+  const imageFiles = files.filter(file => 
+    CONFIG.supportedFormats.some(format => 
+      file.toLowerCase().endsWith(format.toLowerCase())
+    )
+  );
+
+  if (imageFiles.length === 0) {
+    console.log(`⚠️  No supported images found in ${folderPath}`);
+    return;
+  }
+
+  // Create output directories
+  for (const sizeName of Object.keys(CONFIG.sizes)) {
+    const outputDir = path.join(CONFIG.outputDir, folderPath, sizeName + 's');
+    await ensureDirectoryExists(outputDir);
+  }
+
+  // Process each image
+  for (const imageFile of imageFiles) {
+    const inputPath = path.join(inputFolder, imageFile);
+    const baseName = path.parse(imageFile).name;
+    
+    for (const [sizeName, size] of Object.entries(CONFIG.sizes)) {
+      const outputPath = path.join(
+        CONFIG.outputDir, 
+        folderPath, 
+        sizeName + 's', 
+        `${baseName}.webp`
+      );
+      
+      await optimizeImage(inputPath, outputPath, size);
+    }
+  }
+  
+  console.log(`✅ Completed processing ${folderPath}: ${imageFiles.length} images`);
+}
+
+async function processRootImages() {
+  console.log('\n🔄 Processing root images (hero image, video thumbnails)...');
+  
+  // Process hero image with preserved aspect ratio
+  const heroImagePath = path.join(CONFIG.inputDir, 'title.jpg');
+  if (fs.existsSync(heroImagePath)) {
+    const outputDir = path.join(CONFIG.outputDir, 'hero');
+    await ensureDirectoryExists(outputDir);
+    
+    // Get original image dimensions
+    const metadata = await sharp(heroImagePath).metadata();
+    const originalWidth = metadata.width;
+    const originalHeight = metadata.height;
+    const aspectRatio = originalWidth / originalHeight;
+    
+    console.log(`📐 Original dimensions: ${originalWidth}x${originalHeight} (aspect ratio: ${aspectRatio.toFixed(2)})`);
+    
+    // Create sizes that preserve aspect ratio with higher quality for hero image
+    const heroSizes = {
+      thumb: { width: Math.round(400 * aspectRatio), height: 400, quality: 90 },
+      medium: { width: Math.round(800 * aspectRatio), height: 800, quality: 95 },
+      full: { width: Math.round(1400 * aspectRatio), height: 1400, quality: 95 }
+    };
+    
+    for (const [sizeName, size] of Object.entries(heroSizes)) {
+      const outputPath = path.join(outputDir, `title_${sizeName}.webp`);
+      await optimizeImageWithAspectRatio(heroImagePath, outputPath, size);
+    }
+    console.log('✅ Processed hero image with preserved aspect ratio');
+  }
+  
+  // Process video thumbnails
+  const videoDir = path.join(CONFIG.inputDir, '../video');
+  if (fs.existsSync(videoDir)) {
+    const files = fs.readdirSync(videoDir);
+    const imageFiles = files.filter(file => 
+      CONFIG.supportedFormats.some(format => 
+        file.toLowerCase().endsWith(format.toLowerCase())
+      )
+    );
+    
+    for (const imageFile of imageFiles) {
+      const inputPath = path.join(videoDir, imageFile);
+      const baseName = path.parse(imageFile).name;
+      
+      // Create video thumbnails directory
+      const outputDir = path.join(CONFIG.outputDir, 'video-thumbnails');
+      await ensureDirectoryExists(outputDir);
+      
+      for (const [sizeName, size] of Object.entries(CONFIG.sizes)) {
+        const outputPath = path.join(outputDir, `${baseName}_${sizeName}.webp`);
+        await optimizeImage(inputPath, outputPath, size);
+      }
+    }
+    console.log(`✅ Processed ${imageFiles.length} video thumbnails`);
+  }
+}
+
 async function main() {
   console.log('🚀 Starting image optimization...\n');
   
@@ -123,10 +252,18 @@ async function main() {
   // Get all folders to process
   const folders = Object.keys(FOLDER_MAPPINGS);
   
-  // Process each folder
+  // Process mapped folders
   for (const folder of folders) {
     await processFolder(folder);
   }
+  
+  // Process additional folders that don't need mapping
+  for (const folder of ADDITIONAL_FOLDERS) {
+    await processAdditionalFolder(folder);
+  }
+  
+  // Process hero image and video thumbnails
+  await processRootImages();
   
   console.log('\n🎉 Image optimization completed!');
   console.log('\n📁 New folder structure:');

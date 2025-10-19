@@ -2,11 +2,11 @@ import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
-import titleStovka from "/resources/video/stovka.jpg";
-import titleKoleje from "/resources/video/koleje.webp";
-import titleRHSO from "/resources/video/rso.webp";
-import titleSvadba from "/resources/video/svadba.webp";
-import titleKreditovka from "/resources/video/kreditovka.webp";
+import titleStovka from "/resources/img/video-thumbnails/stovka_medium.webp";
+import titleKoleje from "/resources/img/video-thumbnails/koleje_medium.webp";
+import titleRHSO from "/resources/img/video-thumbnails/rso_medium.webp";
+import titleSvadba from "/resources/img/video-thumbnails/svadba_medium.webp";
+import titleKreditovka from "/resources/img/video-thumbnails/kreditovka_medium.webp";
 
 const videos = [
   {

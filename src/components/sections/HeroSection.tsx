@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
-import titlePhoto  from "/resources/img/title.jpg";
+import { ArrowDown, Menu, X } from "lucide-react";
+import titlePhotoThumb from "/resources/img/hero/title_thumb.webp";
+import titlePhotoMedium from "/resources/img/hero/title_medium.webp";
+import titlePhotoFull from "/resources/img/hero/title_full.webp";
 import { useState, useEffect } from "react";
 import AnimatedButton from "../my components/AnimatedButton";
 
@@ -51,27 +53,18 @@ export const HeroSection = () => {
     });  };
 
   return (
-    <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-blue-400 dark:from-navy dark:to-blue-900 text-white">
+    <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-blue-400 dark:from-navy dark:to-blue-900 text-white overflow-hidden">
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 dark:bg-navy/80 backdrop-blur-sm">
         <button onClick={handleLogoClick} className="text-2xl font-bold">
           MB
         </button>
         <div className="flex items-center gap-4">
-          {/* <div className="mr-5">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
-            >
-              {isDark ? <Sun size={24} /> : <Moon size={24} />}
-            </button>
-
-            <button
-              className="md:hidden p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div> */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
 
           <div className="hidden md:flex gap-8">
             {menuItems.map((item) => (
@@ -87,12 +80,12 @@ export const HeroSection = () => {
           </div>
 
           {isMenuOpen && (
-            <div className="absolute top-full left-0 w-full bg-skyblue/95 dark:bg-navy/95 backdrop-blur-sm py-2 md:hidden">
+            <div className="absolute top-full left-0 right-0 bg-skyblue/95 dark:bg-navy/95 backdrop-blur-sm py-2 md:hidden border-t border-white/20">
               {menuItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="w-full text-left px-4 py-2 hover:bg-white/10 transition-colors"
+                  className="w-full text-left px-4 py-3 hover:bg-white/10 transition-colors border-b border-white/10 last:border-b-0"
                 >
                   {item.label}
                 </button>
@@ -102,8 +95,8 @@ export const HeroSection = () => {
         </div>
       </nav>
 
-      <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center" id="home">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+      <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center overflow-hidden" id="home">
+        <div className="grid md:grid-cols-2 gap-8 items-center w-full">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -117,7 +110,7 @@ export const HeroSection = () => {
               I capture authentic, dynamic moments through my lens — from football matches and conferences to creative events.  
               When I’m not behind the camera, I design and build modern web and mobile apps focused on clean design and performance.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
             <AnimatedButton
               text="📸 View Photography Portfolio"
               onClick={() => scrollToSection('portfolio')}
@@ -135,14 +128,21 @@ export const HeroSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col pb-4 gap-4 max-w-sm mx-auto"
+            className="flex flex-col pb-4 gap-4 max-w-sm mx-auto w-full"
           >
             <div className="relative">
-              <img
-                src={titlePhoto}
-                alt="Martin Baran"
-                className="rounded-2xl w-full shadow-xl"
-              />
+              <picture>
+                {/* Optimized responsive images with high quality */}
+                <source media="(max-width: 480px)" srcSet={titlePhotoMedium} />
+                <source media="(max-width: 768px)" srcSet={titlePhotoMedium} />
+                <source media="(max-width: 1024px)" srcSet={titlePhotoFull} />
+                <img
+                  src={titlePhotoFull}
+                  alt="Martin Baran"
+                  className="rounded-2xl w-full h-auto shadow-xl object-cover"
+                  loading="eager"
+                />
+              </picture>
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent rounded-2xl" />
             </div>
 
