@@ -202,15 +202,15 @@ export const PortfolioSection = () => {
                           alt={photo.title}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex flex-col items-center justify-center p-4">
-                          <div className="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <h3 className="text-white text-lg font-bold mb-2">
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-all duration-300 flex flex-col items-center justify-end group-hover:justify-center p-4">
+                          <div className="text-center opacity-80 group-hover:opacity-100 transition-all duration-300 transform translate-y-0 group-hover:translate-y-0">
+                            <h3 className="text-white text-lg font-bold mb-2 drop-shadow-lg">
                               {photo.title}
                             </h3>
-                            <p className="text-white/90 text-sm mb-2 leading-relaxed">
+                            <p className="text-white/90 text-sm mb-2 leading-relaxed drop-shadow-md max-h-0 group-hover:max-h-20 overflow-hidden transition-all duration-300">
                               {photo.description}
                             </p>
-                            <span className="text-skyblue text-xs font-medium">
+                            <span className="text-skyblue text-xs font-medium drop-shadow-md">
                               {photo.photoCount}
                             </span>
                           </div>
