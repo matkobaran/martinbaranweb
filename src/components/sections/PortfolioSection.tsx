@@ -53,15 +53,6 @@ const sportData = [
   },
   { 
     id: 5, 
-    folder: "Kendice_Saris", 
-    titleKey: "portfolio.galleries.kendice_saris.title", 
-    category: "Sport",
-    descriptionKey: "portfolio.galleries.kendice_saris.description",
-    photoCountKey: "portfolio.galleries.kendice_saris.photoCount",
-    titlePhoto: 6
-  },
-  { 
-    id: 6, 
     folder: "Kendice_Bardejov", 
     titleKey: "portfolio.galleries.kendice_bardejov.title", 
     category: "Sport",
@@ -69,6 +60,15 @@ const sportData = [
     photoCountKey: "portfolio.galleries.kendice_bardejov.photoCount",
     titlePhoto: 32
   },
+  { 
+    id: 6, 
+    folder: "Kendice_Saris", 
+    titleKey: "portfolio.galleries.kendice_saris.title", 
+    category: "Sport",
+    descriptionKey: "portfolio.galleries.kendice_saris.description",
+    photoCountKey: "portfolio.galleries.kendice_saris.photoCount",
+    titlePhoto: 6
+  }
 ];
 
 export const PortfolioSection = () => {
