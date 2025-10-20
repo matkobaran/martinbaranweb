@@ -1,19 +1,19 @@
 {
   "navigation": {
-    "photography": "Fotografia",
+    "photography": "Fotografie",
     "experience": "Skúsenosti",
     "skills": "Zručnosti",
-    "videography": "Videografia",
+    "videography": "Video",
     "contact": "Kontakt"
   },
   "hero": {
     "greeting": "Ahoj, som Martin",
-    "description": "Som <strong>fotograf a softvérový vývojár</strong> z Prahy, Česko. Zachytávam autentické, dynamické momenty cez môj objektív — od futbalových zápasov a konferencií po kreatívne udalosti. Keď nie som za kamerou, navrhujem a vyvíjam moderné webové a mobilné aplikácie zamerané na čistý dizajn a výkon.",
+    "description": "Som <strong>fotograf a softvérový vývojár</strong> momentálne sídliaci v Prahe. Zachytávam autentické a dynamické momenty — od futbalových zápasov a konferencií po kreatívne udalosti.",
     "portfolioButton": "📸 Pozrieť fotoportfólio",
     "contactButton": "Kontakt"
   },
   "portfolio": {
-    "title": "Fotoportfólio",
+    "title": "Fotografické portfólio",
     "categories": {
       "events": "Udalosti",
       "sport": "Šport"
@@ -21,36 +21,36 @@
     "galleries": {
       "bd_paris": {
         "title": "Best Diplomats Paríž 2025",
-        "description": "Diplomatická konferenčná fotografia zachytávajúca medzinárodné vzťahy a networking momenty",
+        "description": "",
         "photoCount": "1 fotka"
       },
       "bd_london": {
         "title": "Best Diplomats Londýn 2024",
-        "description": "Medzinárodný diplomatický summit predstavujúci globálnych lídrov a kultúrnu výmenu",
+        "description": "",
         "photoCount": "29 fotiek"
       },
       "cyber_wine": {
         "title": "Cyber Wine 2024",
-        "description": "Technologická a víno networking udalosť kombinujúca inovácie s tradíciou",
+        "description": "",
         "photoCount": "39 fotiek"
       },
       "kendice_kosice": {
         "title": "Pohár futbalový zápas Kendice vs Košice",
-        "description": "Dynamická športová fotografia zachytávajúca intenzitu a vášeň futbalu",
+        "description": "",
         "photoCount": "1 fotka"
       },
       "kendice_saris": {
         "title": "Futbalový zápas Kendice vs Veľký Šariš",
-        "description": "Vysokoenergetické futbalové akčné zábery a tímové momenty",
+        "description": "",
         "photoCount": "Čoskoro"
       },
       "kendice_bardejov": {
         "title": "Futbalový zápas Kendice vs Bardejov",
-        "description": "Intenzívna futbalová fotografia predstavujúca atletizmus a tímovú prácu",
+        "description": "",
         "photoCount": "Čoskoro"
       }
     },
-    "viewMoreButton": "Pozrieť viac fotokategórií"
+    "viewMoreButton": "Zobraziť celú galériu"
   },
   "experience": {
     "title": "Skúsenosti a vzdelanie",
@@ -72,7 +72,7 @@
         "details": [
           "Vývoj a údržba Windows aplikácií (.NET, VB.NET)",
           "Vývoj webových aplikácií používaných 50,000+ používateľmi",
-          "Migrácia mobilnej aplikácie z Xamarin na MAUI, zlepšenie výkonu a udržateľnosti",
+          "Migrácia mobilnej aplikácie z Xamarinu na MAUI, zlepšenie výkonu a udržateľnosti kódu",
           "Tvorba REST API pre mobilnú aplikáciu",
           "Modernizácia Windows aplikácie v XAML",
           "Zákaznícka podpora"
@@ -82,7 +82,7 @@
         "title": "Frontend Developer",
         "company": "Metio Software",
         "period": "12/2022 - 05/2023",
-        "description": "Vývoj a optimalizácia frontend aplikácií pomocou React a JavaScript",
+        "description": "Vývoj a optimalizácia frontend aplikácií pomocou Reactu a JavaScriptu",
         "details": [
           "Vývoj znovu použiteľných React komponentov z Figma dizajnov",
           "Práca s Redux",
@@ -90,7 +90,7 @@
         ]
       },
       "university": {
-        "title": "Bakalár v informatike",
+        "title": "Bakalárske štúdium informatiky",
         "company": "Masarykova univerzita",
         "period": "09/2018 - 09/2020, 09/2021 - 01/2023",
         "description": "Neukončené",
@@ -107,8 +107,8 @@
         "period": "10/2020 - 09/2021",
         "description": "Diagnostika a oprava skenerov a tlačiarní používaných vo skladových prostrediach",
         "details": [
-          "Diagnostika a fyzická oprava pokazených tlačiarní a ručných skenerov",
-          "Servis na mieste",
+          "Diagnostika a fyzická oprava tlačiarní a ručných skenerov",
+          "Servis u zákazníka",
           "Konfigurácia Zebra zariadení",
           "Zákaznícka podpora"
         ]
@@ -152,16 +152,18 @@
         "description": "Regionálne hry špeciálnych olympiád 2023 Brno"
       }
     },
-    "viewMoreButton": "Pozrieť viac videokategórií"
+    "viewMoreButton": "Zobraziť viac"
   },
   "contact": {
     "title": "Kontakt",
-    "description": "Chcete spolupracovať na fotoprojekte alebo diskutovať o softvérovej myšlienke? Vždy som nadšený pracovať na nových kreatívnych projektoch!",
+    "description": "Pre spoluprácu ma neváhajte kontaktovať.",
     "email": "martin.baran12@gmail.com",
     "social": {
       "github": "GitHub",
       "linkedin": "LinkedIn",
-      "instagram": "Instagram"
+      "instagram": "Instagram",
+      "instagram_portfolio": "Portfólio Instagram",
+      "instagram_personal": "Osobný Instagram"
     }
   },
   "common": {

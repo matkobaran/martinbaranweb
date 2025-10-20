@@ -1,9 +1,11 @@
 import { Mail, Github, Linkedin, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from 'react-i18next';
+import { SOCIAL_MEDIA_CONFIG, getInstagramLinks } from '../../config/socialMedia';
 
 export const ContactSection = () => {
   const { t } = useTranslation();
+  const instagramLinks = getInstagramLinks('both');
   return (
     <section className="py-20 bg-navy text-white dark:bg-gray-900" id="contact">
       <div className="container mx-auto px-4">
@@ -41,7 +43,7 @@ export const ContactSection = () => {
             className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8"
           >
             <a
-              href="https://github.com/matkobaran"
+              href={SOCIAL_MEDIA_CONFIG.github}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 hover:text-skyblue transition-colors group"
@@ -50,7 +52,7 @@ export const ContactSection = () => {
               <span>{t('contact.social.github')}</span>
             </a>
             <a
-              href="https://www.linkedin.com/in/martin-baran/"
+              href={SOCIAL_MEDIA_CONFIG.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 hover:text-skyblue transition-colors group"
@@ -58,15 +60,23 @@ export const ContactSection = () => {
               <Linkedin size={24} className="group-hover:scale-110 transition-transform duration-300" />
               <span>{t('contact.social.linkedin')}</span>
             </a>
-            <a
-              href="https://www.instagram.com/matko_baran/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 hover:text-skyblue transition-colors group"
-            >
-              <Instagram size={24} className="group-hover:scale-110 transition-transform duration-300" />
-              <span>{t('contact.social.instagram')}</span>
-            </a>
+            {instagramLinks.map((instagram, index) => (
+              <a
+                key={instagram.username}
+                href={instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 hover:text-skyblue transition-colors group"
+              >
+                <Instagram size={24} className="group-hover:scale-110 transition-transform duration-300" />
+                <span>
+                  {instagram.type === 'portfolio' 
+                    ? t('contact.social.instagram_portfolio')
+                    : t('contact.social.instagram_personal')
+                  }
+                </span>
+              </a>
+            ))}
           </motion.div>
         </motion.div>
       </div>
