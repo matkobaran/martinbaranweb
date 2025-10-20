@@ -11,29 +11,75 @@ import {
 } from "@/components/ui/carousel";
 
 const eventData = [
-  { id: 1, folder: "BD_Paris", title: "Best Diplomats Paris 2025", category: "Events" },
-  { id: 2, folder: "BD_London", title: "Best Diplomats London 2024", category: "Events" },
-  { id: 3, folder: "Cyber_Wine", title: "Cyber Wine 2024", category: "Events" },
+  { 
+    id: 1, 
+    folder: "BD_Paris", 
+    title: "Best Diplomats Paris 2025", 
+    category: "Events",
+    description: "Diplomatic conference photography capturing international relations and networking moments",
+    photoCount: "1 photo"
+  },
+  { 
+    id: 2, 
+    folder: "BD_London", 
+    title: "Best Diplomats London 2024", 
+    category: "Events",
+    description: "International diplomatic summit showcasing global leaders and cultural exchange",
+    photoCount: "29 photos"
+  },
+  { 
+    id: 3, 
+    folder: "Cyber_Wine", 
+    title: "Cyber Wine 2024", 
+    category: "Events",
+    description: "Technology and wine networking event blending innovation with tradition",
+    photoCount: "39 photos"
+  },
 ];
 
 const sportData = [
-  { id: 4, folder: "Kendice_Kosice", title: "Football Match", category: "Sport" },
-  { id: 5, folder: "Sport", title: "Basketball Tournament", category: "Sport" },
-  { id: 6, folder: "Sport", title: "Tennis Match", category: "Sport" },
+  { 
+    id: 4, 
+    folder: "Kendice_Kosice", 
+    title: "Cup match football match Kendice vs Košice", 
+    category: "Sport",
+    description: "Dynamic sports photography capturing the intensity and passion of football",
+    photoCount: "1 photo"
+  },
+  { 
+    id: 5, 
+    folder: "Kendice_Saris", 
+    title: "Football match Kendice vs Veľký Šariš", 
+    category: "Sport",
+    description: "High-energy football action shots and team moments",
+    photoCount: "Coming soon"
+  },
+  { 
+    id: 6, 
+    folder: "Kendice_Bardejov", 
+    title: "Football match Kendice vs Bardejov", 
+    category: "Sport",
+    description: "Intense football match photography showcasing athleticism and teamwork",
+    photoCount: "Coming soon"
+  },
 ];
 
-const eventPhotos = eventData.map(({ id, folder, title, category }) => ({
+const eventPhotos = eventData.map(({ id, folder, title, category, description, photoCount }) => ({
   id,
   src: `/resources/img/events/${folder}/mediums/1.webp`,
   title,
   category,
+  description,
+  photoCount,
 }));
 
-const sportPhotos = sportData.map(({ id, folder, title, category }) => ({
+const sportPhotos = sportData.map(({ id, folder, title, category, description, photoCount }) => ({
   id,
   src: `/resources/img/sports/${folder}/mediums/1.webp`,
   title,
   category,
+  description,
+  photoCount,
 }));
 
 const allPhotos = { Events: eventPhotos, Sport: sportPhotos };
@@ -154,10 +200,18 @@ export const PortfolioSection = () => {
                           alt={photo.title}
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                          <p className="text-white text-xl font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            {photo.title}
-                          </p>
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex flex-col items-center justify-center p-4">
+                          <div className="text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 className="text-white text-lg font-bold mb-2">
+                              {photo.title}
+                            </h3>
+                            <p className="text-white/90 text-sm mb-2 leading-relaxed">
+                              {photo.description}
+                            </p>
+                            <span className="text-skyblue text-xs font-medium">
+                              {photo.photoCount}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
