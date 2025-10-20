@@ -24,3 +24,8 @@ docs
 *.sln
 *.sw?
 *.env
+
+# Image files (optimized versions are in git, originals are not)
+*.jpg
+*.jpeg
+*.png

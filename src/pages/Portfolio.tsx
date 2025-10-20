@@ -34,22 +34,33 @@ const portfolioData = [
     tags: ['events', 'networking'],
     date: '2024-11-15',
     description: 'Technology and wine networking event'
+  },
+  {
+    id: 'kendice-kosice-2024',
+    title: "Cup match football match Kendice vs Košice",
+    folder: "Kendice_Kosice",
+    photoCount: 56,
+    thumbnail: "/resources/img/sports/Kendice_Kosice/thumbs/1.webp",
+    tags: ['sports', 'football', 'cup match'],
+    date: '2024-12-15',
+    description: 'Dynamic sports photography capturing the intensity and passion of football'
   }
 ];
 
 // Generate optimized image URLs
-const getOptimizedImage = (folder: string, index: number, size: 'thumb' | 'medium' | 'full' = 'full') => {
+const getOptimizedImage = (folder: string, index: number, size: 'thumb' | 'medium' | 'full' = 'full', type: 'events' | 'sports' = 'events') => {
   const sizePath = size === 'thumb' ? 'thumbs' : size === 'medium' ? 'medium' : 'fulls';
-  return `/resources/img/events/${folder}/${sizePath}/${index + 1}.webp`;
+  return `/resources/img/${type}/${folder}/${sizePath}/${index + 1}.webp`;
 };
 
 const categoryPhotos = {};
 
-portfolioData.forEach(({ title, folder, photoCount }) => {
+portfolioData.forEach(({ title, folder, photoCount, tags }) => {
+  const type = tags.includes('sports') ? 'sports' : 'events';
   categoryPhotos[title] = {
-    thumbnails: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'thumb')),
-    medium: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'medium')),
-    full: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'full'))
+    thumbnails: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'thumb', type)),
+    medium: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'medium', type)),
+    full: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'full', type))
   };
 });
 

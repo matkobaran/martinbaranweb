@@ -112,20 +112,28 @@ async function processFolder(folderName) {
     await ensureDirectoryExists(outputDir);
   }
 
-  // Process each image
-  for (const imageFile of imageFiles) {
+  // Process each image with sequential numbering
+  for (let i = 0; i < imageFiles.length; i++) {
+    const imageFile = imageFiles[i];
     const inputPath = path.join(inputFolder, imageFile);
-    const baseName = path.parse(imageFile).name;
+    const newFileName = `${i + 1}.jpg`; // Rename to 1.jpg, 2.jpg, 3.jpg, etc.
+    
+    // Rename the original file
+    const newInputPath = path.join(inputFolder, newFileName);
+    if (inputPath !== newInputPath) {
+      fs.renameSync(inputPath, newInputPath);
+      console.log(`📝 Renamed: ${imageFile} → ${newFileName}`);
+    }
     
     for (const [sizeName, size] of Object.entries(CONFIG.sizes)) {
       const outputPath = path.join(
         CONFIG.outputDir, 
         newFolderName, 
         sizeName + 's', 
-        `${baseName}.webp`
+        `${i + 1}.webp`
       );
       
-      await optimizeImage(inputPath, outputPath, size);
+      await optimizeImage(newInputPath, outputPath, size);
     }
   }
   
@@ -160,20 +168,28 @@ async function processAdditionalFolder(folderPath) {
     await ensureDirectoryExists(outputDir);
   }
 
-  // Process each image
-  for (const imageFile of imageFiles) {
+  // Process each image with sequential numbering
+  for (let i = 0; i < imageFiles.length; i++) {
+    const imageFile = imageFiles[i];
     const inputPath = path.join(inputFolder, imageFile);
-    const baseName = path.parse(imageFile).name;
+    const newFileName = `${i + 1}.jpg`; // Rename to 1.jpg, 2.jpg, 3.jpg, etc.
+    
+    // Rename the original file
+    const newInputPath = path.join(inputFolder, newFileName);
+    if (inputPath !== newInputPath) {
+      fs.renameSync(inputPath, newInputPath);
+      console.log(`📝 Renamed: ${imageFile} → ${newFileName}`);
+    }
     
     for (const [sizeName, size] of Object.entries(CONFIG.sizes)) {
       const outputPath = path.join(
         CONFIG.outputDir, 
         folderPath, 
         sizeName + 's', 
-        `${baseName}.webp`
+        `${i + 1}.webp`
       );
       
-      await optimizeImage(inputPath, outputPath, size);
+      await optimizeImage(newInputPath, outputPath, size);
     }
   }
   
