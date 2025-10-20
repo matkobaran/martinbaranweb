@@ -174,7 +174,7 @@ const Portfolio = () => {
                   <img
                     src={photo}
                     alt={`${category} photo ${index + 1}`}
-                    className={`w-full h-full object-cover hover:scale-110 transition-all duration-500 ${
+                    className={`w-full h-full object-cover hover:scale-105 transition-all duration-500 ${
                       isLoaded ? 'opacity-100' : 'opacity-0'
                     }`}
                     onLoad={() => handleImageLoad(index)}
@@ -199,14 +199,17 @@ const Portfolio = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-white text-xl font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 capitalize">
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-all duration-300 flex flex-col items-center justify-end group-hover:justify-center p-4">
+                  <div className="text-center opacity-80 group-hover:opacity-100 transition-all duration-300 transform translate-y-0 group-hover:translate-y-0">
+                    <h3 className="text-white text-lg font-bold mb-2 drop-shadow-lg capitalize">
                       {item.title}
+                    </h3>
+                    <p className="text-white/90 text-sm mb-2 leading-relaxed drop-shadow-md max-h-0 group-hover:max-h-20 overflow-hidden transition-all duration-300">
+                      {item.description}
                     </p>
-                    <p className="text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1">
+                    <span className="text-skyblue text-xs font-medium drop-shadow-md">
                       {item.photoCount} photos
-                    </p>
+                    </span>
                   </div>
                 </div>
               </motion.div>

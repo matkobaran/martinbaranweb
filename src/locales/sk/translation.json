@@ -116,7 +116,7 @@
     }
   },
   "skills": {
-    "title": "Zručnosti",
+    "title": "Programovacie zručnosti",
     "categories": {
       "frontend": {
         "title": "Frontend vývoj",
@@ -137,7 +137,7 @@
     }
   },
   "videography": {
-    "title": "Videografia",
+    "title": "Video tvorba",
     "videos": {
       "stovka": {
         "title": "Stovka",
