@@ -1,0 +1,172 @@
+{
+  "navigation": {
+    "photography": "Photography",
+    "experience": "Experience",
+    "skills": "Skills",
+    "videography": "Videography",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm Martin",
+    "description": "I'm a <strong>photographer and software developer</strong> based in Prague, Czechia. I capture authentic, dynamic moments through my lens — from football matches and conferences to creative events. When I'm not behind the camera, I design and build modern web and mobile apps focused on clean design and performance.",
+    "portfolioButton": "📸 View Photography Portfolio",
+    "contactButton": "Get in Touch"
+  },
+  "portfolio": {
+    "title": "Photo portfolio",
+    "categories": {
+      "events": "Events",
+      "sport": "Sport"
+    },
+    "galleries": {
+      "bd_paris": {
+        "title": "Best Diplomats Paris 2025",
+        "description": "Diplomatic conference photography capturing international relations and networking moments",
+        "photoCount": "1 photo"
+      },
+      "bd_london": {
+        "title": "Best Diplomats London 2024", 
+        "description": "International diplomatic summit showcasing global leaders and cultural exchange",
+        "photoCount": "29 photos"
+      },
+      "cyber_wine": {
+        "title": "Cyber Wine 2024",
+        "description": "Technology and wine networking event blending innovation with tradition",
+        "photoCount": "39 photos"
+      },
+      "kendice_kosice": {
+        "title": "Cup match football match Kendice vs Košice",
+        "description": "Dynamic sports photography capturing the intensity and passion of football",
+        "photoCount": "1 photo"
+      },
+      "kendice_saris": {
+        "title": "Football match Kendice vs Veľký Šariš",
+        "description": "High-energy football action shots and team moments",
+        "photoCount": "Coming soon"
+      },
+      "kendice_bardejov": {
+        "title": "Football match Kendice vs Bardejov",
+        "description": "Intense football match photography showcasing athleticism and teamwork",
+        "photoCount": "Coming soon"
+      }
+    },
+    "viewMoreButton": "View more photo categories"
+  },
+  "experience": {
+    "title": "Experience & Education",
+    "experiences": {
+      "creasoft": {
+        "title": "Fullstack Developer",
+        "company": "Creasoft",
+        "period": "10/2025 - Present",
+        "description": "Fullstack Software Developer",
+        "details": [
+          "C#, React"
+        ]
+      },
+      "aps_brno": {
+        "title": "Junior Software Developer",
+        "company": "ApS Brno",
+        "period": "06/2023 - 05/2025",
+        "description": "Fullstack Software Developer",
+        "details": [
+          "Developed and maintained Windows applications (.NET, VB.NET)",
+          "Developing web applications used by 50,000+ users",
+          "Migration of mobile application from Xamarin to MAUI, improving performance and maintainability",
+          "Creating REST API for mobile app",
+          "Facelift of Windows application in XAML",
+          "Customer support"
+        ]
+      },
+      "metio": {
+        "title": "Frontend Developer",
+        "company": "Metio Software",
+        "period": "12/2022 - 05/2023",
+        "description": "Developed and optimized frontend applications using React and JavaScript",
+        "details": [
+          "Developed reusable React components from Figma designs",
+          "Working with Redux",
+          "Adjusting static web pages"
+        ]
+      },
+      "university": {
+        "title": "Bachelor's in Computer Science",
+        "company": "Masaryk University",
+        "period": "09/2018 - 09/2020, 09/2021 - 01/2023",
+        "description": "Unfinished",
+        "details": [
+          "Studied core computer science principles, including algorithms, data structures, and software development",
+          "Gained experience with programming languages and software engineering methodologies",
+          "Completed the majority of coursework",
+          "Organizing a faculty film festival"
+        ]
+      },
+      "kodys": {
+        "title": "Service Technician",
+        "company": "Kodys Slovensko",
+        "period": "10/2020 - 09/2021",
+        "description": "Diagnosed and repaired scanners and printers used in warehouse environments",
+        "details": [
+          "Diagnostics and physical repair of broken printers and hand scanners",
+          "Onsite service",
+          "Zebra device configuration",
+          "Customer support"
+        ]
+      }
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "categories": {
+      "frontend": {
+        "title": "Frontend Development",
+        "technologies": ["React", "TypeScript", "HTML", "CSS", "JS"]
+      },
+      "backend": {
+        "title": "Backend Development", 
+        "technologies": [".NET", ".VB", "C#", "SQL"]
+      },
+      "mobile": {
+        "title": "Mobile Development",
+        "technologies": ["React Native", "MAUI", "Xamarin"]
+      },
+      "technologies": {
+        "title": "Technologies",
+        "technologies": ["Git", "Azure", "Docker"]
+      }
+    }
+  },
+  "videography": {
+    "title": "Videography",
+    "videos": {
+      "stovka": {
+        "title": "Stovka",
+        "description": "Documentary about rivalry"
+      },
+      "koleje": {
+        "title": "Koleje", 
+        "description": "A short film about the benefits of living in a dormitory"
+      },
+      "rhso": {
+        "title": "RHSO 2023",
+        "description": "Regional Games of the Special Olympics 2023 Brno"
+      }
+    },
+    "viewMoreButton": "View more video categories"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "description": "Want to collaborate on a photo project or discuss a software idea? I'm always excited to work on new creative ventures!",
+    "email": "martin.baran12@gmail.com",
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn", 
+      "instagram": "Instagram"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "back": "Back"
+  }
+}

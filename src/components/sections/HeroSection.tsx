@@ -4,17 +4,12 @@ import titlePhotoThumb from "/resources/img/hero/title_thumb.webp";
 import titlePhotoMedium from "/resources/img/hero/title_medium.webp";
 import titlePhotoFull from "/resources/img/hero/title_full.webp";
 import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import AnimatedButton from "../my components/AnimatedButton";
-
-const menuItems = [
-  { id: 'portfolio', label: 'Photography' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'videography', label: 'Videography' },
-  { id: 'contact', label: 'Contact' }
-];
+import { LanguageSwitcher } from "../LanguageSwitcher";
 
 export const HeroSection = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -45,6 +40,14 @@ export const HeroSection = () => {
     setIsMenuOpen(false);
   };
 
+  const menuItems = [
+    { id: 'portfolio', label: t('navigation.photography') },
+    { id: 'experience', label: t('navigation.experience') },
+    { id: 'skills', label: t('navigation.skills') },
+    { id: 'videography', label: t('navigation.videography') },
+    { id: 'contact', label: t('navigation.contact') }
+  ];
+
   const handleLogoClick = () => {
     window.scrollTo({
       top: 0,
@@ -59,6 +62,8 @@ export const HeroSection = () => {
           MB
         </button>
         <div className="flex items-center gap-4">
+          <LanguageSwitcher />
+          
           <button
             className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -103,21 +108,20 @@ export const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Hi, I'm Martin
+              {t('hero.greeting')}
             </h1>
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-              I'm a <span className="font-bold">photographer and software developer</span> based in Prague, Czechia.  
-              I capture authentic, dynamic moments through my lens — from football matches and conferences to creative events.  
-              When I’m not behind the camera, I design and build modern web and mobile apps focused on clean design and performance.
-            </p>
+            <p 
+              className="text-xl md:text-2xl mb-8 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: t('hero.description') }}
+            />
             <div className="flex flex-col sm:flex-row gap-4">
             <AnimatedButton
-              text="📸 View Photography Portfolio"
+              text={t('hero.portfolioButton')}
               onClick={() => scrollToSection('portfolio')}
               variant="primary"
             />
             <AnimatedButton
-              text="Get in Touch"
+              text={t('hero.contactButton')}
               onClick={() => scrollToSection('contact')}
               variant="secondary"
             />

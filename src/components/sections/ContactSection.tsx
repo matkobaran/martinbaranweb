@@ -1,7 +1,9 @@
 import { Mail, Github, Linkedin, Instagram } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 
 export const ContactSection = () => {
+  const { t } = useTranslation();
   return (
     <section className="py-20 bg-navy text-white dark:bg-gray-900" id="contact">
       <div className="container mx-auto px-4">
@@ -10,10 +12,9 @@ export const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <h2 className="text-4xl font-bold mb-6">Get in Touch</h2>
+          <h2 className="text-4xl font-bold mb-6">{t('contact.title')}</h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto">
-            Want to collaborate on a photo project or discuss a software idea? 
-            I'm always excited to work on new creative ventures!
+            {t('contact.description')}
           </p>
           
           {/* Email Section */}
@@ -24,11 +25,11 @@ export const ContactSection = () => {
             className="mb-12"
           >
             <a
-              href="mailto:martin.baran12@gmail.com"
+              href={`mailto:${t('contact.email')}`}
               className="inline-flex items-center space-x-3 bg-skyblue/20 hover:bg-skyblue/30 transition-all duration-300 px-8 py-4 rounded-full border border-skyblue/30 hover:border-skyblue/50 group"
             >
               <Mail size={28} className="group-hover:scale-110 transition-transform duration-300" />
-              <span className="text-xl font-semibold">martin.baran12@gmail.com</span>
+              <span className="text-xl font-semibold">{t('contact.email')}</span>
             </a>
           </motion.div>
 
@@ -46,7 +47,7 @@ export const ContactSection = () => {
               className="flex items-center space-x-2 hover:text-skyblue transition-colors group"
             >
               <Github size={24} className="group-hover:scale-110 transition-transform duration-300" />
-              <span>GitHub</span>
+              <span>{t('contact.social.github')}</span>
             </a>
             <a
               href="https://www.linkedin.com/in/martin-baran/"
@@ -55,7 +56,7 @@ export const ContactSection = () => {
               className="flex items-center space-x-2 hover:text-skyblue transition-colors group"
             >
               <Linkedin size={24} className="group-hover:scale-110 transition-transform duration-300" />
-              <span>LinkedIn</span>
+              <span>{t('contact.social.linkedin')}</span>
             </a>
             <a
               href="https://www.instagram.com/matko_baran/"
@@ -64,7 +65,7 @@ export const ContactSection = () => {
               className="flex items-center space-x-2 hover:text-skyblue transition-colors group"
             >
               <Instagram size={24} className="group-hover:scale-110 transition-transform duration-300" />
-              <span>Instagram</span>
+              <span>{t('contact.social.instagram')}</span>
             </a>
           </motion.div>
         </motion.div>

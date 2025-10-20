@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import AnimatedButton from "../my components/AnimatedButton";
 import {
   Carousel,
@@ -14,26 +15,26 @@ const eventData = [
   { 
     id: 1, 
     folder: "BD_Paris", 
-    title: "Best Diplomats Paris 2025", 
+    titleKey: "portfolio.galleries.bd_paris.title", 
     category: "Events",
-    description: "Diplomatic conference photography capturing international relations and networking moments",
-    photoCount: "1 photo"
+    descriptionKey: "portfolio.galleries.bd_paris.description",
+    photoCountKey: "portfolio.galleries.bd_paris.photoCount"
   },
   { 
     id: 2, 
     folder: "BD_London", 
-    title: "Best Diplomats London 2024", 
+    titleKey: "portfolio.galleries.bd_london.title", 
     category: "Events",
-    description: "International diplomatic summit showcasing global leaders and cultural exchange",
-    photoCount: "29 photos"
+    descriptionKey: "portfolio.galleries.bd_london.description",
+    photoCountKey: "portfolio.galleries.bd_london.photoCount"
   },
   { 
     id: 3, 
     folder: "Cyber_Wine", 
-    title: "Cyber Wine 2024", 
+    titleKey: "portfolio.galleries.cyber_wine.title", 
     category: "Events",
-    description: "Technology and wine networking event blending innovation with tradition",
-    photoCount: "39 photos"
+    descriptionKey: "portfolio.galleries.cyber_wine.description",
+    photoCountKey: "portfolio.galleries.cyber_wine.photoCount"
   },
 ];
 
@@ -41,56 +42,57 @@ const sportData = [
   { 
     id: 4, 
     folder: "Kendice_Kosice", 
-    title: "Cup match football match Kendice vs Košice", 
+    titleKey: "portfolio.galleries.kendice_kosice.title", 
     category: "Sport",
-    description: "Dynamic sports photography capturing the intensity and passion of football",
-    photoCount: "1 photo"
+    descriptionKey: "portfolio.galleries.kendice_kosice.description",
+    photoCountKey: "portfolio.galleries.kendice_kosice.photoCount"
   },
   { 
     id: 5, 
     folder: "Kendice_Saris", 
-    title: "Football match Kendice vs Veľký Šariš", 
+    titleKey: "portfolio.galleries.kendice_saris.title", 
     category: "Sport",
-    description: "High-energy football action shots and team moments",
-    photoCount: "Coming soon"
+    descriptionKey: "portfolio.galleries.kendice_saris.description",
+    photoCountKey: "portfolio.galleries.kendice_saris.photoCount"
   },
   { 
     id: 6, 
     folder: "Kendice_Bardejov", 
-    title: "Football match Kendice vs Bardejov", 
+    titleKey: "portfolio.galleries.kendice_bardejov.title", 
     category: "Sport",
-    description: "Intense football match photography showcasing athleticism and teamwork",
-    photoCount: "Coming soon"
+    descriptionKey: "portfolio.galleries.kendice_bardejov.description",
+    photoCountKey: "portfolio.galleries.kendice_bardejov.photoCount"
   },
 ];
 
-const eventPhotos = eventData.map(({ id, folder, title, category, description, photoCount }) => ({
-  id,
-  src: `/resources/img/events/${folder}/mediums/1.webp`,
-  title,
-  category,
-  description,
-  photoCount,
-}));
-
-const sportPhotos = sportData.map(({ id, folder, title, category, description, photoCount }) => ({
-  id,
-  src: `/resources/img/sports/${folder}/mediums/1.webp`,
-  title,
-  category,
-  description,
-  photoCount,
-}));
-
-const allPhotos = { Events: eventPhotos, Sport: sportPhotos };
-const combinedPhotos = [...eventPhotos, ...sportPhotos];
-
-
 export const PortfolioSection = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<'Events' | 'Sport'>('Events');
   const [carouselApi, setCarouselApi] = useState<any>(null);
+
+  // Create photos with translations
+  const eventPhotos = eventData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey }) => ({
+    id,
+    src: `/resources/img/events/${folder}/mediums/1.webp`,
+    title: t(titleKey),
+    category,
+    description: t(descriptionKey),
+    photoCount: t(photoCountKey),
+  }));
+
+  const sportPhotos = sportData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey }) => ({
+    id,
+    src: `/resources/img/sports/${folder}/mediums/1.webp`,
+    title: t(titleKey),
+    category,
+    description: t(descriptionKey),
+    photoCount: t(photoCountKey),
+  }));
+
+  const allPhotos = { Events: eventPhotos, Sport: sportPhotos };
+  const combinedPhotos = [...eventPhotos, ...sportPhotos];
 
   const handlePhotoClick = (photo: typeof eventPhotos[0]) => {
     navigate(`/portfolio?category=${photo.title}`);
@@ -144,7 +146,7 @@ export const PortfolioSection = () => {
   return (
     <section className="py-20 bg-lightgray dark:bg-gray-900" id="portfolio">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-8 text-skyblue dark:text-blue-400">Photo portfolio</h2>
+        <h2 className="text-4xl font-bold text-center mb-8 text-skyblue dark:text-blue-400">{t('portfolio.title')}</h2>
         
         {/* Category Indicators */}
         <div className="flex justify-center mb-8">
@@ -157,7 +159,7 @@ export const PortfolioSection = () => {
                   : 'text-gray-600 dark:text-gray-300 hover:text-skyblue dark:hover:text-blue-400'
               }`}
             >
-              Events
+              {t('portfolio.categories.events')}
             </button>
             <button
               onClick={() => jumpToCategory('Sport')}
@@ -167,7 +169,7 @@ export const PortfolioSection = () => {
                   : 'text-gray-600 dark:text-gray-300 hover:text-skyblue dark:hover:text-blue-400'
               }`}
             >
-              Sport
+              {t('portfolio.categories.sport')}
             </button>
           </div>
         </div>
@@ -227,7 +229,7 @@ export const PortfolioSection = () => {
         <div className="mt-12 flex flex-col items-center">
           <Link to="/portfolio" className="group">
             <AnimatedButton
-              text="View more photo categories"
+              text={t('portfolio.viewMoreButton')}
               variant="wide"
               decoration={true}
             />

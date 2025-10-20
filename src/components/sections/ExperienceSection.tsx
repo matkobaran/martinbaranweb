@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -8,87 +9,64 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 
-const experiences = [
-  {
-    id: 0,
-    type: "work3",
-    title: "Fullstack Developer",
-    company: "Creasoft",
-    period: "10/2025 - Present",
-    description: "Fullstack Software Developer",
-    details: [
-      "C#, React",
-    ]
-  },
-  {
-    id: 1,
-    type: "work2",
-    title: "Junior Software Developer",
-    company: "ApS Brno",
-    period: "06/2023 - 05/2025",
-    description: "Fullstack Software Developer",
-    details: [
-      "Developed and maintained Windows applications  (.NET, .VB)",
-      "Developing web applications used by 50,000+ users",
-      "Migration of mobile application from Xamarin to MAUI, improving performance and maintainability",
-      "Creating REST API for mobile app",
-      "Facelift of Windows application in XAML",
-      "Customer support"
-    ]
-  },
-  {
-    id: 2,
-    type: "work1",
-    title: "Frontend Developer",
-    company: "Metio Software",
-    period: "12/2022 - 05/2023",
-    description: "Developed and optimized frontend applications using React and JavaScript",
-    details: [
-      "Developed reusable React components from Figma designs",
-      "Working with Redux",
-      "Adjusting static web pages"
-    ]
-  },
-  {
-    id: 4,
-    type: "education",
-    title: "Bachelor's in Computer Science",
-    company: "Masaryk University",
-    period: "09/2018 - 09/2020, 09/2021 - 01/2023",
-    description: "Unfinished",
-    details: [
-     "Studied core computer science principles, including algorithms, data structures, and software development", 
-     "Gained experience with programming languages and software engineering methodologies", 
-     "Completed the majority of coursework",
-     "Organizing a faculty film festival"
-    ]
-  },
-  {
-    id: 3,
-    type: "project",
-    title: "Service Technician",
-    company: "Kodys Slovensko",
-    period: "10/2020 - 09/2021",
-    description: "Diagnosed and repaired scanners and printers used in warehouse environments",
-    details: [
-      "Diagnostics and physical repair of broken printers and hand scanners", 
-      "Onsite service", 
-      "Zebra device configuration", 
-      "Customer support"
-    ]
-  }
-];
-
-
 export const ExperienceSection = () => {
-  const [selectedExperience, setSelectedExperience] = useState<typeof experiences[0] | null>(null);
+  const { t } = useTranslation();
+  const [selectedExperience, setSelectedExperience] = useState<any>(null);
   const [showMore, setShowMore] = useState(false);
+
+  const experiences = [
+    {
+      id: 0,
+      type: "work3",
+      title: t('experience.experiences.creasoft.title'),
+      company: t('experience.experiences.creasoft.company'),
+      period: t('experience.experiences.creasoft.period'),
+      description: t('experience.experiences.creasoft.description'),
+      details: t('experience.experiences.creasoft.details', { returnObjects: true }) as string[]
+    },
+    {
+      id: 1,
+      type: "work2",
+      title: t('experience.experiences.aps_brno.title'),
+      company: t('experience.experiences.aps_brno.company'),
+      period: t('experience.experiences.aps_brno.period'),
+      description: t('experience.experiences.aps_brno.description'),
+      details: t('experience.experiences.aps_brno.details', { returnObjects: true }) as string[]
+    },
+    {
+      id: 2,
+      type: "work1",
+      title: t('experience.experiences.metio.title'),
+      company: t('experience.experiences.metio.company'),
+      period: t('experience.experiences.metio.period'),
+      description: t('experience.experiences.metio.description'),
+      details: t('experience.experiences.metio.details', { returnObjects: true }) as string[]
+    },
+    {
+      id: 4,
+      type: "education",
+      title: t('experience.experiences.university.title'),
+      company: t('experience.experiences.university.company'),
+      period: t('experience.experiences.university.period'),
+      description: t('experience.experiences.university.description'),
+      details: t('experience.experiences.university.details', { returnObjects: true }) as string[]
+    },
+    {
+      id: 3,
+      type: "project",
+      title: t('experience.experiences.kodys.title'),
+      company: t('experience.experiences.kodys.company'),
+      period: t('experience.experiences.kodys.period'),
+      description: t('experience.experiences.kodys.description'),
+      details: t('experience.experiences.kodys.details', { returnObjects: true }) as string[]
+    }
+  ];
 
   return (
     <section className="py-20 bg-white dark:bg-gray-900" id="experience">
   <div className="container mx-auto px-4">
     <h2 className="text-4xl font-bold text-center mb-16 text-skyblue">
-      Experience & Education
+      {t('experience.title')}
     </h2>
 
     {/* STATE: show more toggle */}
