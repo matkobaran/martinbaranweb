@@ -21,23 +21,25 @@ const CONFIG = {
   inputDir: './public/resources/img',
   outputDir: './public/resources/img',
   sizes: {
-    thumb: { width: 300, height: 300, quality: 80 },
-    medium: { width: 800, height: 800, quality: 85 },
-    full: { width: 1920, height: 1920, quality: 90 }
+    thumb: { width: 400, height: 400, quality: 80 }, // Max dimensions, preserves aspect ratio
+    medium: { width: 1000, height: 1000, quality: 85 }, // Max dimensions, preserves aspect ratio
+    full: { width: 2048, height: 2048, quality: 90 } // Max dimensions, preserves aspect ratio
   },
   supportedFormats: ['.jpg', '.jpeg', '.png', '.webp']
 };
 
 // Folder mappings (old -> new)
 const FOLDER_MAPPINGS = {
-  'BD Paris': 'events/BD_Paris',
-  'BD London': 'events/BD_London', 
-  'Cyber Wine': 'events/Cyber_Wine'
+  //'BD Paris': 'events/BD_Paris',
+  //'BD London': 'events/BD_London', 
+  //'Cyber Wine': 'events/Cyber_Wine'
 };
 
 // Additional folders to process
 const ADDITIONAL_FOLDERS = [
-  'sports/Kendice_Kosice'
+  //'sports/Kendice_Kosice'
+  'sports/Kendice_Saris',
+  'sports/Kendice_Bardejov'
 ];
 
 async function ensureDirectoryExists(dirPath) {
@@ -51,8 +53,8 @@ async function optimizeImage(inputPath, outputPath, size) {
   try {
     await sharp(inputPath)
       .resize(size.width, size.height, {
-        fit: 'cover',
-        position: 'center'
+        fit: 'inside', // Preserve aspect ratio, don't crop
+        withoutEnlargement: true
       })
       .webp({ quality: size.quality })
       .toFile(outputPath);
@@ -168,17 +170,48 @@ async function processAdditionalFolder(folderPath) {
     await ensureDirectoryExists(outputDir);
   }
 
-  // Process each image with sequential numbering
-  for (let i = 0; i < imageFiles.length; i++) {
-    const imageFile = imageFiles[i];
+  // Filter out portrait images and get image metadata
+  const landscapeImages = [];
+  for (const imageFile of imageFiles) {
     const inputPath = path.join(inputFolder, imageFile);
+    try {
+      const metadata = await sharp(inputPath).metadata();
+      const isLandscape = metadata.width > metadata.height;
+      
+      if (isLandscape) {
+        landscapeImages.push({
+          file: imageFile,
+          path: inputPath,
+          width: metadata.width,
+          height: metadata.height
+        });
+        console.log(`✅ Landscape: ${imageFile} (${metadata.width}x${metadata.height})`);
+      } else {
+        console.log(`⏭️  Skipped portrait: ${imageFile} (${metadata.width}x${metadata.height})`);
+      }
+    } catch (error) {
+      console.error(`❌ Error reading ${imageFile}:`, error.message);
+    }
+  }
+
+  if (landscapeImages.length === 0) {
+    console.log(`⚠️  No landscape images found in ${folderPath}`);
+    return;
+  }
+
+  // Sort images by filename to maintain consistent order
+  landscapeImages.sort((a, b) => a.file.localeCompare(b.file, undefined, { numeric: true }));
+
+  // Process each landscape image with sequential numbering
+  for (let i = 0; i < landscapeImages.length; i++) {
+    const imageData = landscapeImages[i];
     const newFileName = `${i + 1}.jpg`; // Rename to 1.jpg, 2.jpg, 3.jpg, etc.
     
-    // Rename the original file
+    // Rename the original file only if needed
     const newInputPath = path.join(inputFolder, newFileName);
-    if (inputPath !== newInputPath) {
-      fs.renameSync(inputPath, newInputPath);
-      console.log(`📝 Renamed: ${imageFile} → ${newFileName}`);
+    if (imageData.path !== newInputPath) {
+      fs.renameSync(imageData.path, newInputPath);
+      console.log(`📝 Renamed: ${imageData.file} → ${newFileName}`);
     }
     
     for (const [sizeName, size] of Object.entries(CONFIG.sizes)) {
@@ -193,7 +226,7 @@ async function processAdditionalFolder(folderPath) {
     }
   }
   
-  console.log(`✅ Completed processing ${folderPath}: ${imageFiles.length} images`);
+  console.log(`✅ Completed processing ${folderPath}: ${landscapeImages.length} landscape images (${imageFiles.length - landscapeImages.length} portraits skipped)`);
 }
 
 async function processRootImages() {
@@ -254,6 +287,67 @@ async function processRootImages() {
   }
 }
 
+async function renumberFolder(folderPath) {
+  const inputFolder = path.join(CONFIG.inputDir, folderPath);
+  
+  if (!fs.existsSync(inputFolder)) {
+    console.log(`⚠️  Folder not found: ${folderPath}`);
+    return;
+  }
+
+  console.log(`\n🔄 Renumbering folder: ${folderPath}`);
+  
+  const files = fs.readdirSync(inputFolder);
+  const imageFiles = files.filter(file => 
+    CONFIG.supportedFormats.some(format => 
+      file.toLowerCase().endsWith(format.toLowerCase())
+    )
+  );
+
+  if (imageFiles.length === 0) {
+    console.log(`⚠️  No supported images found in ${folderPath}`);
+    return;
+  }
+
+  // Filter landscape images and sort them
+  const landscapeImages = [];
+  for (const imageFile of imageFiles) {
+    const inputPath = path.join(inputFolder, imageFile);
+    try {
+      const metadata = await sharp(inputPath).metadata();
+      const isLandscape = metadata.width > metadata.height;
+      
+      if (isLandscape) {
+        landscapeImages.push({
+          file: imageFile,
+          path: inputPath,
+          width: metadata.width,
+          height: metadata.height
+        });
+      }
+    } catch (error) {
+      console.error(`❌ Error reading ${imageFile}:`, error.message);
+    }
+  }
+
+  // Sort images by filename to maintain consistent order
+  landscapeImages.sort((a, b) => a.file.localeCompare(b.file, undefined, { numeric: true }));
+
+  // Renumber files sequentially
+  for (let i = 0; i < landscapeImages.length; i++) {
+    const imageData = landscapeImages[i];
+    const newFileName = `${i + 1}.jpg`;
+    const newInputPath = path.join(inputFolder, newFileName);
+    
+    if (imageData.path !== newInputPath) {
+      fs.renameSync(imageData.path, newInputPath);
+      console.log(`📝 Renamed: ${imageData.file} → ${newFileName}`);
+    }
+  }
+  
+  console.log(`✅ Renumbered ${folderPath}: ${landscapeImages.length} landscape images`);
+}
+
 async function main() {
   console.log('🚀 Starting image optimization...\n');
   
@@ -300,4 +394,4 @@ async function main() {
 // Run the script
 main().catch(console.error);
 
-export { optimizeImage, processFolder };
+export { optimizeImage, processFolder, renumberFolder };

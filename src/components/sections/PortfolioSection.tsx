@@ -49,7 +49,7 @@ const sportData = [
     category: "Sport",
     descriptionKey: "portfolio.galleries.kendice_kosice.description",
     photoCountKey: "portfolio.galleries.kendice_kosice.photoCount",
-    titlePhoto: 43
+    titlePhoto: 30
   },
   { 
     id: 5, 
@@ -58,7 +58,7 @@ const sportData = [
     category: "Sport",
     descriptionKey: "portfolio.galleries.kendice_saris.description",
     photoCountKey: "portfolio.galleries.kendice_saris.photoCount",
-    titlePhoto: 1
+    titlePhoto: 6
   },
   { 
     id: 6, 
@@ -67,7 +67,7 @@ const sportData = [
     category: "Sport",
     descriptionKey: "portfolio.galleries.kendice_bardejov.description",
     photoCountKey: "portfolio.galleries.kendice_bardejov.photoCount",
-    titlePhoto: 1
+    titlePhoto: 32
   },
 ];
 
