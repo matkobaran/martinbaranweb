@@ -18,7 +18,8 @@ const eventData = [
     titleKey: "portfolio.galleries.bd_paris.title", 
     category: "Events",
     descriptionKey: "portfolio.galleries.bd_paris.description",
-    photoCountKey: "portfolio.galleries.bd_paris.photoCount"
+    photoCountKey: "portfolio.galleries.bd_paris.photoCount",
+    titlePhoto: 1
   },
   { 
     id: 2, 
@@ -26,7 +27,8 @@ const eventData = [
     titleKey: "portfolio.galleries.bd_london.title", 
     category: "Events",
     descriptionKey: "portfolio.galleries.bd_london.description",
-    photoCountKey: "portfolio.galleries.bd_london.photoCount"
+    photoCountKey: "portfolio.galleries.bd_london.photoCount",
+    titlePhoto: 1
   },
   { 
     id: 3, 
@@ -34,7 +36,8 @@ const eventData = [
     titleKey: "portfolio.galleries.cyber_wine.title", 
     category: "Events",
     descriptionKey: "portfolio.galleries.cyber_wine.description",
-    photoCountKey: "portfolio.galleries.cyber_wine.photoCount"
+    photoCountKey: "portfolio.galleries.cyber_wine.photoCount",
+    titlePhoto: 1
   },
 ];
 
@@ -45,7 +48,8 @@ const sportData = [
     titleKey: "portfolio.galleries.kendice_kosice.title", 
     category: "Sport",
     descriptionKey: "portfolio.galleries.kendice_kosice.description",
-    photoCountKey: "portfolio.galleries.kendice_kosice.photoCount"
+    photoCountKey: "portfolio.galleries.kendice_kosice.photoCount",
+    titlePhoto: 43
   },
   { 
     id: 5, 
@@ -53,7 +57,8 @@ const sportData = [
     titleKey: "portfolio.galleries.kendice_saris.title", 
     category: "Sport",
     descriptionKey: "portfolio.galleries.kendice_saris.description",
-    photoCountKey: "portfolio.galleries.kendice_saris.photoCount"
+    photoCountKey: "portfolio.galleries.kendice_saris.photoCount",
+    titlePhoto: 1
   },
   { 
     id: 6, 
@@ -61,7 +66,8 @@ const sportData = [
     titleKey: "portfolio.galleries.kendice_bardejov.title", 
     category: "Sport",
     descriptionKey: "portfolio.galleries.kendice_bardejov.description",
-    photoCountKey: "portfolio.galleries.kendice_bardejov.photoCount"
+    photoCountKey: "portfolio.galleries.kendice_bardejov.photoCount",
+    titlePhoto: 1
   },
 ];
 
@@ -73,18 +79,18 @@ export const PortfolioSection = () => {
   const [carouselApi, setCarouselApi] = useState<any>(null);
 
   // Create photos with translations
-  const eventPhotos = eventData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey }) => ({
+  const eventPhotos = eventData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey, titlePhoto }) => ({
     id,
-    src: `/resources/img/events/${folder}/mediums/1.webp`,
+    src: `/resources/img/events/${folder}/mediums/${titlePhoto}.webp`,
     title: t(titleKey),
     category,
     description: t(descriptionKey),
     photoCount: t(photoCountKey),
   }));
 
-  const sportPhotos = sportData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey }) => ({
+  const sportPhotos = sportData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey, titlePhoto }) => ({
     id,
-    src: `/resources/img/sports/${folder}/mediums/1.webp`,
+    src: `/resources/img/sports/${folder}/mediums/${titlePhoto}.webp`,
     title: t(titleKey),
     category,
     description: t(descriptionKey),

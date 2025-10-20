@@ -4,13 +4,14 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 // Enhanced metadata-driven structure
+// titlePhoto: specifies which photo number (1-based) to use as the category thumbnail
 const portfolioData = [
   {
     id: 'bd-paris-2025',
     title: "Best Diplomats Paris 2025",
     folder: "BD_Paris",
     photoCount: 1,
-    thumbnail: "/resources/img/events/BD_Paris/thumbs/1.webp",
+    titlePhoto: 1, // Photo number to use as thumbnail
     tags: ['events', 'conference'],
     date: '2025-01-15',
     description: 'Diplomatic conference photography'
@@ -20,7 +21,7 @@ const portfolioData = [
     title: "Best Diplomats London 2024",
     folder: "BD_London",
     photoCount: 29,
-    thumbnail: "/resources/img/events/BD_London/thumbs/1.webp",
+    titlePhoto: 1, // Photo number to use as thumbnail
     tags: ['events', 'conference'],
     date: '2024-12-01',
     description: 'International diplomatic summit'
@@ -30,7 +31,7 @@ const portfolioData = [
     title: "Cyber Wine 2024",
     folder: "Cyber_Wine",
     photoCount: 39,
-    thumbnail: "/resources/img/events/Cyber_Wine/thumbs/1.webp",
+    titlePhoto: 1, // Photo number to use as thumbnail
     tags: ['events', 'networking'],
     date: '2024-11-15',
     description: 'Technology and wine networking event'
@@ -40,7 +41,7 @@ const portfolioData = [
     title: "Cup match football match Kendice vs Košice",
     folder: "Kendice_Kosice",
     photoCount: 56,
-    thumbnail: "/resources/img/sports/Kendice_Kosice/thumbs/1.webp",
+    titlePhoto: 43, // Photo number to use as thumbnail (as you specified)
     tags: ['sports', 'football', 'cup match'],
     date: '2024-12-15',
     description: 'Dynamic sports photography capturing the intensity and passion of football'
@@ -55,12 +56,13 @@ const getOptimizedImage = (folder: string, index: number, size: 'thumb' | 'mediu
 
 const categoryPhotos = {};
 
-portfolioData.forEach(({ title, folder, photoCount, tags }) => {
+portfolioData.forEach(({ title, folder, photoCount, titlePhoto, tags }) => {
   const type = tags.includes('sports') ? 'sports' : 'events';
   categoryPhotos[title] = {
     thumbnails: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'thumb', type)),
     medium: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'medium', type)),
-    full: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'full', type))
+    full: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'full', type)),
+    titlePhoto: getOptimizedImage(folder, titlePhoto - 1, 'thumb', type) // titlePhoto is 1-based, so subtract 1
   };
 });
 
@@ -205,7 +207,7 @@ const Portfolio = () => {
                 onClick={() => navigate(`/portfolio?category=${item.title}`)}
               >
                 <img
-                  src={item.thumbnail}
+                  src={categoryPhotos[item.title]?.titlePhoto || `/resources/img/events/${item.folder}/thumbs/1.webp`}
                   alt={`${item.title} category`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   loading="lazy"
