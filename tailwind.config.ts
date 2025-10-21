@@ -19,10 +19,11 @@ export default {
     },
     extend: {
       colors: {
-        // Core brand colors
-        skyblue: "#33C3F0",
-        navy: "#1a237e",
-        lightgray: "#f5f5f5",
+        // Core brand colors - Option 2: Warm Professional (no gradient - same blue)
+        skyblue: "#2B6CB0", // Deep Blue
+        navy: "#2B6CB0", // Same Blue (no gradient)
+        lightgray: "#F7FAFC", // Soft White
+        accent: "#38A169", // Forest Green
 
         // UI Theme colors
         border: "#e2e8f0",

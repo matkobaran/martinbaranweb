@@ -58,7 +58,7 @@ const Videos = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-skyblue to-blue-400 p-4">
+    <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4">
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
           <span>MB</span>

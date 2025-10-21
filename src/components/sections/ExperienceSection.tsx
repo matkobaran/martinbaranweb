@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Button } from "../ui/button";
+import AnimatedButton from "../my components/AnimatedButton";
 import {
   Dialog,
   DialogContent,
@@ -85,7 +86,7 @@ export const ExperienceSection = () => {
             <p className="text-gray-600 mb-2">{exp.company}</p>
             <p className="text-sm text-gray-500 mb-4">{exp.period}</p>
             <p className="text-gray-700">{exp.description}</p>
-            <Button variant="link" className="mt-4 text-skyblue">
+            <Button variant="link" className="mt-4 text-accent">
               {t('common.learnMore')}
             </Button>
           </motion.div>
@@ -94,13 +95,15 @@ export const ExperienceSection = () => {
 
       {/* Show More / Show Less Button */}
       {experiences.length > 4 && (
-        <Button
-          onClick={() => setShowMore(!showMore)}
-          variant="outline"
-          className="mt-10 text-skyblue border-skyblue hover:bg-skyblue hover:text-white transition"
-        >
-          {showMore ? t('common.showLess') : t('common.showMore')}
-        </Button>
+        <div className="mt-12 flex flex-col items-center">
+          <button onClick={() => setShowMore(!showMore)} className="group">
+            <AnimatedButton
+              text={showMore ? t('common.showLess') : t('common.showMore')}
+              variant="wide"
+              decoration={true}
+            />
+          </button>
+        </div>
       )}
     </div>
 

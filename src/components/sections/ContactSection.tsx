@@ -28,7 +28,7 @@ export const ContactSection = () => {
           >
             <a
               href={`mailto:${t('contact.email')}`}
-              className="inline-flex items-center space-x-3 bg-skyblue/20 hover:bg-skyblue/30 transition-all duration-300 px-8 py-4 rounded-full border border-skyblue/30 hover:border-skyblue/50 group"
+              className="inline-flex items-center space-x-3 bg-skyblue/20 hover:bg-skyblue/30 transition-all duration-300 px-8 py-4 rounded-full border-2 border-white hover:border-skyblue group"
             >
               <Mail size={28} className="group-hover:scale-110 transition-transform duration-300" />
               <span className="text-xl font-semibold">{t('contact.email')}</span>

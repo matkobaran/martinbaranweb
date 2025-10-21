@@ -37,7 +37,7 @@ export const BlogSection = () => {
             >
               <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
               <p className="text-gray-700">{blog.description}</p>
-              <Button variant="link" className="mt-4 text-skyblue" >
+              <Button variant="link" className="mt-4 text-accent" >
                 {t('common.readMore')}
               </Button>
             </motion.div>

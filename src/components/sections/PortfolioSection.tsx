@@ -167,7 +167,7 @@ export const PortfolioSection = () => {
                             <p className="text-white/90 text-sm mb-2 leading-relaxed drop-shadow-md max-h-0 group-hover:max-h-20 overflow-hidden transition-all duration-300">
                               {photo.description}
                             </p>
-                            <span className="text-skyblue text-xs font-medium drop-shadow-md">
+                            <span className="text-white text-xs font-semibold">
                               {photo.photoCount}
                             </span>
                           </div>

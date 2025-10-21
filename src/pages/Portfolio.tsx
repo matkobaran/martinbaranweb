@@ -112,7 +112,7 @@ const Portfolio = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-skyblue to-blue-400 p-4">
+    <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4">
       <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
           <span>MB</span>
@@ -192,7 +192,7 @@ const Portfolio = () => {
                     <p className="text-white/90 text-sm mb-2 leading-relaxed drop-shadow-md max-h-0 group-hover:max-h-20 overflow-hidden transition-all duration-300">
                       {item.description}
                     </p>
-                    <span className="text-skyblue text-xs font-medium drop-shadow-md">
+                    <span className="text-white text-xs font-semibold">
                       {getPhotoCountText(item.photoCount, getCurrentLanguage(i18n))}
                     </span>
                   </div>

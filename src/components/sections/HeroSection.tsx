@@ -56,8 +56,8 @@ export const HeroSection = () => {
     });  };
 
   return (
-    <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-blue-400 dark:from-navy dark:to-blue-900 text-white overflow-hidden">
-      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 dark:bg-navy/80 backdrop-blur-sm">
+    <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-navy text-white overflow-hidden">
+      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
         <button onClick={handleLogoClick} className="text-2xl font-bold">
           MB
         </button>
@@ -85,7 +85,7 @@ export const HeroSection = () => {
           </div>
 
           {isMenuOpen && (
-            <div className="absolute top-full left-0 right-0 bg-skyblue/95 dark:bg-navy/95 backdrop-blur-sm py-2 md:hidden border-t border-white/20">
+            <div className="absolute top-full left-0 right-0 bg-skyblue/95 backdrop-blur-sm py-2 md:hidden border-t border-white/20">
               {menuItems.map((item) => (
                 <button
                   key={item.id}
