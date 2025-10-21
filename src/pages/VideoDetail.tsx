@@ -110,7 +110,7 @@ useEffect(() => {
 
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <h2 className="text-2xl font-semibold mb-4">About this film</h2>
+            <h2 className="text-2xl font-semibold mb-4">{t('common.aboutThisFilm')}</h2>
             <p className="text-gray-700 mb-6">{video.details}</p>
           </div>
 

@@ -74,7 +74,7 @@ const Videos = () => {
           {t('common.back')}
         </Link>
 
-        <h1 className="text-4xl font-bold text-white mb-8">Videos</h1>
+        <h1 className="text-4xl font-bold text-white mb-8">{t('pages.videos')}</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {videos.map((video, index) => (

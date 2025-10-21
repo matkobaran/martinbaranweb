@@ -86,7 +86,7 @@ export const ExperienceSection = () => {
             <p className="text-sm text-gray-500 mb-4">{exp.period}</p>
             <p className="text-gray-700">{exp.description}</p>
             <Button variant="link" className="mt-4 text-skyblue">
-              Learn More
+              {t('common.learnMore')}
             </Button>
           </motion.div>
         ))}
@@ -99,7 +99,7 @@ export const ExperienceSection = () => {
           variant="outline"
           className="mt-10 text-skyblue border-skyblue hover:bg-skyblue hover:text-white transition"
         >
-          {showMore ? "Show Less" : "Show More"}
+          {showMore ? t('common.showLess') : t('common.showMore')}
         </Button>
       )}
     </div>

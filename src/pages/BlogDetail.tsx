@@ -45,7 +45,7 @@ const BlogDetail = () => {
   }, []);
 
   if (!blog) {
-    return <div>Blog not found</div>;
+    return <div>{t('common.blogNotFound')}</div>;
   }
 
   // useEffect(() => {
@@ -118,7 +118,7 @@ const BlogDetail = () => {
               className="w-full border border-gray-300 rounded-md p-2"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Write a comment..."
+              placeholder={t('common.writeComment')}
             />
             {/* <button
               className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md"

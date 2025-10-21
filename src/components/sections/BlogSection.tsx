@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const blogPosts = [
   {
@@ -12,6 +13,7 @@ const blogPosts = [
 ];
 
 export const BlogSection = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
   
 
@@ -36,7 +38,7 @@ export const BlogSection = () => {
               <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
               <p className="text-gray-700">{blog.description}</p>
               <Button variant="link" className="mt-4 text-skyblue" >
-                Read More
+                {t('common.readMore')}
               </Button>
             </motion.div>
           ))}

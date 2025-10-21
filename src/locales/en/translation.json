@@ -163,6 +163,17 @@
   "common": {
     "loading": "Loading...",
     "error": "Error",
-    "back": "Back"
+    "back": "Back",
+    "showMore": "Show More",
+    "showLess": "Show Less",
+    "learnMore": "Learn More",
+    "readMore": "Read More",
+    "writeComment": "Write a comment...",
+    "blogNotFound": "Blog not found",
+    "aboutThisFilm": "About this film"
+  },
+  "pages": {
+    "videos": "Videos",
+    "blog": "Blog"
   }
 }

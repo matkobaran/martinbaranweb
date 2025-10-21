@@ -163,6 +163,17 @@
   "common": {
     "loading": "Načítava sa...",
     "error": "Chyba",
-    "back": "Späť"
+    "back": "Späť",
+    "showMore": "Zobraziť viac",
+    "showLess": "Zobraziť menej",
+    "learnMore": "Dozvedieť sa viac",
+    "readMore": "Čítať viac",
+    "writeComment": "Napísať komentár...",
+    "blogNotFound": "Blog sa nenašiel",
+    "aboutThisFilm": "O tomto filme"
+  },
+  "pages": {
+    "videos": "Videá",
+    "blog": "Blog"
   }
 }
