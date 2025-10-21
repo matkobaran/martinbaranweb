@@ -125,7 +125,7 @@ const Portfolio = () => {
           className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-4"
         >
           <ChevronLeft className="w-5 h-5" />
-          Back
+          {t('common.back')}
         </Link>
         <div className="flex items-center gap-4 mb-8">
           {portfolioItem ? (

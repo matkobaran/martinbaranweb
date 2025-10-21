@@ -1,6 +1,7 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
 const videos = [
   
@@ -75,6 +76,7 @@ const videos = [
 ];
 
 const Video = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const video = videos.find(v => v.id === Number(id));
@@ -93,7 +95,7 @@ useEffect(() => {
           className="text-black hover:text-black/80 transition-colors flex items-center gap-2 pb-4"
         >
           <ChevronLeft className="w-5 h-5" />
-          Back
+          {t('common.back')}
         </Link>
 
         <h1 className="text-4xl font-bold mb-4">{video.title}</h1>

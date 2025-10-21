@@ -2,6 +2,7 @@ import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import titleStovka from "/resources/img/video-thumbnails/stovka_medium.webp";
 import titleKoleje from "/resources/img/video-thumbnails/koleje_medium.webp";
 import titleRHSO from "/resources/img/video-thumbnails/rso_medium.webp";
@@ -47,6 +48,7 @@ const videos = [
 ];
 
 const Videos = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ const Videos = () => {
           className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-4"
         >
           <ChevronLeft className="w-5 h-5" />
-          Back
+          {t('common.back')}
         </Link>
 
         <h1 className="text-4xl font-bold text-white mb-8">Videos</h1>
