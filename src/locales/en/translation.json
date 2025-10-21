@@ -21,33 +21,27 @@
     "galleries": {
       "bd_paris": {
         "title": "Best Diplomats Paris 2025",
-        "description": "",
-        "photoCount": "1 photo"
+        "description": ""
       },
       "bd_london": {
         "title": "Best Diplomats London 2024", 
-        "description": "",
-        "photoCount": "29 photos"
+        "description": ""
       },
       "cyber_wine": {
         "title": "Cyber Wine 2024",
-        "description": "",
-        "photoCount": "39 photos"
+        "description": ""
       },
       "kendice_kosice": {
         "title": "Cup football match Kendice vs Košice",
-        "description": "",
-        "photoCount": "56 photos"
+        "description": ""
       },
       "kendice_saris": {
         "title": "Football match Kendice vs Veľký Šariš",
-        "description": "",
-        "photoCount": "41"
+        "description": ""
       },
       "kendice_bardejov": {
         "title": "Football match Kendice vs Bardejov",
-        "description": "",
-        "photoCount": "37"
+        "description": ""
       }
     },
     "viewMoreButton": "View more photo categories"

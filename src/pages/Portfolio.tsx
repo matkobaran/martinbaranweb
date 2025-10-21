@@ -3,77 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
+import { portfolioData, getPortfolioByTranslatedTitle } from '../config/portfolioData';
+import { getPhotoCountText, getCurrentLanguage } from '../utils/photoCount';
 
-// Enhanced metadata-driven structure
-// titlePhoto: specifies which photo number (1-based) to use as the category thumbnail
-const portfolioData = [
-  {
-    id: 'bd-paris-2025',
-    titleKey: "portfolio.galleries.bd_paris.title",
-    title: "Best Diplomats Paris 2025",
-    folder: "BD_Paris",
-    photoCount: 1,
-    titlePhoto: 1, // Photo number to use as thumbnail
-    tags: ['events', 'conference'],
-    date: '2025-01-15',
-    description: 'Diplomatic conference photography'
-  },
-  {
-    id: 'bd-london-2024',
-    titleKey: "portfolio.galleries.bd_london.title",
-    title: "Best Diplomats London 2024",
-    folder: "BD_London",
-    photoCount: 21,
-    titlePhoto: 1, // Photo number to use as thumbnail
-    tags: ['events', 'conference'],
-    date: '2024-12-01',
-    description: 'International diplomatic summit'
-  },  
-  {
-    id: 'cyber-wine-2024',
-    titleKey: "portfolio.galleries.cyber_wine.title",
-    title: "Cyber Wine 2024",
-    folder: "Cyber_Wine",
-    photoCount: 31,
-    titlePhoto: 1, // Photo number to use as thumbnail
-    tags: ['events', 'networking'],
-    date: '2024-11-15',
-    description: 'Technology and wine networking event'
-  },
-  {
-    id: 'kendice-kosice-2025',
-    titleKey: "portfolio.galleries.kendice_kosice.title",
-    title: "Cup football match Kendice vs Košice",
-    folder: "Kendice_Kosice",
-    photoCount: 56,
-    titlePhoto: 30, // Photo number to use as thumbnail (renumbered by script)
-    tags: ['sports', 'football', 'cup match'],
-    date: '2024-12-15',
-    description: ''
-  },
-  {
-    id: 'kendice-bardejov-2025',
-    titleKey: "portfolio.galleries.kendice_bardejov.title",
-    title: "Football match Kendice vs Bardejov",
-    folder: "Kendice_Bardejov",
-    photoCount: 37,
-    titlePhoto: 32, // Photo number to use as thumbnail (renumbered by script)
-    tags: ['sports', 'football', 'cup match'],
-    date: '2024-12-15',
-    description: ''  
-  },
-  {
-    id: 'kendice-saris-2025',
-    titleKey: "portfolio.galleries.kendice_saris.title",
-    title: "Football match Kendice vs Veľký Šariš",
-    folder: "Kendice_Saris",
-    photoCount: 41,
-    titlePhoto: 6, // Photo number to use as thumbnail (renumbered by script)
-    tags: ['sports', 'football', 'cup match'],
-    date: '2024-12-15',
-    description: ''
-  }
-];
+// Portfolio data is now imported from centralized config
 
 // Generate optimized image URLs
 const getOptimizedImage = (folder: string, index: number, size: 'thumb' | 'medium' | 'full' = 'full', type: 'events' | 'sports' = 'events') => {
@@ -81,17 +14,25 @@ const getOptimizedImage = (folder: string, index: number, size: 'thumb' | 'mediu
   return `/resources/img/${type}/${folder}/${sizePath}/${index + 1}.webp`;
 };
 
-const categoryPhotos = {};
+// Create categoryPhotos object from centralized data
+const createCategoryPhotos = () => {
+  const categoryPhotos: { [key: string]: any } = {};
+  
+  portfolioData.forEach(({ titleKey, folder, photoCount, titlePhoto, tags }) => {
+    const type = tags.includes('sports') ? 'sports' : 'events';
+    // Use the full titleKey as the key to avoid conflicts
+    categoryPhotos[titleKey] = {
+      thumbnails: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'thumb', type)),
+      medium: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'medium', type)),
+      full: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'full', type)),
+      titlePhoto: getOptimizedImage(folder, titlePhoto - 1, 'thumb', type) // titlePhoto is 1-based, so subtract 1
+    };
+  });
+  
+  return categoryPhotos;
+};
 
-portfolioData.forEach(({ title, folder, photoCount, titlePhoto, tags }) => {
-  const type = tags.includes('sports') ? 'sports' : 'events';
-  categoryPhotos[title] = {
-    thumbnails: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'thumb', type)),
-    medium: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'medium', type)),
-    full: Array.from({ length: photoCount }, (_, i) => getOptimizedImage(folder, i, 'full', type)),
-    titlePhoto: getOptimizedImage(folder, titlePhoto - 1, 'thumb', type) // titlePhoto is 1-based, so subtract 1
-  };
-});
+const categoryPhotos = createCategoryPhotos();
 
 // Temporary fallback for old structure until optimization script is run
 const oldCategories = [
@@ -111,24 +52,16 @@ oldCategories.forEach(({ title, folder, photoCount }) => {
 // Note: Using native lazy loading with loading="lazy" attribute instead of IntersectionObserver
 
 const Portfolio = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [searchParams] = useSearchParams();
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
   const [imageQuality, setImageQuality] = useState<'thumb' | 'medium' | 'full'>('thumb');
   const [isLoading, setIsLoading] = useState(false);
   
-  // Create a mapping from translated titles to portfolio data
-  const getPortfolioItemByTranslatedTitle = (translatedTitle: string) => {
-    return portfolioData.find(item => {
-      const translatedItemTitle = t(item.titleKey);
-      return translatedItemTitle === translatedTitle;
-    });
-  };
-  
   const category = searchParams.get("category");
-  const portfolioItem = category ? getPortfolioItemByTranslatedTitle(category) : null;
-  const photos = portfolioItem ? categoryPhotos[portfolioItem.title as keyof typeof categoryPhotos] : null;
+  const portfolioItem = category ? getPortfolioByTranslatedTitle(category, t) : null;
+  const photos = portfolioItem ? categoryPhotos[portfolioItem.titleKey as keyof typeof categoryPhotos] : null;
   
   // Fallback to original structure if new structure doesn't exist
   const getPhotosForDisplay = () => {
@@ -196,9 +129,9 @@ const Portfolio = () => {
         </Link>
         <div className="flex items-center gap-4 mb-8">
           {portfolioItem ? (
-            <h1 className="text-4xl font-bold text-white capitalize">{t(portfolioItem.titleKey)} Photos</h1>
+            <h1 className="text-4xl font-bold text-white capitalize">{t(portfolioItem.titleKey)}</h1>
           ) : (
-            <h1 className="text-4xl font-bold text-white">Photo portfolio</h1>
+            <h1 className="text-4xl font-bold text-white">{t('portfolio.title')}</h1>
           )}
         </div>
 
@@ -246,7 +179,7 @@ const Portfolio = () => {
                 onClick={() => navigate(`/portfolio?category=${t(item.titleKey)}`)}
               >
                 <img
-                  src={categoryPhotos[item.title]?.titlePhoto || `/resources/img/events/${item.folder}/thumbs/1.webp`}
+                  src={categoryPhotos[item.titleKey]?.titlePhoto || `/resources/img/events/${item.folder}/thumbs/1.webp`}
                   alt={`${t(item.titleKey)} category`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   loading="lazy"
@@ -260,7 +193,7 @@ const Portfolio = () => {
                       {item.description}
                     </p>
                     <span className="text-skyblue text-xs font-medium drop-shadow-md">
-                      {item.photoCount} photos
+                      {getPhotoCountText(item.photoCount, getCurrentLanguage(i18n))}
                     </span>
                   </div>
                 </div>

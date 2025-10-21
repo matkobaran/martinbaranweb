@@ -37,7 +37,7 @@ const FOLDER_MAPPINGS = {
 
 // Additional folders to process
 const ADDITIONAL_FOLDERS = [
-  //'sports/Kendice_Kosice'
+  'sports/Kendice_Kosice',
   'sports/Kendice_Saris',
   'sports/Kendice_Bardejov'
 ];

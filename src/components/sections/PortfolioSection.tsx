@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import AnimatedButton from "../my components/AnimatedButton";
+import { getHighlightedPortfolios, getPortfoliosByCategory } from '../../config/portfolioData';
+import { getPhotoCountText, getCurrentLanguage } from '../../utils/photoCount';
 import {
   Carousel,
   CarouselContent,
@@ -11,90 +13,39 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const eventData = [
-  { 
-    id: 1, 
-    folder: "BD_Paris", 
-    titleKey: "portfolio.galleries.bd_paris.title", 
-    category: "Events",
-    descriptionKey: "portfolio.galleries.bd_paris.description",
-    photoCountKey: "portfolio.galleries.bd_paris.photoCount",
-    titlePhoto: 1
-  },
-  { 
-    id: 2, 
-    folder: "BD_London", 
-    titleKey: "portfolio.galleries.bd_london.title", 
-    category: "Events",
-    descriptionKey: "portfolio.galleries.bd_london.description",
-    photoCountKey: "portfolio.galleries.bd_london.photoCount",
-    titlePhoto: 1
-  },
-  { 
-    id: 3, 
-    folder: "Cyber_Wine", 
-    titleKey: "portfolio.galleries.cyber_wine.title", 
-    category: "Events",
-    descriptionKey: "portfolio.galleries.cyber_wine.description",
-    photoCountKey: "portfolio.galleries.cyber_wine.photoCount",
-    titlePhoto: 1
-  },
-];
+// Get highlighted portfolios from centralized data
+const getEventData = () => {
+  return getPortfoliosByCategory('events').filter(item => item.isHighlight);
+};
 
-const sportData = [
-  { 
-    id: 4, 
-    folder: "Kendice_Kosice", 
-    titleKey: "portfolio.galleries.kendice_kosice.title", 
-    category: "Sport",
-    descriptionKey: "portfolio.galleries.kendice_kosice.description",
-    photoCountKey: "portfolio.galleries.kendice_kosice.photoCount",
-    titlePhoto: 30
-  },
-  { 
-    id: 5, 
-    folder: "Kendice_Bardejov", 
-    titleKey: "portfolio.galleries.kendice_bardejov.title", 
-    category: "Sport",
-    descriptionKey: "portfolio.galleries.kendice_bardejov.description",
-    photoCountKey: "portfolio.galleries.kendice_bardejov.photoCount",
-    titlePhoto: 32
-  },
-  { 
-    id: 6, 
-    folder: "Kendice_Saris", 
-    titleKey: "portfolio.galleries.kendice_saris.title", 
-    category: "Sport",
-    descriptionKey: "portfolio.galleries.kendice_saris.description",
-    photoCountKey: "portfolio.galleries.kendice_saris.photoCount",
-    titlePhoto: 6
-  }
-];
+const getSportData = () => {
+  return getPortfoliosByCategory('sports').filter(item => item.isHighlight);
+};
 
 export const PortfolioSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
   const [currentCategory, setCurrentCategory] = useState<'Events' | 'Sport'>('Events');
   const [carouselApi, setCarouselApi] = useState<any>(null);
 
-  // Create photos with translations
-  const eventPhotos = eventData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey, titlePhoto }) => ({
+  // Create photos with translations from centralized data
+  const eventPhotos = getEventData().map(({ id, folder, titleKey, descriptionKey, photoCount, titlePhoto }) => ({
     id,
     src: `/resources/img/events/${folder}/mediums/${titlePhoto}.webp`,
     title: t(titleKey),
-    category,
+    category: "Events",
     description: t(descriptionKey),
-    photoCount: t(photoCountKey),
+    photoCount: getPhotoCountText(photoCount, getCurrentLanguage(i18n)),
   }));
 
-  const sportPhotos = sportData.map(({ id, folder, titleKey, category, descriptionKey, photoCountKey, titlePhoto }) => ({
+  const sportPhotos = getSportData().map(({ id, folder, titleKey, descriptionKey, photoCount, titlePhoto }) => ({
     id,
     src: `/resources/img/sports/${folder}/mediums/${titlePhoto}.webp`,
     title: t(titleKey),
-    category,
+    category: "Sport",
     description: t(descriptionKey),
-    photoCount: t(photoCountKey),
+    photoCount: getPhotoCountText(photoCount, getCurrentLanguage(i18n)),
   }));
 
   const allPhotos = { Events: eventPhotos, Sport: sportPhotos };

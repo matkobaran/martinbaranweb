@@ -8,7 +8,7 @@
   },
   "hero": {
     "greeting": "Ahoj, som Martin",
-    "description": "Som <strong>fotograf a softvérový vývojár</strong> momentálne sídliaci v Prahe. Zachytávam autentické a dynamické momenty — od futbalových zápasov a konferencií po kreatívne udalosti.",
+    "description": "Som <strong>fotograf a softvérový vývojár</strong> sídliaci v Prahe. Zachytávam autentické a dynamické momenty — od futbalových zápasov a konferencií po kreatívne udalosti.",
     "portfolioButton": "📸 Pozrieť fotoportfólio",
     "contactButton": "Kontakt"
   },
@@ -21,33 +21,27 @@
     "galleries": {
       "bd_paris": {
         "title": "Best Diplomats Paríž 2025",
-        "description": "",
-        "photoCount": "1 fotka"
+        "description": ""
       },
       "bd_london": {
         "title": "Best Diplomats Londýn 2024",
-        "description": "",
-        "photoCount": "29 fotiek"
+        "description": ""
       },
       "cyber_wine": {
         "title": "Cyber Wine 2024",
-        "description": "",
-        "photoCount": "39 fotiek"
+        "description": ""
       },
       "kendice_kosice": {
         "title": "Pohárový zápas Kendice vs Košice",
-        "description": "",
-        "photoCount": "56 fotiek"
+        "description": ""
       },
       "kendice_saris": {
         "title": "Futbalový zápas Kendice vs Veľký Šariš",
-        "description": "",
-        "photoCount": "Čoskoro"
+        "description": ""
       },
       "kendice_bardejov": {
         "title": "Futbalový zápas Kendice vs Bardejov",
-        "description": "",
-        "photoCount": "Čoskoro"
+        "description": ""
       }
     },
     "viewMoreButton": "Zobraziť celú galériu"
