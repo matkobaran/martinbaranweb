@@ -10,7 +10,7 @@ export const portfolioData = [
     titlePhoto: 62,
     tags: ['events', 'conference'],
     date: '2025-01-15',
-    description: 'Diplomatic conference photography',
+    description: 'International diplomatic conference',
     isHighlight: true // Shows in main carousel
   },
   {
@@ -18,11 +18,11 @@ export const portfolioData = [
     titleKey: "portfolio.galleries.bd_london.title",
     descriptionKey: "portfolio.galleries.bd_london.description", 
     folder: "BD_London",
-    photoCount: 88,
+    photoCount: 86,
     titlePhoto: 3,
     tags: ['events', 'conference'],
     date: '2024-12-01',
-    description: 'International diplomatic summit',
+    description: 'International diplomatic conference',
     isHighlight: true // Shows in main carousel
   },  
   {
@@ -34,7 +34,7 @@ export const portfolioData = [
     titlePhoto: 1,
     tags: ['events', 'networking'],
     date: '2024-11-15',
-    description: 'Technology and wine networking event',
+    description: 'Technology and networking event',
     isHighlight: true // Shows in main carousel
   },
   {

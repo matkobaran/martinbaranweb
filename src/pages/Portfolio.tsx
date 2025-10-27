@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 import { portfolioData, getPortfolioByTranslatedTitle } from '../config/portfolioData';
 import { getPhotoCountText, getCurrentLanguage } from '../utils/photoCount';
+import { SEO, PortfolioSEO } from '../components/SEO';
 
 // Portfolio data is now imported from centralized config
 
@@ -112,12 +113,36 @@ const Portfolio = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4">
-      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
-        <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
-          <span>MB</span>
-        </Link>
-      </nav>
+    <>
+      {portfolioItem ? (
+        <PortfolioSEO
+          galleryTitle={t(portfolioItem.titleKey)}
+          galleryDescription={portfolioItem.description || t(portfolioItem.descriptionKey)}
+          photoCount={portfolioItem.photoCount}
+          galleryUrl={`https://martinbaran.com/portfolio?category=${t(portfolioItem.titleKey)}`}
+          language={i18n.language as 'en' | 'sk'}
+        />
+      ) : (
+        <SEO
+          title={i18n.language === 'sk' ? "Fotografické portfólio | Martin Baran" : "Photography Portfolio | Martin Baran"}
+          description={i18n.language === 'sk' 
+            ? "Prehliadajte profesionálne fotografické portfólio Martina Barana obsahujúce fotografovanie konferencií, udalostí a športu z Prahy, Česká republika."
+            : "Browse Martin Baran's professional photography portfolio featuring conference photography, event photography, and sports photography from Prague, Czech Republic."
+          }
+          keywords={i18n.language === 'sk'
+            ? "fotografické portfólio, Martin Baran, fotografovanie udalostí, fotografovanie konferencií, športové fotografovanie, fotograf Praha"
+            : "photography portfolio, Martin Baran, event photography, conference photography, sports photography, Prague photographer"
+          }
+          language={i18n.language as 'en' | 'sk'}
+        />
+      )}
+      
+      <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4">
+        <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
+          <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
+            <span>MB</span>
+          </Link>
+        </nav>
 
       <div className="container mx-auto pt-24">
         <Link
@@ -157,7 +182,7 @@ const Portfolio = () => {
                     )}
                     <img
                       src={photo}
-                      alt={`${category} photo ${index + 1}`}
+                      alt={`${portfolioItem ? `${t(portfolioItem.titleKey)} professional photography` : 'Professional photography'} by Martin Baran - Photo ${index + 1} of ${portfolioItem?.photoCount || 'portfolio'}`}
                       className={`w-full h-auto object-cover group-hover:scale-105 transition-all duration-300 ${
                         isLoaded ? 'opacity-100' : 'opacity-0'
                       }`}
@@ -180,7 +205,7 @@ const Portfolio = () => {
               >
                 <img
                   src={categoryPhotos[item.titleKey]?.titlePhoto || `/resources/img/events/${item.folder}/thumbs/1.webp`}
-                  alt={`${t(item.titleKey)} category`}
+                  alt={`${t(item.titleKey)} professional photography portfolio by Martin Baran - ${item.photoCount} photos available`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   loading="lazy"
                 />
@@ -232,7 +257,7 @@ const Portfolio = () => {
             {photos && (
               <img
                 src={photos.full[selectedPhotoIndex]}
-                alt={`${category} photo ${selectedPhotoIndex + 1}`}
+                alt={`${portfolioItem ? `${t(portfolioItem.titleKey)} professional photography` : 'Professional photography'} by Martin Baran - High resolution photo ${selectedPhotoIndex + 1} of ${portfolioItem?.photoCount || 'portfolio'}`}
                 className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
                 loading="eager"
@@ -251,7 +276,8 @@ const Portfolio = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 };
 

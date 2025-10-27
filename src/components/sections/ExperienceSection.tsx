@@ -86,9 +86,9 @@ export const ExperienceSection = () => {
             <p className="text-gray-600 mb-2">{exp.company}</p>
             <p className="text-sm text-gray-500 mb-4">{exp.period}</p>
             <p className="text-gray-700">{exp.description}</p>
-            <Button variant="link" className="mt-4 text-accent">
+            <p className="mt-4 text-accent text-sm font-medium">
               {t('common.learnMore')}
-            </Button>
+            </p>
           </motion.div>
         ))}
       </div>
@@ -96,13 +96,12 @@ export const ExperienceSection = () => {
       {/* Show More / Show Less Button */}
       {experiences.length > 4 && (
         <div className="mt-12 flex flex-col items-center">
-          <button onClick={() => setShowMore(!showMore)} className="group">
-            <AnimatedButton
-              text={showMore ? t('common.showLess') : t('common.showMore')}
-              variant="wide"
-              decoration={true}
-            />
-          </button>
+          <AnimatedButton
+            text={showMore ? t('common.showLess') : t('common.showMore')}
+            variant="wide"
+            decoration={true}
+            onClick={() => setShowMore(!showMore)}
+          />
         </div>
       )}
     </div>
