@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import { Navigation } from '../components/Navigation';
 import titleStovka from "/resources/img/video-thumbnails/stovka_medium.webp";
 import titleKoleje from "/resources/img/video-thumbnails/koleje_medium.webp";
 import titleRHSO from "/resources/img/video-thumbnails/rso_medium.webp";
@@ -59,11 +60,7 @@ const Videos = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4">
-      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
-        <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-white">
-          <span>MB</span>
-        </Link>
-      </nav>
+      <Navigation variant="subpage" />
 
       <div className="container mx-auto pt-24">
         <Link

@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Menu, X } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import titlePhotoThumb from "/resources/img/hero/title_thumb.webp";
 import titlePhotoMedium from "/resources/img/hero/title_medium.webp";
 import titlePhotoFull from "/resources/img/hero/title_full.webp";
 import { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import AnimatedButton from "../my components/AnimatedButton";
-import { LanguageSwitcher } from "../LanguageSwitcher";
+import { Navigation } from "../Navigation";
 
 export const HeroSection = () => {
   const { t } = useTranslation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       return document.documentElement.classList.contains('dark');
@@ -32,73 +31,9 @@ export const HeroSection = () => {
     document.documentElement.classList.toggle('dark');
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsMenuOpen(false);
-  };
-
-  const menuItems = [
-    { id: 'portfolio', label: t('navigation.photography') },
-    { id: 'experience', label: t('navigation.experience') },
-    { id: 'skills', label: t('navigation.skills') },
-    { id: 'videography', label: t('navigation.videography') },
-    { id: 'contact', label: t('navigation.contact') }
-  ];
-
-  const handleLogoClick = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });  };
-
   return (
     <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-navy text-white overflow-hidden">
-      <nav className="fixed top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-skyblue/80 backdrop-blur-sm">
-        <button onClick={handleLogoClick} className="text-2xl font-bold">
-          MB
-        </button>
-        <div className="flex items-center gap-4">
-          <LanguageSwitcher />
-          
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-
-          <div className="hidden md:flex gap-8">
-            {menuItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-lg hover:text-white/80 transition-colors relative group"
-              >
-                {item.label}
-                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-white scale-x-0 group-hover:scale-x-100 transition-transform" />
-              </button>
-            ))}
-          </div>
-
-          {isMenuOpen && (
-            <div className="absolute top-full left-0 right-0 bg-skyblue/95 backdrop-blur-sm py-2 md:hidden border-t border-white/20">
-              {menuItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="w-full text-left px-4 py-3 hover:bg-white/10 transition-colors border-b border-white/10 last:border-b-0"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </nav>
+      <Navigation variant="homepage" />
 
       <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center overflow-hidden" id="home">
         <div className="grid md:grid-cols-2 gap-8 items-center w-full">

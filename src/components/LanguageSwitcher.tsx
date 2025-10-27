@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 
-export const LanguageSwitcher = () => {
+interface LanguageSwitcherProps {
+  textColor?: string;
+}
+
+export const LanguageSwitcher = ({ textColor = 'text-white' }: LanguageSwitcherProps) => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,12 +26,12 @@ export const LanguageSwitcher = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-white/10 transition-colors"
+        className={`flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-white/10 transition-colors ${textColor}`}
         aria-label="Change language"
       >
         <Globe size={18} />
         <span className="text-lg">{currentLanguage.flag}</span>
-        <span className="hidden sm:block text-sm">{currentLanguage.code.toUpperCase()}</span>
+        <span className={`hidden sm:block text-sm ${textColor}`}>{currentLanguage.code.toUpperCase()}</span>
       </button>
 
       {isOpen && (
