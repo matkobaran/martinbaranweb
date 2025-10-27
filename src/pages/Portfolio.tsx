@@ -111,6 +111,42 @@ const Portfolio = () => {
     setSelectedPhotoIndex(selectedPhotoIndex === photos.full.length - 1 ? 0 : selectedPhotoIndex + 1);
   };
 
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (selectedPhotoIndex === null) return;
+
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          handlePrevPhoto();
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          handleNextPhoto();
+          break;
+        case 'Escape':
+          event.preventDefault();
+          setSelectedPhotoIndex(null);
+          break;
+      }
+    };
+
+    if (selectedPhotoIndex !== null) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Prevent body scroll when lightbox is open
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore body scroll when lightbox is closed
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedPhotoIndex, handlePrevPhoto, handleNextPhoto]);
+
   const navigate = useNavigate();
 
   return (
@@ -234,12 +270,14 @@ const Portfolio = () => {
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
             onClick={() => setSelectedPhotoIndex(null)}
           >
-            <button
-              className="absolute top-4 right-4 text-white hover:text-white/80 transition-colors"
-              onClick={() => setSelectedPhotoIndex(null)}
-            >
-              <X size={32} />
-            </button>
+            <div className="absolute top-4 right-4">
+              <button
+                className="text-white hover:text-white/80 transition-colors"
+                onClick={() => setSelectedPhotoIndex(null)}
+              >
+                <X size={32} />
+              </button>
+            </div>
             
             <button
               className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors"
@@ -252,13 +290,18 @@ const Portfolio = () => {
             </button>
 
             {photos && (
-              <img
-                src={photos.full[selectedPhotoIndex]}
-                alt={`${portfolioItem ? `${t(portfolioItem.titleKey)} professional photography` : 'Professional photography'} by Martin Baran - High resolution photo ${selectedPhotoIndex + 1} of ${portfolioItem?.photoCount || 'portfolio'}`}
-                className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-                loading="eager"
-              />
+              <>
+                <div className="absolute top-4 left-4 text-white/70 text-sm">
+                  {selectedPhotoIndex + 1} / {photos.full.length}
+                </div>
+                <img
+                  src={photos.full[selectedPhotoIndex]}
+                  alt={`${portfolioItem ? `${t(portfolioItem.titleKey)} professional photography` : 'Professional photography'} by Martin Baran - High resolution photo ${selectedPhotoIndex + 1} of ${portfolioItem?.photoCount || 'portfolio'}`}
+                  className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                  loading="eager"
+                />
+              </>
             )}
 
             <button
