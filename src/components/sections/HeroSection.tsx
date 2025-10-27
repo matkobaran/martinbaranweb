@@ -31,6 +31,13 @@ export const HeroSection = () => {
     document.documentElement.classList.toggle('dark');
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="min-h-screen relative bg-gradient-to-r from-skyblue to-navy text-white overflow-hidden">
       <Navigation variant="homepage" />
