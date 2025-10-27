@@ -30,16 +30,16 @@ const CONFIG = {
 
 // Folder mappings (old -> new)
 const FOLDER_MAPPINGS = {
-  //'BD Paris': 'events/BD_Paris',
-  //'BD London': 'events/BD_London', 
+  'events/BD_Paris': 'events/BD_Paris',
+  'events/BD_London': 'events/BD_London', 
   //'Cyber Wine': 'events/Cyber_Wine'
 };
 
 // Additional folders to process
 const ADDITIONAL_FOLDERS = [
-  'sports/Kendice_Kosice',
-  'sports/Kendice_Saris',
-  'sports/Kendice_Bardejov'
+  //'sports/Kendice_Kosice',
+  //'sports/Kendice_Saris',
+  //'sports/Kendice_Bardejov'
 ];
 
 async function ensureDirectoryExists(dirPath) {
