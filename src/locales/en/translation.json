@@ -48,6 +48,7 @@
   },
   "experience": {
     "title": "Experience & Education",
+    "keyResponsibilities": "Key Responsibilities & Achievements",
     "experiences": {
       "creasoft": {
         "title": "Fullstack Developer",

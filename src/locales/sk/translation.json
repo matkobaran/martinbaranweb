@@ -48,6 +48,7 @@
   },
   "experience": {
     "title": "Skúsenosti a vzdelanie",
+    "keyResponsibilities": "Kľúčové zodpovednosti a úspechy",
     "experiences": {
       "creasoft": {
         "title": "Fullstack Developer",

@@ -1,14 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { Button } from "../ui/button";
+import { X, Calendar, MapPin, Building } from "lucide-react";
 import AnimatedButton from "../my components/AnimatedButton";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/dialog";
 
 export const ExperienceSection = () => {
   const { t } = useTranslation();
@@ -65,66 +59,133 @@ export const ExperienceSection = () => {
 
   return (
     <section className="py-20 bg-white dark:bg-gray-900" id="experience">
-  <div className="container mx-auto px-4">
-    <h2 className="text-4xl font-bold text-center mb-16 text-skyblue">
-      {t('experience.title')}
-    </h2>
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-16 text-skyblue">
+          {t('experience.title')}
+        </h2>
 
-    {/* STATE: show more toggle */}
-    <div className="flex flex-col items-center">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
-        {(showMore ? experiences : experiences.slice(0, 4)).map((exp, index) => (
-          <motion.div
-            key={exp.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-lightgray p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-            onClick={() => setSelectedExperience(exp)}
-          >
-            <h3 className="text-xl font-semibold mb-2">{exp.title}</h3>
-            <p className="text-gray-600 mb-2">{exp.company}</p>
-            <p className="text-sm text-gray-500 mb-4">{exp.period}</p>
-            <p className="text-gray-700">{exp.description}</p>
-            <p className="mt-4 text-accent text-sm font-medium">
-              {t('common.learnMore')}
-            </p>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Show More / Show Less Button */}
-      {experiences.length > 4 && (
-        <div className="mt-12 flex flex-col items-center">
-          <AnimatedButton
-            text={showMore ? t('common.showLess') : t('common.showMore')}
-            variant="wide"
-            decoration={true}
-            onClick={() => setShowMore(!showMore)}
-          />
-        </div>
-      )}
-    </div>
-
-    {/* Dialog */}
-    <Dialog open={!!selectedExperience} onOpenChange={() => setSelectedExperience(null)}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="text-center">{selectedExperience?.title}</DialogTitle>
-          <p className="text-gray-600 text-center">{selectedExperience?.company}</p>
-          <p className="text-sm text-gray-500 mb-4 text-center">{selectedExperience?.period}</p>
-          <ul className="list-disc pl-4 space-y-2">
-            {selectedExperience?.details.map((detail, index) => (
-              <li key={index} className="text-gray-700">
-                {detail}
-              </li>
+        {/* STATE: show more toggle */}
+        <div className="flex flex-col items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
+            {(showMore ? experiences : experiences.slice(0, 4)).map((exp, index) => (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-lightgray p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer group"
+                onClick={() => setSelectedExperience(exp)}
+              >
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-skyblue transition-colors">{exp.title}</h3>
+                <p className="text-gray-600 mb-2">{exp.company}</p>
+                <p className="text-sm text-gray-500 mb-4">{exp.period}</p>
+                <p className="text-gray-700">{exp.description}</p>
+                <p className="mt-4 text-accent text-sm font-medium group-hover:text-skyblue transition-colors">
+                  {t('common.learnMore')} →
+                </p>
+              </motion.div>
             ))}
-          </ul>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
-  </div>
-</section>
+          </div>
 
+          {/* Show More / Show Less Button */}
+          {experiences.length > 4 && (
+            <div className="mt-12 flex flex-col items-center">
+              <AnimatedButton
+                text={showMore ? t('common.showLess') : t('common.showMore')}
+                variant="wide"
+                decoration={true}
+                onClick={() => setShowMore(!showMore)}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Custom Modal */}
+        <AnimatePresence>
+          {selectedExperience && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={() => setSelectedExperience(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: "spring", duration: 0.3 }}
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Header */}
+                <div className="bg-gradient-to-r from-skyblue to-navy p-6 text-white relative">
+                  <button
+                    onClick={() => setSelectedExperience(null)}
+                    className="absolute top-4 right-4 text-white hover:text-white/80 transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                  
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                      <Building size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold">{selectedExperience.title}</h3>
+                      <p className="text-white/90">{selectedExperience.company}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 text-white/80">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={16} />
+                      <span className="text-sm">{selectedExperience.period}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 overflow-y-auto max-h-[60vh]">
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+                    {selectedExperience.description}
+                  </p>
+                  
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                      {t('experience.keyResponsibilities')}
+                    </h4>
+                    <ul className="space-y-3">
+                      {selectedExperience.details.map((detail, index) => (
+                        <motion.li
+                          key={index}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="flex items-start gap-3 text-gray-700 dark:text-gray-300"
+                        >
+                          <div className="w-2 h-2 bg-skyblue rounded-full mt-2 flex-shrink-0"></div>
+                          <span className="leading-relaxed">{detail}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 flex justify-end">
+                  <button
+                    onClick={() => setSelectedExperience(null)}
+                    className="px-6 py-2 bg-skyblue text-white rounded-lg hover:bg-skyblue/90 transition-colors font-medium"
+                  >
+                    Close
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
   );
 };
