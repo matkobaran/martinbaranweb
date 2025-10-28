@@ -36,20 +36,6 @@ const createCategoryPhotos = () => {
 
 const categoryPhotos = createCategoryPhotos();
 
-// Temporary fallback for old structure until optimization script is run
-const oldCategories = [
-  { title: "Best Diplomats Paris 2025", folder: "BD_Paris", photoCount: 1 },
-  { title: "Best Diplomats London 2024", folder: "BD_London", photoCount: 29},
-  { title: "Cyber Wine 2024", folder: "Cyber_Wine", photoCount: 39 },
-];
-
-oldCategories.forEach(({ title, folder, photoCount }) => {
-  if (!categoryPhotos[title]) {
-    categoryPhotos[title] = Array.from({ length: photoCount }, (_, i) => 
-      `/resources/img/events/${folder}/${i + 1}.jpg`
-    );
-  }
-});
 
 // Note: Using native lazy loading with loading="lazy" attribute instead of IntersectionObserver
 

@@ -59,6 +59,7 @@ export const Navigation = ({ variant = 'homepage' }: NavigationProps) => {
     if (location.pathname !== '/') {
       navigate('/');
     } else {
+      // If already on homepage, scroll to top immediately
       window.scrollTo({
         top: 0,
         left: 0,
@@ -66,6 +67,17 @@ export const Navigation = ({ variant = 'homepage' }: NavigationProps) => {
       });
     }
   };
+
+  // Scroll to top when navigating to homepage
+  useEffect(() => {
+    if (location.pathname === '/') {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
+    }
+  }, [location.pathname]);
 
   const menuItems = [
     { id: 'portfolio', label: t('navigation.photography') },
