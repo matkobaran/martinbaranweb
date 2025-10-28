@@ -149,6 +149,55 @@
     },
     "viewMoreButton": "Zobraziť viac"
   },
+  "videos": {
+    "stovka": {
+      "title": "Stovka",
+      "description": "Dokumentárny film o rivalite",
+      "details": "Čo je víťazstvo a čo ste ochotní obetovať? Toto je dokumentárny film o poslednom preteku sezóny, kde môže byť len jeden víťaz.",
+      "credits": {
+        "director": "Réžia: Martin Baran",
+        "cinematography": "Kamera: Dominik Hanak",
+        "editing": "Strih: Martin Baran"
+      }
+    },
+    "koleje": {
+      "title": "Koleje",
+      "description": "Krátky film o výhodách bývania na internáte",
+      "details": "Krátky reklamný spot vytvorený pre Filmový festival, kde divák môže vidieť, ako môže byť život na internátoch niekedy zaujímavý",
+      "credits": {
+        "director": "Réžia: Martin Baran",
+        "cinematography": "Kamera: Lazar Kis Bence",
+        "editing": "Strih: Martin Baran"
+      }
+    },
+    "rhso": {
+      "title": "RHSO 2023",
+      "description": "Regionálne hry špeciálnych olympiád 2023 Brno",
+      "details": "Športová udalosť organizovaná študentmi MUNI Sport.",
+      "credits": {
+        "cinematography": "Kamera: Martin Baran",
+        "editing": "Strih: Martin Baran"
+      }
+    },
+    "svadba": {
+      "title": "Svadba Juraj a Naďka",
+      "description": "Svadobné video",
+      "details": "Video zo svadby môjho drahého priateľa",
+      "credits": {
+        "cinematography": "Kamera: Martin Baran",
+        "editing": "Strih: Martin Baran"
+      }
+    },
+    "kreditovka": {
+      "title": "Kreditovka",
+      "description": "Krátky hororový film",
+      "details": "Skupina študentov potrebuje zarobiť pár extra kreditov, tak sa prihlásia na veľmi ľahký kurz, kde musia splniť len tri online testy. Čo sa môže pokaziť?",
+      "credits": {
+        "cinematography": "Kamera: Martin Baran",
+        "director": "Réžia: Martin Macák"
+      }
+    }
+  },
   "contact": {
     "title": "Kontakt",
     "description": "Pre spoluprácu ma neváhajte kontaktovať.",
@@ -171,7 +220,12 @@
     "readMore": "Čítať viac",
     "writeComment": "Napísať komentár...",
     "blogNotFound": "Blog sa nenašiel",
-    "aboutThisFilm": "O tomto filme"
+    "aboutThisFilm": "O tomto filme",
+    "details": "Detaily",
+    "year": "Rok",
+    "duration": "Trvanie",
+    "credits": "Titulky",
+    "videoNotFound": "Video sa nenašlo"
   },
   "pages": {
     "videos": "Videá",

@@ -149,6 +149,55 @@
     },
     "viewMoreButton": "View more video categories"
   },
+  "videos": {
+    "stovka": {
+      "title": "Stovka",
+      "description": "Documentary about rivalry",
+      "details": "What is victory and what you are willing to sacrifice? This is a documentary about the last race of the season, when there can only be one winner.",
+      "credits": {
+        "director": "Director: Martin Baran",
+        "cinematography": "Cinematography: Dominik Hanak",
+        "editing": "Editing: Martin Baran"
+      }
+    },
+    "koleje": {
+      "title": "Koleje",
+      "description": "A short film about the benefits of living in a dormitory",
+      "details": "Short commercial created for the Film Festival, where viewer can see how life in dormitories can sometimes be interesting",
+      "credits": {
+        "director": "Director: Martin Baran",
+        "cinematography": "Cinematography: Lazar Kis Bence",
+        "editing": "Editing: Martin Baran"
+      }
+    },
+    "rhso": {
+      "title": "RSHO 2023",
+      "description": "Regional Games of the Special Olympics 2023 Brno",
+      "details": "A sports event organized by MUNI Sport student.",
+      "credits": {
+        "cinematography": "Cinematography: Martin Baran",
+        "editing": "Editing: Martin Baran"
+      }
+    },
+    "svadba": {
+      "title": "Svadba Juraj a Naďka",
+      "description": "Wedding video",
+      "details": "Video from my dear friend's wedding",
+      "credits": {
+        "cinematography": "Cinematography: Martin Baran",
+        "editing": "Editing: Martin Baran"
+      }
+    },
+    "kreditovka": {
+      "title": "Kreditovka",
+      "description": "Short horror film",
+      "details": "A group of students need to earn a few extra credits, so they sign up for a very easy course where they only need to complete three online tests. What could go wrong?",
+      "credits": {
+        "cinematography": "Cinematography: Martin Baran",
+        "director": "Director: Martin Macák"
+      }
+    }
+  },
   "contact": {
     "title": "Get in Touch",
     "description": "Want to collaborate on a photo project or discuss a software idea?",
@@ -171,7 +220,12 @@
     "readMore": "Read More",
     "writeComment": "Write a comment...",
     "blogNotFound": "Blog not found",
-    "aboutThisFilm": "About this film"
+    "aboutThisFilm": "About this film",
+    "details": "Details",
+    "year": "Year",
+    "duration": "Duration",
+    "credits": "Credits",
+    "videoNotFound": "Video not found"
   },
   "pages": {
     "videos": "Videos",

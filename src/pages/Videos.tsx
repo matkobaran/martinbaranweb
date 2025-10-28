@@ -13,37 +13,32 @@ import titleKreditovka from "/resources/img/video-thumbnails/kreditovka_medium.w
 const videos = [
   {
     id: 1,
-    title: "Stovka",
+    key: "stovka",
     thumbnail: titleStovka,
-    description: "Documentary about rivarly",
     duration: "7:06"
   },
   {
     id: 2,
-    title: "Koleje",
+    key: "koleje",
     thumbnail: titleKoleje,
-    description: "A short film about the benefits of living in a dormitory",
     duration: "3:05"
   },
   {
     id: 3,
-    title: "RHSO 2023",
+    key: "rhso",
     thumbnail: titleRHSO,
-    description: "Regional Games of the Special Olympics 2023 Brno",
     duration: "5:05"
   },
   {
     id: 4,
-    title: "Svadba Juraj a Naďka",
+    key: "svadba",
     thumbnail: titleSvadba,
-    description: "Wedding video",
     duration: "4:32"
   },
   {
     id: 5,
-    title: "Kreditovka",
+    key: "kreditovka",
     thumbnail: titleKreditovka,
-    description: "Short horror film",
     duration: "8:01"
   }
 ];
@@ -86,13 +81,13 @@ const Videos = () => {
               <div className="relative overflow-hidden rounded-lg aspect-video">
                 <img
                   src={video.thumbnail}
-                  alt={video.title}
+                  alt={t(`videos.${video.key}.title`)}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <h3 className="text-xl font-semibold mb-2">{video.title}</h3>
-                    <p className="text-sm opacity-90">{video.description}</p>
+                    <h3 className="text-xl font-semibold mb-2">{t(`videos.${video.key}.title`)}</h3>
+                    <p className="text-sm opacity-90">{t(`videos.${video.key}.description`)}</p>
                     <span className="absolute top-0 right-4 bg-black/50 px-2 py-1 rounded text-sm">
                       {video.duration}
                     </span>
