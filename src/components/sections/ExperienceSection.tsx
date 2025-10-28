@@ -178,7 +178,7 @@ export const ExperienceSection = () => {
                     onClick={() => setSelectedExperience(null)}
                     className="px-6 py-2 bg-skyblue text-white rounded-lg hover:bg-skyblue/90 transition-colors font-medium"
                   >
-                    Close
+                    {t('common.close')}
                   </button>
                 </div>
               </motion.div>

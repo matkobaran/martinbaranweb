@@ -225,7 +225,8 @@
     "year": "Rok",
     "duration": "Trvanie",
     "credits": "Titulky",
-    "videoNotFound": "Video sa nenašlo"
+    "videoNotFound": "Video sa nenašlo",
+    "close": "Zavrieť"
   },
   "pages": {
     "videos": "Videá",

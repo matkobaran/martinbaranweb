@@ -225,7 +225,8 @@
     "year": "Year",
     "duration": "Duration",
     "credits": "Credits",
-    "videoNotFound": "Video not found"
+    "videoNotFound": "Video not found",
+    "close": "Close"
   },
   "pages": {
     "videos": "Videos",
