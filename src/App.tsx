@@ -8,7 +8,6 @@ import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import Video from "./pages/VideoDetail";
 import Videos from "./pages/Videos";
-import BlogDetail from "./pages/BlogDetail";
 
 
 const queryClient = new QueryClient();
@@ -19,15 +18,19 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <HashRouter>
+        <BrowserRouter
+          future={{
+            v7_relativeSplatPath: true,
+            v7_startTransition: true
+          }}
+        >
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/video/:id" element={<Video />} />
-            {/* <Route path="/blogdetail/:id" element={<BlogDetail />} /> */}
             <Route path="/videos" element={<Videos />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
