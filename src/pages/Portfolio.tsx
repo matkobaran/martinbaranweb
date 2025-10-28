@@ -58,6 +58,8 @@ const Portfolio = () => {
   const [searchParams] = useSearchParams();
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [imageQuality, setImageQuality] = useState<'thumb' | 'medium' | 'full'>('thumb');
   const [isLoading, setIsLoading] = useState(false);
   
@@ -109,6 +111,31 @@ const Portfolio = () => {
   const handleNextPhoto = () => {
     if (selectedPhotoIndex === null || !photos) return;
     setSelectedPhotoIndex(selectedPhotoIndex === photos.full.length - 1 ? 0 : selectedPhotoIndex + 1);
+  };
+
+  // Touch handlers for mobile swipe navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      handleNextPhoto();
+    }
+    if (isRightSwipe) {
+      handlePrevPhoto();
+    }
   };
 
   // Keyboard navigation for lightbox
@@ -269,29 +296,32 @@ const Portfolio = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
             onClick={() => setSelectedPhotoIndex(null)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
-            <div className="absolute top-4 right-4">
+            <div className="absolute top-2 md:top-4 right-2 md:right-4">
               <button
-                className="text-white hover:text-white/80 transition-colors"
+                className="text-white hover:text-white/80 transition-colors p-2 md:p-0"
                 onClick={() => setSelectedPhotoIndex(null)}
               >
-                <X size={32} />
+                <X size={40} className="md:w-8 md:h-8" />
               </button>
             </div>
             
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors"
+              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors p-2 md:p-0"
               onClick={(e) => {
                 e.stopPropagation();
                 handlePrevPhoto();
               }}
             >
-              <ChevronLeft size={32} />
+              <ChevronLeft size={40} className="md:w-8 md:h-8" />
             </button>
 
             {photos && (
               <>
-                <div className="absolute top-4 left-4 text-white/70 text-sm">
+                <div className="absolute top-2 md:top-4 left-2 md:left-4 text-white/70 text-sm bg-black/50 px-2 py-1 rounded">
                   {selectedPhotoIndex + 1} / {photos.full.length}
                 </div>
                 <img
@@ -305,13 +335,13 @@ const Portfolio = () => {
             )}
 
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors"
+              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors p-2 md:p-0"
               onClick={(e) => {
                 e.stopPropagation();
                 handleNextPhoto();
               }}
             >
-              <ChevronRight size={32} />
+              <ChevronRight size={40} className="md:w-8 md:h-8" />
             </button>
           </motion.div>
         )}
