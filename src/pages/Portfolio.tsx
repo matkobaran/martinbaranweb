@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
-import { portfolioData, getPortfolioByTranslatedTitle } from '../config/portfolioData';
+import { portfolioData, getPortfolioByTranslatedTitle, getPortfolioById } from '../config/portfolioData';
 import { getPhotoCountText, getCurrentLanguage } from '../utils/photoCount';
 import { SEO, PortfolioSEO } from '../components/SEO';
 import { Navigation } from '../components/Navigation';
@@ -49,8 +49,13 @@ const Portfolio = () => {
   const [imageQuality, setImageQuality] = useState<'thumb' | 'medium' | 'full'>('thumb');
   const [isLoading, setIsLoading] = useState(false);
   
-  const category = searchParams.get("category");
-  const portfolioItem = category ? getPortfolioByTranslatedTitle(category, t) : null;
+  const categoryId = searchParams.get("id");
+  const category = searchParams.get("category"); // Keep for backward compatibility
+  const portfolioItem = categoryId 
+    ? getPortfolioById(categoryId) 
+    : category 
+      ? getPortfolioByTranslatedTitle(category, t) 
+      : null;
   const photos = portfolioItem ? categoryPhotos[portfolioItem.titleKey as keyof typeof categoryPhotos] : null;
   
   // Fallback to original structure if new structure doesn't exist
@@ -83,7 +88,7 @@ const Portfolio = () => {
       clearTimeout(timer);
       clearTimeout(timer2);
     };
-  }, [category]);
+  }, [categoryId, category]);
 
   const handleImageLoad = useCallback((index: number) => {
     setLoadedImages(prev => new Set([...prev, index]));
@@ -169,7 +174,7 @@ const Portfolio = () => {
           galleryTitle={t(portfolioItem.titleKey)}
           galleryDescription={portfolioItem.description || t(portfolioItem.descriptionKey)}
           photoCount={portfolioItem.photoCount}
-          galleryUrl={`https://martinbaran.com/portfolio?category=${t(portfolioItem.titleKey)}`}
+          galleryUrl={`https://martinbaran.com/portfolio?id=${portfolioItem.id}`}
           language={i18n.language as 'en' | 'sk'}
         />
       ) : (
@@ -192,7 +197,7 @@ const Portfolio = () => {
 
       <div className="container mx-auto pt-24">
         <Link
-          to={category ? ("/portfolio") : ("/")}
+          to={portfolioItem ? ("/portfolio") : ("/")}
           className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-4"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -207,7 +212,7 @@ const Portfolio = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max">
-          {category && photos ? (
+          {portfolioItem && photos ? (
             getPhotosForDisplay().map((photo, index) => {
               const isLoaded = loadedImages.has(index);
 
@@ -247,7 +252,7 @@ const Portfolio = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group"
-                onClick={() => navigate(`/portfolio?category=${t(item.titleKey)}`)}
+                onClick={() => navigate(`/portfolio?id=${item.id}`)}
               >
                 <img
                   src={categoryPhotos[item.titleKey]?.titlePhoto || `/resources/img/events/${item.folder}/thumbs/1.webp`}

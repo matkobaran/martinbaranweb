@@ -2,6 +2,18 @@
 // isHighlight: true means it appears in the main PortfolioSection carousel
 export const portfolioData = [
   {
+    id: 'pmi-pmo',
+    titleKey: "portfolio.galleries.pmi_pmo.title",
+    descriptionKey: "portfolio.galleries.pmi_pmo.description",
+    folder: "PMI_PMO",
+    photoCount: 36,
+    titlePhoto: 7,
+    tags: ['events', 'conference'],
+    date: '2025-01-26',
+    description: '',
+    isHighlight: true // Shows in main carousel
+  },
+  {
     id: 'bd-paris-2025',
     titleKey: "portfolio.galleries.bd_paris.title",
     descriptionKey: "portfolio.galleries.bd_paris.description",
@@ -10,7 +22,7 @@ export const portfolioData = [
     titlePhoto: 62,
     tags: ['events', 'conference'],
     date: '2025-01-15',
-    description: 'International diplomatic conference',
+    description: '',
     isHighlight: true // Shows in main carousel
   },
   {
@@ -22,7 +34,7 @@ export const portfolioData = [
     titlePhoto: 3,
     tags: ['events', 'conference'],
     date: '2024-12-01',
-    description: 'International diplomatic conference',
+    description: '',
     isHighlight: true // Shows in main carousel
   },  
   {
@@ -34,7 +46,7 @@ export const portfolioData = [
     titlePhoto: 1,
     tags: ['events', 'networking'],
     date: '2024-11-15',
-    description: 'Technology and networking event',
+    description: '',
     isHighlight: true // Shows in main carousel
   },
   {

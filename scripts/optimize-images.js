@@ -31,7 +31,8 @@ const CONFIG = {
 // Folder mappings (old -> new)
 const FOLDER_MAPPINGS = {
   'events/BD_Paris': 'events/BD_Paris',
-  'events/BD_London': 'events/BD_London', 
+  'events/BD_London': 'events/BD_London',
+  'events/PMI_PMO': 'events/PMI_PMO',
   //'Cyber Wine': 'events/Cyber_Wine'
 };
 

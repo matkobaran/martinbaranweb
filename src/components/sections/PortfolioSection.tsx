@@ -52,7 +52,7 @@ export const PortfolioSection = () => {
   const combinedPhotos = [...eventPhotos, ...sportPhotos];
 
   const handlePhotoClick = (photo: typeof eventPhotos[0]) => {
-    navigate(`/portfolio?category=${photo.title}`);
+    navigate(`/portfolio?id=${photo.id}`);
   };
 
   const jumpToCategory = (category: 'Events' | 'Sport') => {
