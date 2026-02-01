@@ -13,6 +13,7 @@
     "contactButton": "Get in Touch"
   },
   "portfolio": {
+    "overviewTitle": "Portfolio",
     "title": "Photo portfolio",
     "categories": {
       "events": "Events",
@@ -213,6 +214,9 @@
       "instagram_portfolio": "Photography",
       "instagram_personal": "Personal"
     }
+  },
+  "footer": {
+    "contact": "Contact"
   },
   "common": {
     "loading": "Loading...",

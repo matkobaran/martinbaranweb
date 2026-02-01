@@ -13,6 +13,7 @@
     "contactButton": "Kontakt"
   },
   "portfolio": {
+    "overviewTitle": "Portfólio",
     "title": "Fotografické portfólio",
     "categories": {
       "events": "Udalosti",
@@ -213,6 +214,9 @@
       "instagram_portfolio": "Portfólio Instagram",
       "instagram_personal": "Osobný Instagram"
     }
+  },
+  "footer": {
+    "contact": "Kontakt"
   },
   "common": {
     "loading": "Načítava sa...",

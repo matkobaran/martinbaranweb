@@ -8,7 +8,12 @@ import titleKoleje from "/resources/img/video-thumbnails/koleje_medium.webp";
 import titleRHSO from "/resources/img/video-thumbnails/rso_medium.webp";
 
 
-export const VideographySection = () => {
+type VideographySectionProps = {
+  /** When true, section title and bottom "view more" link are omitted (used inside overview with tabs). */
+  embedded?: boolean;
+};
+
+export const VideographySection = ({ embedded = false }: VideographySectionProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [visibleCount, setVisibleCount] = useState(3);
@@ -62,10 +67,11 @@ export const VideographySection = () => {
 
   const visibleVideos = videos.slice(0, visibleCount);
 
-  return (
-    <section className="py-20 bg-white dark:bg-navy" id="videography">
-      <div className="container mx-auto px-4">
+  const content = (
+    <div className="container mx-auto px-4">
+      {!embedded && (
         <h2 className="text-4xl font-bold text-center mb-16 text-skyblue dark:text-white">{t('videography.title')}</h2>
+      )}
         
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {visibleVideos.map((video, index) => (
@@ -96,16 +102,26 @@ export const VideographySection = () => {
             </motion.div>
           ))}
         </div>
-        <div className="mt-12 flex flex-col items-center">
-          <Link to="/videos" className="group">
-            <AnimatedButton
-              text={t('videography.viewMoreButton')}
-              variant="wide"
-              decoration={true}
-            />
-          </Link>
-        </div>
+        {!embedded && (
+          <div className="mt-12 flex flex-col items-center">
+            <Link to="/videos" className="group">
+              <AnimatedButton
+                text={t('videography.viewMoreButton')}
+                variant="wide"
+                decoration={true}
+              />
+            </Link>
+          </div>
+        )}
       </div>
+  );
+
+  if (embedded) {
+    return <div className="py-12 md:py-16">{content}</div>;
+  }
+  return (
+    <section className="py-20 bg-white dark:bg-navy" id="videography">
+      {content}
     </section>
   );
 };

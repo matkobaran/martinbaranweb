@@ -4,6 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 import titleStovka from "/resources/img/video-thumbnails/stovka_medium.webp";
 import titleKoleje from "/resources/img/video-thumbnails/koleje_medium.webp";
 import titleRHSO from "/resources/img/video-thumbnails/rso_medium.webp";
@@ -98,6 +99,7 @@ const Videos = () => {
           ))}
         </div>
       </div>
+        <Footer variant="compact" />
     </div>
   );
 };

@@ -22,7 +22,12 @@ const getSportData = () => {
   return getPortfoliosByCategory('sports').filter(item => item.isHighlight);
 };
 
-export const PortfolioSection = () => {
+type PortfolioSectionProps = {
+  /** When true, section title and bottom "view more" link are omitted (used inside overview with tabs). */
+  embedded?: boolean;
+};
+
+export const PortfolioSection = ({ embedded = false }: PortfolioSectionProps) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [mounted, setMounted] = useState(false);
@@ -52,7 +57,8 @@ export const PortfolioSection = () => {
   const combinedPhotos = [...eventPhotos, ...sportPhotos];
 
   const handlePhotoClick = (photo: typeof eventPhotos[0]) => {
-    navigate(`/portfolio?id=${photo.id}`);
+    const segment = photo.category === 'Events' ? 'events' : 'sport';
+    navigate(`/portfolio/${segment}?id=${photo.id}`);
   };
 
   const jumpToCategory = (category: 'Events' | 'Sport') => {
@@ -100,13 +106,42 @@ export const PortfolioSection = () => {
     return () => carouselApi.off('select', onSelect);
   }, [carouselApi]);
 
-  return (
-    <section className="py-20 bg-lightgray dark:bg-gray-900" id="portfolio">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-8 text-skyblue dark:text-blue-400">{t('portfolio.title')}</h2>
-        
+  const sectionVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+    },
+  };
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const content = (
+    <div className="container mx-auto px-4">
+      <motion.div
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="space-y-8"
+      >
+        {!embedded && (
+          <motion.h2
+            variants={itemVariants}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold text-center mb-8 text-skyblue dark:text-blue-400"
+          >
+            {t('portfolio.title')}
+          </motion.h2>
+        )}
+
         {/* Category Indicators */}
-        <div className="flex justify-center mb-8">
+        <motion.div
+          variants={itemVariants}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center mb-8"
+        >
           <div className="flex bg-white dark:bg-gray-800 rounded-lg p-1 shadow-lg">
             <button
               onClick={() => jumpToCategory('Events')}
@@ -129,9 +164,14 @@ export const PortfolioSection = () => {
               {t('portfolio.categories.sport')}
             </button>
           </div>
-        </div>
+        </motion.div>
+
         {mounted && (
-          <div className="relative">
+          <motion.div
+            variants={itemVariants}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
             <Carousel
               className="w-full"
               opts={{ 
@@ -180,19 +220,34 @@ export const PortfolioSection = () => {
               <CarouselPrevious className="-left-6 md:-left-12 h-12 w-12 text-xl" />
               <CarouselNext className="-right-6 md:-right-12 h-12 w-12 text-xl" />
             </Carousel>
-          </div>
+          </motion.div>
         )}
         
-        <div className="mt-12 flex flex-col items-center">
-          <Link to="/portfolio" className="group">
-            <AnimatedButton
-              text={t('portfolio.viewMoreButton')}
-              variant="wide"
-              decoration={true}
-            />
-          </Link>
-        </div>
-      </div>
+        {!embedded && (
+          <motion.div
+            variants={itemVariants}
+            transition={{ duration: 0.5 }}
+            className="mt-12 flex flex-col items-center"
+          >
+            <Link to="/portfolio" className="group">
+              <AnimatedButton
+                text={t('portfolio.viewMoreButton')}
+                variant="wide"
+                decoration={true}
+              />
+            </Link>
+          </motion.div>
+        )}
+      </motion.div>
+    </div>
+  );
+
+  if (embedded) {
+    return <div className="py-12 md:py-16">{content}</div>;
+  }
+  return (
+    <section className="py-20 bg-lightgray dark:bg-gray-900" id="portfolio">
+      {content}
     </section>
   );
 };

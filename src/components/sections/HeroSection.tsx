@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Mail } from "lucide-react";
 import titlePhotoThumb from "/resources/img/hero/title_thumb.webp";
 import titlePhotoMedium from "/resources/img/hero/title_medium.webp";
 import titlePhotoFull from "/resources/img/hero/title_full.webp";
@@ -45,28 +45,61 @@ export const HeroSection = () => {
       <div className="container mx-auto px-4 pt-32 flex min-h-screen items-center overflow-hidden" id="home">
         <div className="grid md:grid-cols-2 gap-8 items-center w-full">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+              hidden: {},
+            }}
+            className="space-y-6"
           >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <motion.h1
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.5 }}
+              className="text-5xl md:text-7xl font-bold mb-6"
+            >
               {t('hero.greeting')}
-            </h1>
-            <p 
+            </motion.h1>
+            <motion.p
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ duration: 0.5 }}
               className="text-xl md:text-2xl mb-8 leading-relaxed"
               dangerouslySetInnerHTML={{ __html: t('hero.description') }}
             />
             <div className="flex flex-col sm:flex-row gap-4">
-            <AnimatedButton
-              text={t('hero.portfolioButton')}
-              onClick={() => scrollToSection('portfolio')}
-              variant="primary"
-            />
-            <AnimatedButton
-              text={t('hero.contactButton')}
-              onClick={() => scrollToSection('contact')}
-              variant="secondary"
-            />
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <AnimatedButton
+                  text={t('hero.portfolioButton')}
+                  onClick={() => scrollToSection('portfolio')}
+                  variant="primary"
+                />
+              </motion.div>
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <AnimatedButton
+                  text={t('hero.contactButton')}
+                  onClick={() => scrollToSection('contact')}
+                  variant="secondary"
+                  icon={<Mail size={20} />}
+                />
+              </motion.div>
             </div>
           </motion.div>
 

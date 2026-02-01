@@ -1,12 +1,13 @@
-import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import { useSearchParams, useLocation, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
-import { portfolioData, getPortfolioByTranslatedTitle, getPortfolioById } from '../config/portfolioData';
+import { portfolioData, getPortfolioByTranslatedTitle, getPortfolioById, getPortfoliosByCategory } from '../config/portfolioData';
 import { getPhotoCountText, getCurrentLanguage } from '../utils/photoCount';
 import { SEO, PortfolioSEO } from '../components/SEO';
 import { Navigation } from '../components/Navigation';
+import { Footer } from '../components/Footer';
 
 // Portfolio data is now imported from centralized config
 
@@ -39,16 +40,30 @@ const categoryPhotos = createCategoryPhotos();
 
 // Note: Using native lazy loading with loading="lazy" attribute instead of IntersectionObserver
 
+type PortfolioCategory = 'events' | 'sport';
+
 const Portfolio = () => {
   const { t, i18n } = useTranslation();
+  const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [imageQuality, setImageQuality] = useState<'thumb' | 'medium' | 'full'>('thumb');
   const [isLoading, setIsLoading] = useState(false);
-  
+
+  // URL category: /portfolio/sport -> 'sport', /portfolio/events or /portfolio -> 'events'
+  const pathCategory: PortfolioCategory = pathname.endsWith('/sport') ? 'sport' : 'events';
+
+  // Redirect /portfolio (no segment) to /portfolio/events so clients get a clear URL
+  useEffect(() => {
+    if (pathname === '/portfolio' && !searchParams.get('id') && !searchParams.get('category')) {
+      navigate('/portfolio/events', { replace: true });
+    }
+  }, [pathname, searchParams, navigate]);
+
   const categoryId = searchParams.get("id");
   const category = searchParams.get("category"); // Keep for backward compatibility
   const portfolioItem = categoryId 
@@ -57,6 +72,10 @@ const Portfolio = () => {
       ? getPortfolioByTranslatedTitle(category, t) 
       : null;
   const photos = portfolioItem ? categoryPhotos[portfolioItem.titleKey as keyof typeof categoryPhotos] : null;
+
+  // Grid view: show galleries filtered by path category (events vs sport)
+  const listCategory: PortfolioCategory = pathCategory;
+  const portfolioList = getPortfoliosByCategory(listCategory === 'sport' ? 'sports' : 'events');
   
   // Fallback to original structure if new structure doesn't exist
   const getPhotosForDisplay = () => {
@@ -165,7 +184,9 @@ const Portfolio = () => {
     };
   }, [selectedPhotoIndex, handlePrevPhoto, handleNextPhoto]);
 
-  const navigate = useNavigate();
+  const backHref = portfolioItem
+    ? (portfolioItem.tags.includes('sports') ? '/portfolio/sport' : '/portfolio/events')
+    : '/';
 
   return (
     <>
@@ -174,7 +195,7 @@ const Portfolio = () => {
           galleryTitle={t(portfolioItem.titleKey)}
           galleryDescription={portfolioItem.description || t(portfolioItem.descriptionKey)}
           photoCount={portfolioItem.photoCount}
-          galleryUrl={`https://martinbaran.com/portfolio?id=${portfolioItem.id}`}
+          galleryUrl={`https://martinbaran.com/portfolio/${portfolioItem.tags.includes('sports') ? 'sport' : 'events'}?id=${portfolioItem.id}`}
           language={i18n.language as 'en' | 'sk'}
         />
       ) : (
@@ -197,19 +218,48 @@ const Portfolio = () => {
 
       <div className="container mx-auto pt-24">
         <Link
-          to={portfolioItem ? ("/portfolio") : ("/")}
+          to={backHref}
           className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-4"
         >
           <ChevronLeft className="w-5 h-5" />
           {t('common.back')}
         </Link>
-        <div className="flex items-center gap-4 mb-8">
-          {portfolioItem ? (
+
+        {!portfolioItem && (
+          <div className="mb-10">
+            <h1 className="text-4xl font-bold text-white text-center mb-6">{t('portfolio.title')}</h1>
+            <div className="flex justify-center">
+              <div className="inline-flex bg-white/15 backdrop-blur-sm rounded-xl p-1.5 shadow-lg ring-1 ring-white/20">
+                <Link
+                  to="/portfolio/events"
+                  className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                    pathCategory === 'events'
+                      ? 'bg-white text-skyblue shadow-md'
+                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {t('portfolio.categories.events')}
+                </Link>
+                <Link
+                  to="/portfolio/sport"
+                  className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                    pathCategory === 'sport'
+                      ? 'bg-white text-skyblue shadow-md'
+                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {t('portfolio.categories.sport')}
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {portfolioItem && (
+          <div className="flex items-center gap-4 mb-8">
             <h1 className="text-4xl font-bold text-white capitalize">{t(portfolioItem.titleKey)}</h1>
-          ) : (
-            <h1 className="text-4xl font-bold text-white">{t('portfolio.title')}</h1>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max">
           {portfolioItem && photos ? (
@@ -245,14 +295,14 @@ const Portfolio = () => {
               );
             })
           ) : (
-            portfolioData.map((item, index) => (
+            portfolioList.map((item, index) => (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group"
-                onClick={() => navigate(`/portfolio?id=${item.id}`)}
+                onClick={() => navigate(`/portfolio/${pathCategory}?id=${item.id}`)}
               >
                 <img
                   src={categoryPhotos[item.titleKey]?.titlePhoto || `/resources/img/events/${item.folder}/thumbs/1.webp`}
@@ -337,6 +387,7 @@ const Portfolio = () => {
           </motion.div>
         )}
       </AnimatePresence>
+        <Footer variant="compact" contactButtonDelay={portfolioItem ? 500 : 0} />
       </div>
     </>
   );

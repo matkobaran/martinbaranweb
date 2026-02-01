@@ -68,16 +68,16 @@ export const Navigation = ({ variant = 'homepage' }: NavigationProps) => {
     }
   };
 
-  // Scroll to top when navigating to homepage
+  // Scroll to top when navigating to homepage (but not when going to #contact)
   useEffect(() => {
-    if (location.pathname === '/') {
+    if (location.pathname === '/' && location.hash !== '#contact') {
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: "smooth"
       });
     }
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   const menuItems = [
     { id: 'portfolio', label: t('navigation.photography') },

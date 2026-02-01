@@ -3,6 +3,7 @@ import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { Navigation } from "../components/Navigation";
+import { Footer } from "../components/Footer";
 
 const videos = [
   {
@@ -47,14 +48,16 @@ const Video = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const video = videos.find(v => v.id === Number(id));
-useEffect(() => {
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   if (!video) {
     return (
-      <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4">
+      <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4 flex flex-col">
         <Navigation variant="subpage" />
-        <div className="container mx-auto pt-24 px-4 pb-10">
+        <div className="container mx-auto pt-24 px-4 pb-10 flex-1">
           <div className="text-center text-white">
             <h1 className="text-4xl font-bold mb-4">{t('common.videoNotFound')}</h1>
             <Link
@@ -66,14 +69,15 @@ useEffect(() => {
             </Link>
           </div>
         </div>
+        <Footer variant="compact" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4">
+    <div className="min-h-screen bg-gradient-to-r from-skyblue to-navy p-4 flex flex-col">
       <Navigation variant="subpage" />
-      <div className="container mx-auto pt-24 px-4 pb-10">
+      <div className="container mx-auto pt-24 px-4 pb-10 flex-1">
         <Link
           to="/videos"
           className="text-white hover:text-white/80 transition-colors flex items-center gap-2 pb-6"
@@ -121,6 +125,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      <Footer variant="compact" />
     </div>
   );
 };
