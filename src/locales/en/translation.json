@@ -49,7 +49,10 @@
         "description": ""
       }
     },
-    "viewMoreButton": "View more photo categories"
+    "viewMoreButton": "View more photo categories",
+    "sportIntro": "Football match photography. If you're interested in working together — match reportage, cup games or your club events — get in touch.",
+    "sportCta": "Get in touch",
+    "sportForClubs": "For football clubs: match reportage, cup games, club events. Get in touch for a quote. Based in Prague."
   },
   "experience": {
     "title": "Experience & Education",

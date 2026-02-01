@@ -200,15 +200,26 @@ const Portfolio = () => {
         />
       ) : (
         <SEO
-          title={i18n.language === 'sk' ? "Fotografické portfólio | Martin Baran" : "Photography Portfolio | Martin Baran"}
-          description={i18n.language === 'sk' 
-            ? "Prehliadajte profesionálne fotografické portfólio Martina Barana obsahujúce fotografovanie konferencií, udalostí a športu z Prahy, Česká republika."
-            : "Browse Martin Baran's professional photography portfolio featuring conference photography, event photography, and sports photography from Prague, Czech Republic."
+          title={
+            pathCategory === 'sport'
+              ? (i18n.language === 'sk' ? "Športová fotografia – futbal | Martin Baran" : "Sports photography – football | Martin Baran")
+              : (i18n.language === 'sk' ? "Fotografické portfólio | Martin Baran" : "Photography Portfolio | Martin Baran")
+          }
+          description={
+            pathCategory === 'sport'
+              ? (i18n.language === 'sk'
+                ? "Fotografie z futbalových zápasov. Profesionálna športová fotografia pre futbalové kluby – reportáže zo zápasov, pohár, akcie. Spolupráca na objednávku. Pôsobisko: Praha."
+                : "Football match photography. Professional sports photography for football clubs – match reportage, cup games, club events. Available for collaboration. Based in Prague.")
+              : (i18n.language === 'sk'
+                ? "Prehliadajte profesionálne fotografické portfólio Martina Barana obsahujúce fotografovanie konferencií, udalostí a športu z Prahy, Česká republika."
+                : "Browse Martin Baran's professional photography portfolio featuring conference photography, event photography, and sports photography from Prague, Czech Republic.")
           }
           keywords={i18n.language === 'sk'
-            ? "fotografické portfólio, Martin Baran, fotografovanie udalostí, fotografovanie konferencií, športové fotografovanie, fotograf Praha"
-            : "photography portfolio, Martin Baran, event photography, conference photography, sports photography, Prague photographer"
+            ? "fotografické portfólio, Martin Baran, fotografovanie udalostí, fotografovanie konferencií, športové fotografovanie, futbalová fotografia, fotograf Praha"
+            : "photography portfolio, Martin Baran, event photography, conference photography, sports photography, football photography, Prague photographer"
           }
+          url={pathCategory === 'sport' ? 'https://martinbaran.com/portfolio/sport' : 'https://martinbaran.com/portfolio/events'}
+          image={pathCategory === 'sport' ? 'https://martinbaran.com/resources/img/hero/title_medium.webp' : undefined}
           language={i18n.language as 'en' | 'sk'}
         />
       )}

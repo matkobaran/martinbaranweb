@@ -49,7 +49,10 @@
         "description": ""
       }
     },
-    "viewMoreButton": "Zobraziť celú galériu"
+    "viewMoreButton": "Zobraziť celú galériu",
+    "sportIntro": "Fotografie z futbalových zápasov. Ak máte záujem o spoluprácu — reportáž zo zápasu, pohár alebo akcie vášho klubu — napíšte mi.",
+    "sportCta": "Napísať o spoluprácu",
+    "sportForClubs": "Pre futbalové kluby: reportáže zo zápasov, pohár, akcie. Napíšte pre cenovú ponuku. Pôsobisko: Praha."
   },
   "experience": {
     "title": "Skúsenosti a vzdelanie",

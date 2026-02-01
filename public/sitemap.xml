@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://martinbaran.com/</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://martinbaran.com/?lang=en" />
@@ -10,11 +10,27 @@
   </url>
   <url>
     <loc>https://martinbaran.com/portfolio</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://martinbaran.com/portfolio?lang=en" />
     <xhtml:link rel="alternate" hreflang="sk" href="https://martinbaran.com/portfolio?lang=sk" />
+  </url>
+  <url>
+    <loc>https://martinbaran.com/portfolio/sport</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://martinbaran.com/portfolio/sport?lang=en" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://martinbaran.com/portfolio/sport?lang=sk" />
+  </url>
+  <url>
+    <loc>https://martinbaran.com/portfolio/events</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://martinbaran.com/portfolio/events?lang=en" />
+    <xhtml:link rel="alternate" hreflang="sk" href="https://martinbaran.com/portfolio/events?lang=sk" />
   </url>
   <url>
     <loc>https://martinbaran.com/portfolio?category=Best%20Diplomats%20Paris%202025</loc>
