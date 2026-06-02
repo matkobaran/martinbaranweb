@@ -47,6 +47,10 @@
       "kendice_bardejov": {
         "title": "Football match Kendice vs Bardejov",
         "description": ""
+      },
+      "viktoria_zizkov_chrudim": {
+        "title": "Football match Viktoria Žižkov vs Chrudim",
+        "description": ""
       }
     },
     "viewMoreButton": "View more photo categories",

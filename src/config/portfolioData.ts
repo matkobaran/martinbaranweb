@@ -50,6 +50,18 @@ export const portfolioData = [
     isHighlight: true // Shows in main carousel
   },
   {
+    id: 'viktoria-zizkov-chrudim-2026',
+    titleKey: "portfolio.galleries.viktoria_zizkov_chrudim.title",
+    descriptionKey: "portfolio.galleries.viktoria_zizkov_chrudim.description",
+    folder: "ViktoriaZizkov_Chrudim",
+    photoCount: 53,
+    titlePhoto: 40,
+    tags: ['sports', 'football', 'league match'],
+    date: '2026-03-01',
+    description: '',
+    isHighlight: true // Shows in main carousel
+  },
+  {
     id: 'kendice-kosice-2025',
     titleKey: "portfolio.galleries.kendice_kosice.title",
     descriptionKey: "portfolio.galleries.kendice_kosice.description",
