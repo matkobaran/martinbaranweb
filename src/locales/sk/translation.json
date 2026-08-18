@@ -8,7 +8,7 @@
   },
   "hero": {
     "greeting": "Ahoj, som Martin",
-    "description": "Som <strong>fotograf a softvérový vývojár</strong> sídliaci v Prahe. Zachytávam autentické a dynamické momenty — od futbalových zápasov a konferencií po kreatívne udalosti.",
+    "description": "Som <strong>fotograf a softvérový vývojár</strong> sídliaci v Prahe. Zachytávam autentické a dynamické momenty — od futbalových zápasov a konferencií po kreatívne udalosti. Keď nie som za kamerou, pracujem v Reacte, TypeScripte a C#/.NET.",
     "portfolioButton": "📸 Pozrieť fotoportfólio",
     "contactButton": "Kontakt"
   },
@@ -66,59 +66,49 @@
         "title": "Fullstack Developer",
         "company": "Creasoft",
         "period": "10/2025 - Súčasnosť",
-        "description": "Fullstack Software Developer",
+        "description": "Migrácia starých React SPA na React 19 a údržba C#/.NET backendu.",
         "details": [
-          "C#, React"
+          "Migrácia CRA/React 16-18 SPA (class komponenty, MobX) do jednej React 19 aplikácie s hooks a Zustand, modul po module",
+          "Nové komponenty a úpravy UI",
+          "Opravy bugov a údržba starých React aplikácií aj C#/.NET backendu popri migrácii",
+          "Presun buildu z CRA a webpacku na Vite + Deno"
         ]
       },
       "aps_brno": {
         "title": "Junior Software Developer",
-        "company": "ApS Brno",
+        "company": "APS Brno",
         "period": "06/2023 - 05/2025",
-        "description": "Fullstack Software Developer",
+        "description": "Windows, web a mobilné aplikácie pre internáty a správu budov.",
         "details": [
-          "Vývoj a údržba Windows aplikácií (.NET, VB.NET)",
-          "Vývoj webových aplikácií používaných 50,000+ používateľmi",
-          "Migrácia mobilnej aplikácie z Xamarinu na MAUI, zlepšenie výkonu a udržateľnosti kódu",
-          "Tvorba REST API pre mobilnú aplikáciu",
-          "Modernizácia Windows aplikácie v XAML",
-          "Zákaznícka podpora"
+          "Vývoj a údržba Windows a webových aplikácií pre internáty a správu budov (recepcia, jedálne, ekonomické oddelenie) v C# a .NET",
+          "REST API a mobilná aplikácia na údržbu budov v Xamarine a .NET MAUI",
+          "Testovanie, ladenie a zákaznícka podpora"
         ]
       },
       "metio": {
-        "title": "Frontend Developer",
+        "title": "Web Developer",
         "company": "Metio Software",
         "period": "12/2022 - 05/2023",
-        "description": "Vývoj a optimalizácia frontend aplikácií pomocou Reactu a JavaScriptu",
+        "description": "React komponenty podľa Figmy, Redux a statické stránky.",
         "details": [
-          "Vývoj znovu použiteľných React komponentov z Figma dizajnov",
-          "Práca s Redux",
-          "Úpravy statických webových stránok"
+          "React komponenty podľa Figma dizajnov",
+          "Stav aplikácie cez Redux",
+          "Údržba statických webových stránok"
         ]
       },
       "university": {
-        "title": "Bakalárske štúdium informatiky",
+        "title": "Informatika",
         "company": "Masarykova univerzita",
-        "period": "09/2018 - 09/2020, 09/2021 - 01/2023",
-        "description": "Neukončené",
-        "details": [
-          "Štúdium základných princípov informatiky vrátane algoritmov, dátových štruktúr a vývoja softvéru",
-          "Získanie skúseností s programovacími jazykmi a metodikami softvérového inžinierstva",
-          "Dokončenie väčšiny kurzov",
-          "Organizovanie fakultného filmového festivalu"
-        ]
+        "period": "09/2018 - 02/2023",
+        "description": "",
+        "details": []
       },
       "kodys": {
         "title": "Servisný technik",
         "company": "Kodys Slovensko",
         "period": "10/2020 - 09/2021",
-        "description": "Diagnostika a oprava skenerov a tlačiarní používaných vo skladových prostrediach",
-        "details": [
-          "Diagnostika a fyzická oprava tlačiarní a ručných skenerov",
-          "Servis u zákazníka",
-          "Konfigurácia Zebra zariadení",
-          "Zákaznícka podpora"
-        ]
+        "description": "Diagnostika, oprava a nastavenie špecializovaného hardvéru.",
+        "details": []
       }
     }
   },
@@ -126,20 +116,20 @@
     "title": "Programovacie zručnosti",
     "categories": {
       "frontend": {
-        "title": "Frontend vývoj",
-        "technologies": ["React", "TypeScript", "HTML", "CSS", "JS"]
+        "title": "Frontend",
+        "technologies": ["React", "JavaScript", "HTML", "CSS", "Zustand"]
       },
       "backend": {
-        "title": "Backend vývoj",
-        "technologies": [".NET", ".VB", "C#", "SQL"]
+        "title": "Programovanie",
+        "technologies": ["C#", ".NET", "TypeScript", "SQL", "Python"]
       },
       "mobile": {
-        "title": "Mobilný vývoj",
-        "technologies": ["React Native", "MAUI", "Xamarin"]
+        "title": "Ďalšie",
+        "technologies": ["Xamarin", ".NET MAUI", "XAML", "VB.NET"]
       },
       "technologies": {
-        "title": "Technológie",
-        "technologies": ["Git", "Azure", "Docker"]
+        "title": "Nástroje",
+        "technologies": ["Git", "Visual Studio", "SSMS", "Azure", "REST APIs", "Google Play", "Cursor", "Claude Code"]
       }
     }
   },

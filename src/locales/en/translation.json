@@ -8,7 +8,7 @@
   },
   "hero": {
     "greeting": "Hi, I'm Martin",
-    "description": "I'm a <strong>photographer and software developer</strong> based in Prague, Czechia. I capture authentic, dynamic moments through my lens — from football matches and conferences to creative events. When I'm not behind the camera, I design and build modern web and mobile apps focused on clean design and performance.",
+    "description": "I'm a <strong>photographer and software developer</strong> based in Prague, Czechia. I capture authentic, dynamic moments through my lens — from football matches and conferences to creative events. When I'm not behind the camera, I work in React, TypeScript, and C#/.NET.",
     "portfolioButton": "📸 View Photography Portfolio",
     "contactButton": "Get in Touch"
   },
@@ -66,59 +66,49 @@
         "title": "Fullstack Developer",
         "company": "Creasoft",
         "period": "10/2025 - Present",
-        "description": "Fullstack Software Developer",
+        "description": "Migrating legacy React SPAs to React 19 and maintaining the C#/.NET backend.",
         "details": [
-          "C#, React"
+          "Migrating CRA/React 16-18 SPAs (class components, MobX) into one React 19 app with hooks and Zustand, module by module",
+          "Building new components and reworking UI without a designer when the old design does not fit the new stack",
+          "Fixing bugs and maintaining the legacy React apps and C#/.NET backend alongside the migration",
+          "Moved the build from CRA and webpack to Vite + Deno"
         ]
       },
       "aps_brno": {
         "title": "Junior Software Developer",
-        "company": "ApS Brno",
+        "company": "APS Brno",
         "period": "06/2023 - 05/2025",
-        "description": "Fullstack Software Developer",
+        "description": "Windows, web, and mobile apps for dormitory and facility management.",
         "details": [
-          "Developed and maintained Windows applications (.NET, VB.NET)",
-          "Developing web applications used by 50,000+ users",
-          "Migration of mobile application from Xamarin to MAUI, improving performance and maintainability",
-          "Creating REST API for mobile app",
-          "Facelift of Windows application in XAML",
-          "Customer support"
+          "Built and maintained Windows and web applications for dormitory and facility management (reception, canteens, economics) in C# and .NET",
+          "Built REST APIs and a mobile app for building maintenance in Xamarin and .NET MAUI",
+          "Tested, debugged, and handled customer support"
         ]
       },
       "metio": {
-        "title": "Frontend Developer",
+        "title": "Web Developer (part-time)",
         "company": "Metio Software",
         "period": "12/2022 - 05/2023",
-        "description": "Developed and optimized frontend applications using React and JavaScript",
+        "description": "React components from Figma, Redux, and static web pages.",
         "details": [
-          "Developed reusable React components from Figma designs",
-          "Working with Redux",
-          "Adjusting static web pages"
+          "Built React components from Figma designs",
+          "Handled app state with Redux",
+          "Maintained static web pages"
         ]
       },
       "university": {
-        "title": "Bachelor's in Computer Science",
+        "title": "Computer Science",
         "company": "Masaryk University",
-        "period": "09/2018 - 09/2020, 09/2021 - 01/2023",
-        "description": "Unfinished",
-        "details": [
-          "Studied core computer science principles, including algorithms, data structures, and software development",
-          "Gained experience with programming languages and software engineering methodologies",
-          "Completed the majority of coursework",
-          "Organizing a faculty film festival"
-        ]
+        "period": "09/2018 - 02/2023",
+        "description": "",
+        "details": []
       },
       "kodys": {
         "title": "Service Technician",
         "company": "Kodys Slovensko",
         "period": "10/2020 - 09/2021",
-        "description": "Diagnosed and repaired scanners and printers used in warehouse environments",
-        "details": [
-          "Diagnostics and physical repair of broken printers and hand scanners",
-          "Onsite service",
-          "Zebra device configuration",
-          "Customer support"
-        ]
+        "description": "Diagnosed, repaired, and set up specialized hardware.",
+        "details": []
       }
     }
   },
@@ -126,20 +116,20 @@
     "title": "Skills",
     "categories": {
       "frontend": {
-        "title": "Frontend Development",
-        "technologies": ["React", "TypeScript", "HTML", "CSS", "JS"]
+        "title": "Frontend",
+        "technologies": ["React", "JavaScript", "HTML", "CSS", "Zustand"]
       },
       "backend": {
-        "title": "Backend Development", 
-        "technologies": [".NET", ".VB", "C#", "SQL"]
+        "title": "Programming",
+        "technologies": ["C#", ".NET", "TypeScript", "SQL", "Python"]
       },
       "mobile": {
-        "title": "Mobile Development",
-        "technologies": ["React Native", "MAUI", "Xamarin"]
+        "title": "Familiar with",
+        "technologies": ["Xamarin", ".NET MAUI", "XAML", "VB.NET"]
       },
       "technologies": {
-        "title": "Technologies",
-        "technologies": ["Git", "Azure", "Docker"]
+        "title": "Tools",
+        "technologies": ["Git", "Visual Studio", "SSMS", "Azure", "REST APIs", "Google Play", "Cursor", "Claude Code"]
       }
     }
   },

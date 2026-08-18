@@ -16,18 +16,6 @@ export const Footer = ({ variant = "full", contactButtonDelay = 0 }: FooterProps
   const { t } = useTranslation();
   const instagramLinks = getInstagramLinks("both");
 
-  const emailLink = (
-    <a
-      href={`mailto:${t("contact.email")}`}
-      className="inline-flex items-center gap-2 text-white hover:text-skyblue transition-colors"
-    >
-      <Mail size={variant === "compact" ? 18 : 28} />
-      <span className={variant === "compact" ? "text-sm" : "text-xl font-semibold"}>
-        {t("contact.email")}
-      </span>
-    </a>
-  );
-
   const socialLinks = (
     <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
       <a

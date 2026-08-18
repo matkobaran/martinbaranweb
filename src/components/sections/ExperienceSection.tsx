@@ -9,6 +9,11 @@ export const ExperienceSection = () => {
   const [selectedExperience, setSelectedExperience] = useState<any>(null);
   const [showMore, setShowMore] = useState(false);
 
+  const getDetails = (key: string) => {
+    const details = t(key, { returnObjects: true });
+    return Array.isArray(details) ? (details as string[]) : [];
+  };
+
   const experiences = [
     {
       id: 0,
@@ -17,7 +22,7 @@ export const ExperienceSection = () => {
       company: t('experience.experiences.creasoft.company'),
       period: t('experience.experiences.creasoft.period'),
       description: t('experience.experiences.creasoft.description'),
-      details: t('experience.experiences.creasoft.details', { returnObjects: true }) as string[]
+      details: getDetails('experience.experiences.creasoft.details')
     },
     {
       id: 1,
@@ -26,7 +31,7 @@ export const ExperienceSection = () => {
       company: t('experience.experiences.aps_brno.company'),
       period: t('experience.experiences.aps_brno.period'),
       description: t('experience.experiences.aps_brno.description'),
-      details: t('experience.experiences.aps_brno.details', { returnObjects: true }) as string[]
+      details: getDetails('experience.experiences.aps_brno.details')
     },
     {
       id: 2,
@@ -35,7 +40,7 @@ export const ExperienceSection = () => {
       company: t('experience.experiences.metio.company'),
       period: t('experience.experiences.metio.period'),
       description: t('experience.experiences.metio.description'),
-      details: t('experience.experiences.metio.details', { returnObjects: true }) as string[]
+      details: getDetails('experience.experiences.metio.details')
     },
     {
       id: 4,
@@ -44,7 +49,7 @@ export const ExperienceSection = () => {
       company: t('experience.experiences.university.company'),
       period: t('experience.experiences.university.period'),
       description: t('experience.experiences.university.description'),
-      details: t('experience.experiences.university.details', { returnObjects: true }) as string[]
+      details: getDetails('experience.experiences.university.details')
     },
     {
       id: 3,
@@ -53,7 +58,7 @@ export const ExperienceSection = () => {
       company: t('experience.experiences.kodys.company'),
       period: t('experience.experiences.kodys.period'),
       description: t('experience.experiences.kodys.description'),
-      details: t('experience.experiences.kodys.details', { returnObjects: true }) as string[]
+      details: getDetails('experience.experiences.kodys.details')
     }
   ];
 
@@ -67,24 +72,29 @@ export const ExperienceSection = () => {
         {/* STATE: show more toggle */}
         <div className="flex flex-col items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
-            {(showMore ? experiences : experiences.slice(0, 4)).map((exp, index) => (
+            {(showMore ? experiences : experiences.slice(0, 4)).map((exp, index) => {
+              const hasDetails = exp.details.length > 0;
+              return (
               <motion.div
                 key={exp.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-lightgray p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer group"
-                onClick={() => setSelectedExperience(exp)}
+                className={`bg-lightgray p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow group ${hasDetails ? 'cursor-pointer' : ''}`}
+                onClick={() => hasDetails && setSelectedExperience(exp)}
               >
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-skyblue transition-colors">{exp.title}</h3>
+                <h3 className={`text-xl font-semibold mb-2 transition-colors ${hasDetails ? 'group-hover:text-skyblue' : ''}`}>{exp.title}</h3>
                 <p className="text-gray-600 mb-2">{exp.company}</p>
-                <p className="text-sm text-gray-500 mb-4">{exp.period}</p>
-                <p className="text-gray-700">{exp.description}</p>
-                <p className="mt-4 text-accent text-sm font-medium group-hover:text-skyblue transition-colors">
-                  {t('common.learnMore')} →
-                </p>
+                <p className={`text-sm text-gray-500 ${exp.description ? 'mb-4' : ''}`}>{exp.period}</p>
+                {exp.description ? <p className="text-gray-700">{exp.description}</p> : null}
+                {hasDetails ? (
+                  <p className="mt-4 text-accent text-sm font-medium group-hover:text-skyblue transition-colors">
+                    {t('common.learnMore')} →
+                  </p>
+                ) : null}
               </motion.div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Show More / Show Less Button */}
@@ -147,16 +157,19 @@ export const ExperienceSection = () => {
 
                 {/* Content */}
                 <div className="p-6 overflow-y-auto max-h-[60vh]">
-                  <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-                    {selectedExperience.description}
-                  </p>
+                  {selectedExperience.description ? (
+                    <p className="text-gray-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
+                      {selectedExperience.description}
+                    </p>
+                  ) : null}
                   
+                  {selectedExperience.details.length > 0 ? (
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                       {t('experience.keyResponsibilities')}
                     </h4>
                     <ul className="space-y-3">
-                      {selectedExperience.details.map((detail, index) => (
+                      {selectedExperience.details.map((detail: string, index: number) => (
                         <motion.li
                           key={index}
                           initial={{ opacity: 0, x: -20 }}
@@ -170,6 +183,7 @@ export const ExperienceSection = () => {
                       ))}
                     </ul>
                   </div>
+                  ) : null}
                 </div>
 
                 {/* Footer */}
